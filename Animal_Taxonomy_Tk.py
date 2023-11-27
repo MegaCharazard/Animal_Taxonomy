@@ -7,7 +7,7 @@ root = tk.Tk()
 root.geometry("800x500")
 root.title("Animal Taxonomy")
 root.maxsize(width = "800", height = "500")
-root.iconbitmap(r"E:/Dhejus/PythonPractice/Visual_Studio_Code/Practice/icon/favicon1.ico")
+root.iconbitmap(r"icon/favicon1.ico")
 
 def on_enter(e):
     e.widget['background'] = 'deepskyblue3'
@@ -201,11 +201,11 @@ def class_page():
 
     search_souropsida_btn = tk.Radiobutton(class_frame, text = "SOUROPSIDA", bg = "darkgrey",
                                             activeforeground = "dodgerblue3", value = "SOUROPSIDA")
-    search_souropsida_btn.place(x = "182", y = "100")
+    search_souropsida_btn.place(x = "190", y = "100")
 
     search_diplopoda_btn = tk.Radiobutton(class_frame, text = "DIPLOPODA", bg = "darkgrey",
                                             activeforeground = "dodgerblue3", value = "DIPLOPODA")
-    search_diplopoda_btn.place(x = "267", y = "100")
+    search_diplopoda_btn.place(x = "285", y = "100")
 
 
     search = tk.Entry(class_frame, width = "30", bg = "darkgrey", fg = "dodgerblue3")
@@ -232,7 +232,7 @@ def order_page():
     label.configure(width = "28")
 
     label = tk.Label(order_frame, text = "Search by :-",font = ("Brush Script MT" , 15, "italic" ), bg = "darkgrey")
-    label.place(x = "400", y = "70")
+    label.place(x = "1", y = "70")
 
     def show(): 
         search.config( contents.set( clicked.get()) ) 
@@ -241,27 +241,19 @@ def order_page():
     
     clicked.set( "Monday" ) 
     options = [ 
-    "Monday", 
-    "Tuesday", 
-    "Wednesday", 
-    "Thursday", 
-    "Friday", 
-    "Saturday", 
-    "Sunday"
+    "Rodentia", 
+    "Chiroptera", 
+    "Afrosoricida", 
+    "Eriaceomorph", 
+    "Primates"
     ] 
     
     search_kingdom_menu = OptionMenu( order_frame , clicked , *options)# back = "dodgerblue3",) 
-    search_kingdom_menu.place(x = "1", y= "300") 
+    search_kingdom_menu.place(x = "1", y= "100") 
     
-    button = Button( order_frame , text = "click Me" , command = show )
-    button.place(x = "50", y = "300") 
-    
-    label = Label( order_frame , text = " " ) 
-    label.place(x = "1", y = "350") 
-#
     search_rodentia_btn = tk.Radiobutton(order_frame, text = "RODENTIA", bg = "darkgrey",
                                            activeforeground = "dodgerblue3", value = "RODENTIA")
-    search_rodentia_btn.place(x = "4", y = "100")
+    search_rodentia_btn.place(x = "4", y = "200")
 
     search_chiroptera_btn = tk.Radiobutton(order_frame, text = "CHIROPTERA", bg = "darkgrey",
                                            activeforeground = "dodgerblue3", value = "CHIROPTERA")
@@ -291,7 +283,8 @@ def order_page():
     contents = tk.StringVar()
     contents.set(clicked.get() )
     search["textvariable"] = contents
-
+ 
+    global search_btn
     search_btn = tk.Button(order_frame, text = "SEARCH", bg = "dodgerblue3", activebackground = "darkgrey",  activeforeground = "dodgerblue3", command = show )
     search_btn.bind("<Enter>", on_enter)
     search_btn.bind("<Leave>", on_leave)
