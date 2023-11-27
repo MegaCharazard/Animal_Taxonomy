@@ -250,31 +250,6 @@ def order_page():
     
     search_kingdom_menu = OptionMenu( order_frame , clicked , *options)# back = "dodgerblue3",) 
     search_kingdom_menu.place(x = "1", y= "100") 
-    
-    search_rodentia_btn = tk.Radiobutton(order_frame, text = "RODENTIA", bg = "darkgrey",
-                                           activeforeground = "dodgerblue3", value = "RODENTIA")
-    search_rodentia_btn.place(x = "4", y = "200")
-
-    search_chiroptera_btn = tk.Radiobutton(order_frame, text = "CHIROPTERA", bg = "darkgrey",
-                                           activeforeground = "dodgerblue3", value = "CHIROPTERA")
-    search_chiroptera_btn.place(x = "74", y = "100")
-
-    search_afrosoricida_btn = tk.Radiobutton(order_frame, text = "AFROSORISIDA", bg = "darkgrey",
-                                           activeforeground = "dodgerblue3", value = "AFROSORISIDA")
-    search_afrosoricida_btn.place(x = "158", y = "100")
-
-    search_eriaceomorph_btn = tk.Radiobutton(order_frame, text = "ERIACEOMORPH", bg = "darkgrey",
-                                           activeforeground = "dodgerblue3", value = "ERIACEOMORPH")
-    search_eriaceomorph_btn.place(x = "252", y = "100")
-
-    search_primates_btn = tk.Radiobutton(order_frame, text = "PRIMATES", bg = "darkgrey",
-                                           activeforeground = "dodgerblue3", value = "PRIMATES")
-    search_primates_btn.place(x = "356", y = "100")
-
-    #search_family_btn = tk.Button(home_frame, text = "FAMILY", bg = "dodgerblue3", activebackground = "darkgrey",  activeforeground = "dodgerblue3")
-    #search_family_btn.bind("<Enter>", on_enter)
-    #search_family_btn.bind("<Leave>", on_leave)
-    #search_family_btn.place(x = "278", y = "100")
 
     search = tk.Entry(order_frame, width = "30", bg = "darkgrey", fg = "dodgerblue3")
     search.place(x = "1", y = "135")
