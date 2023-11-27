@@ -140,42 +140,42 @@ def phylum_page():
     label = tk.Label(phylum_frame , text = "Search by :-",font = ("Brush Script MT" , 15, "italic" ), bg = "darkgrey")
     label.place(x = "1", y = "70")
 
+    def show(): 
+        search.config( contents.set( clicked.get()) ) 
 
-    search_chordate_btn = tk.Radiobutton(phylum_frame, text = "CHORDATE", bg = "darkgrey",
-                                          activeforeground = "dodgerblue3", value = "CHORDATE")
-    search_chordate_btn.place(x = "4", y = "100")
+    clicked = StringVar() 
+    clicked.set( "Chordate" ) 
 
-    search_arthropod_btn = tk.Radiobutton(phylum_frame, text = "ARTHROPOD", bg = "darkgrey",
-                                          activeforeground = "dodgerblue3", value = "ARTHROPOD")
-    search_arthropod_btn.place(x = "93", y = "100")
+    options = [ 
+    "",
+    "Chordate", 
+    "Arthrpod", 
+    "Molusc", 
+    "Echinoderm", 
+    "Annalid",
+    "Sponge"
+    ] 
+    
+    label = tk.Label(phylum_frame, text = "Animals:-",font = ("Bradley Hand ITC" , 12, "italic", "bold"),
+                     bg = "darkgrey", fg = "black")
+    label.place(x = "1", y = 100)
 
-    search_molusc_btn = tk.Radiobutton(phylum_frame, text = "MOLUSC", bg = "darkgrey",
-                                          activeforeground = "dodgerblue3", value = "MOLUSC")
-    search_molusc_btn.place(x = "193", y = "100")
+    search_kingdom_menu = OptionMenu( phylum_frame , clicked , *options)
+    search_kingdom_menu.place(x = "1", y= "125") 
 
-    search_echinoderm_btn = tk.Radiobutton(phylum_frame, text = "ECHINODERM", bg = "darkgrey",
-                                          activeforeground = "dodgerblue3", value = "ECHINODERM")
-    search_echinoderm_btn.place(x = "270", y = "100")
-
-    search_annalid_btn = tk.Radiobutton(phylum_frame, text = "ANNALID", bg = "darkgrey",
-                                          activeforeground = "dodgerblue3", value = "ANNALID")
-    search_annalid_btn.place(x = "369", y = "100")
-
-    search_sponge_btn = tk.Radiobutton(phylum_frame, text = "SPONGE", bg = "darkgrey",
-                                          activeforeground = "dodgerblue3", value = "SPONGE")
-    search_sponge_btn.place(x = "448", y = "100")
-
-    search = tk.Entry(phylum_frame, width = "30", bg = "darkgrey", fg = "dodgerblue3")
-    search.place(x = "1", y = "135")
+    search = tk.Entry(phylum_frame, width = "30", fg = "dodgerblue3")
+    search.place(x = "1", y = "153")
     contents = tk.StringVar()
-    contents.set("Type The Phylum.!")
+    contents.set("Type The Order.")    
+    contents = tk.StringVar()
+    contents.set(clicked.get() )
     search["textvariable"] = contents
-
-    global search_btn
-    search_btn = tk.Button(phylum_frame, text = "SEARCH", bg = "dodgerblue3", activebackground = "darkgrey",  activeforeground = "dodgerblue3")
+ 
+    global search_btn   
+    search_btn = tk.Button(phylum_frame, text = "SEARCH", bg = "dodgerblue3", activebackground = "darkgrey",  activeforeground = "dodgerblue3", command = show )
     search_btn.bind("<Enter>", on_enter)
     search_btn.bind("<Leave>", on_leave)
-    search_btn.place(x = "191", y = "132")
+    search_btn.place(x = "191", y = "150")
 
     phylum_frame.pack(padx = 20, pady = 20)
     phylum_frame.configure(width = "650", height = "500")
@@ -208,7 +208,7 @@ def class_page():
     search_diplopoda_btn.place(x = "285", y = "100")
 
 
-    search = tk.Entry(class_frame, width = "30", bg = "darkgrey", fg = "dodgerblue3")
+    search = tk.Entry(class_frame, width = "30", fg = "dodgerblue3")
     search.place(x = "1", y = "135")
     contents = tk.StringVar()
     contents.set("Type The Class.")
@@ -241,6 +241,7 @@ def order_page():
     
     clicked.set( "Monday" ) 
     options = [ 
+    "",
     "Rodentia", 
     "Chiroptera", 
     "Afrosoricida", 
@@ -248,11 +249,15 @@ def order_page():
     "Primates"
     ] 
     
-    search_kingdom_menu = OptionMenu( order_frame , clicked , *options)# back = "dodgerblue3",) 
-    search_kingdom_menu.place(x = "1", y= "100") 
+    label = tk.Label(order_frame, text = "Mammals:-",font = ("Bradley Hand ITC" , 12, "italic", "bold"), bg = "darkgrey",
+                       fg = "black")
+    label.place(x = "1", y = 100)
 
-    search = tk.Entry(order_frame, width = "30", bg = "darkgrey", fg = "dodgerblue3")
-    search.place(x = "1", y = "135")
+    search_kingdom_menu = OptionMenu( order_frame , clicked , *options)# back = "dodgerblue3",) 
+    search_kingdom_menu.place(x = "1", y= "125") 
+
+    search = tk.Entry(order_frame, width = "30", fg = "dodgerblue3")
+    search.place(x = "1", y = "153")
     contents = tk.StringVar()
     contents.set("Type The Order.")    
     contents = tk.StringVar()
@@ -263,8 +268,7 @@ def order_page():
     search_btn = tk.Button(order_frame, text = "SEARCH", bg = "dodgerblue3", activebackground = "darkgrey",  activeforeground = "dodgerblue3", command = show )
     search_btn.bind("<Enter>", on_enter)
     search_btn.bind("<Leave>", on_leave)
-
-    search_btn.place(x = "191", y = "132")
+    search_btn.place(x = "191", y = "150")
 
     order_frame.pack(padx = 20, pady = 20)
     order_frame.configure(width = "650", height = "500")
@@ -277,7 +281,7 @@ def family_page():
     label.place(x = "7", y = "3")
     label.configure(width = "28")
 
-    search = tk.Entry(family_frame, width = "30", bg = "darkgrey", fg = "dodgerblue3")
+    search = tk.Entry(family_frame, width = "30", fg = "dodgerblue3")
     search.place(x = "1", y = "100")
     contents = tk.StringVar()
     contents.set("Type The Family.")
@@ -300,7 +304,7 @@ def genus_page():
     label.place(x = "7", y = "3")
     label.configure(width = "28")
 
-    search = tk.Entry(genus_frame, width = "30", bg = "darkgrey", fg = "dodgerblue3")
+    search = tk.Entry(genus_frame, width = "30", fg = "dodgerblue3")
     search.place(x = "1", y = "100")
     contents = tk.StringVar()
     contents.set("Type The Genus.")
@@ -323,7 +327,7 @@ def species_page():
     label.place(x = "7", y = "3")
     label.configure(width = "28")
 
-    search = tk.Entry(species_frame, width = "30", bg = "darkgrey", fg = "dodgerblue3")
+    search = tk.Entry(species_frame, width = "30", fg = "dodgerblue3")
     search.place(x = "1", y = "100")
     contents = tk.StringVar()
     contents.set("Type The Species.")
