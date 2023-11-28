@@ -263,17 +263,7 @@ def order_page():
     
     def show(): 
         search.config(contents.set(option_chosen)) 
-        """ if option_chosen == "clicked1" :
-            search.config( contents.set(clicked1.get()) ) 
-        elif option_chosen == "clicked2" :
-            search.config( contents.set(clicked2.get()) ) """
-        #if option_chosen == "clicked3" :
-        #    search.config( contents.set(clicked3.get()) ) 
-        #if option_chosen == "clicked4" :
-        #    search.config( contents.set(clicked4.get()) ) 
-        #else :
-        #    search.config( contents.set(clicked5.get()) ) 
-
+        
     clicked2 = StringVar() 
     clicked2.set("Bryophyta") 
 
