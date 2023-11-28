@@ -354,9 +354,7 @@ def order_page():
     "Gymnosperms", 
     "Angiosperms",
     "Ferns",  
-    "Algea",
-    "Coniferophyta",
-    "Cycadophyta"
+    "Algea"
     ] 
     
     label = tk.Label(order_frame, text = "Plants:-",font = ("Bradley Hand ITC" , 12, "italic", "bold"), bg = "darkgrey",
