@@ -11,6 +11,7 @@ root.iconbitmap(r"icon/favicon1.ico")
 
 option_chosen = ""
 
+#It is executed when dropdown is changed
 def drop_down_index_changed(event) :
     global option_chosen
     option_chosen = event
@@ -147,13 +148,12 @@ def phylum_page():
     label.place(x = "1", y = "70")
 
     def show(): 
-        search.config( contents.set( clicked.get()) ) 
-
+        search.config(contents.set(option_chosen)) 
     clicked = StringVar() 
     clicked.set( "Chordate" ) 
 
     options = [ 
-    "",
+    "--Select--",
     "Chordate", 
     "Arthrpod", 
     "Molusc", 
@@ -166,8 +166,92 @@ def phylum_page():
                      bg = "darkgrey", fg = "black")
     label.place(x = "1", y = 100)
 
-    search_kingdom_menu = OptionMenu( phylum_frame , clicked , *options)
-    search_kingdom_menu.place(x = "1", y= "125") 
+    search_phylum_animal_menu = OptionMenu( phylum_frame , clicked , *options, command= drop_down_index_changed)
+    search_phylum_animal_menu.place(x = "1", y= "125") 
+
+    clicked1 = StringVar() 
+    clicked1.set( "Primates" ) 
+    options = [  
+    "--Select--",
+    "Bryophyta", 
+    "Cycadophyta", 
+    "Ginkgophyta", 
+    "Chlorophyta", 
+    "Lycophyta"
+    ] 
+    
+    label = tk.Label(phylum_frame, text = "Plant:-",font = ("Bradley Hand ITC" , 12, "italic", "bold"), bg = "darkgrey",
+                       fg = "black")
+    label.place(x = "100", y = 100)
+
+    search_phylum_plant_menu = OptionMenu( phylum_frame , clicked1 , *options, command= drop_down_index_changed)# back = "dodgerblue3",) 
+    search_phylum_plant_menu.place(x = "100", y= "125") 
+    
+    def show(): 
+        search.config(contents.set(option_chosen)) 
+        
+    clicked2 = StringVar() 
+    clicked2.set("Bryophyta") 
+
+    options = [ 
+    "--Select--",
+    "Ascomycota", 
+    "Basidiomycota", 
+    "Zygomycota",
+    "Microsporidia",  
+    "Bigyra",
+    "Aphelida",
+    "Mycetozoa"
+    ] 
+    
+    label = tk.Label(phylum_frame, text = "Fungi:-",font = ("Bradley Hand ITC" , 12, "italic", "bold"), bg = "darkgrey",
+                       fg = "black")
+    label.place(x = "205", y = 100)
+
+    search_phylum_fungi_menu = OptionMenu( phylum_frame,clicked2, *options, command= drop_down_index_changed)
+    search_phylum_fungi_menu.place(x = "205", y= "125") 
+
+    def show(): 
+        search.config(contents.set(option_chosen)) 
+
+    clicked3 = StringVar() 
+    clicked3.set("Glomeromycota") 
+
+    options = [ 
+    "--Select--",
+    "Archaebacteria", 
+    "Schizopyta", 
+    "Cyanophyta",
+    "Prochlorophyta"  
+    ] 
+    
+    label = tk.Label(phylum_frame, text = "Monera:-",font = ("Bradley Hand ITC" , 12, "italic", "bold"), bg = "darkgrey",
+                       fg = "black")
+    label.place(x = "400", y = 100)
+
+    search_phylum_monera_menu = OptionMenu( phylum_frame , clicked3 , *options, command= drop_down_index_changed)
+    search_phylum_monera_menu.place(x = "400", y= "125") 
+    
+    def show(): 
+        search.config(contents.set(option_chosen)) 
+
+    clicked4 = StringVar() 
+    clicked4.set("Glomeromycota") 
+
+    options = [ 
+    "--Select--",
+    "Dinoflagellates", 
+    "Amoebozoa", 
+    "Rhodophyta",
+    "Ciliates"  
+    ] 
+    
+    label = tk.Label(phylum_frame, text = "Protista:-",font = ("Bradley Hand ITC" , 12, "italic", "bold"), bg = "darkgrey",
+                       fg = "black")
+    label.place(x = "323", y = 100)
+
+    search_phylum_protista_menu = OptionMenu( phylum_frame , clicked3 , *options, command= drop_down_index_changed)
+    search_phylum_protista_menu.place(x = "323", y= "125") 
 
     search = tk.Entry(phylum_frame, width = "30", fg = "dodgerblue3")
     search.place(x = "1", y = "153")
@@ -240,12 +324,9 @@ def order_page():
     label = tk.Label(order_frame, text = "Search by :-",font = ("Brush Script MT" , 15, "italic" ), bg = "darkgrey")
     label.place(x = "1", y = "70")
 
-    #def show(): 
-       # search.config( contents.set( clicked1.get()) ) 
-
     clicked1 = StringVar() 
     clicked1.set( "Primates" ) 
-    options = [ 
+    options = [  
     "--Select--",
     "Primates", 
     "Chiroptera", 
@@ -282,34 +363,34 @@ def order_page():
                        fg = "black")
     label.place(x = "110", y = 100)
 
-    search_plant_menu = OptionMenu( order_frame,clicked2, *options, command= drop_down_index_changed)# back = "dodgerblue3",) 
+    search_plant_menu = OptionMenu( order_frame,clicked2, *options, command= drop_down_index_changed)
     search_plant_menu.place(x = "110", y= "125") 
 
-    #def show(): 
-    #    search.config( contents.set( clicked3.get()) ) 
-#
-    #clicked3 = StringVar() 
-    #clicked3.set("Glomeromycota") 
-#
-    #options = [ 
-    #"",
-    #"Glomeromycota", 
-    #"Ascomycota", 
-    #"Chytridiomycota",
-    #"Basidiomycetes"  
-    #] 
-    #
-    #label = tk.Label(order_frame, text = "Fungi:-",font = ("Bradley Hand ITC" , 12, "italic", "bold"), bg = "darkgrey",
-    #                   fg = "black")
-    #label.place(x = "222", y = 100)
-#
-    #search_Fungi_menu = OptionMenu( order_frame , clicked3 , *options)# back = "dodgerblue3",) 
-    #search_Fungi_menu.place(x = "222", y= "125") 
+    def show(): 
+        search.config(contents.set(option_chosen)) 
+
+    clicked3 = StringVar() 
+    clicked3.set("Glomeromycota") 
+
+    options = [ 
+    "--Select--",
+    "Glomeromycota", 
+    "Ascomycota", 
+    "Chytridiomycota",
+    "Basidiomycetes"  
+    ] 
+    
+    label = tk.Label(order_frame, text = "Fungi:-",font = ("Bradley Hand ITC" , 12, "italic", "bold"), bg = "darkgrey",
+                       fg = "black")
+    label.place(x = "222", y = 100)
+
+    search_Fungi_menu = OptionMenu( order_frame , clicked3 , *options, command= drop_down_index_changed)
+    search_Fungi_menu.place(x = "222", y= "125") 
 
     search = tk.Entry(order_frame, width = "30", fg = "dodgerblue3")
     search.place(x = "1", y = "153")
     contents = tk.StringVar()
-    contents.set(clicked1.get())# or clicked3.get())
+    contents.set(clicked1.get())
     search["textvariable"] = contents
  
     global search_btn
