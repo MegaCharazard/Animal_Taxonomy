@@ -9,6 +9,12 @@ root.title("Animal Taxonomy")
 root.maxsize(width = "800", height = "500")
 root.iconbitmap(r"icon/favicon1.ico")
 
+option_chosen = ""
+
+def drop_down_index_changed(event) :
+    global option_chosen
+    option_chosen = event
+
 def on_enter(e):
     e.widget['background'] = 'deepskyblue3'
 
@@ -234,13 +240,13 @@ def order_page():
     label = tk.Label(order_frame, text = "Search by :-",font = ("Brush Script MT" , 15, "italic" ), bg = "darkgrey")
     label.place(x = "1", y = "70")
 
-    def show(): 
-        search.config( contents.set( clicked1.get()) ) 
+    #def show(): 
+       # search.config( contents.set( clicked1.get()) ) 
 
     clicked1 = StringVar() 
     clicked1.set( "Primates" ) 
     options = [ 
-    "",
+    "--Select--",
     "Primates", 
     "Chiroptera", 
     "Afrosoricida", 
@@ -252,17 +258,27 @@ def order_page():
                        fg = "black")
     label.place(x = "1", y = 100)
 
-    search_kingdom_menu = OptionMenu( order_frame , clicked1 , *options)# back = "dodgerblue3",) 
+    search_kingdom_menu = OptionMenu( order_frame , clicked1 , *options, command= drop_down_index_changed)# back = "dodgerblue3",) 
     search_kingdom_menu.place(x = "1", y= "125") 
-
+    
     def show(): 
-        search.config( contents.set( clicked2.get()) ) 
+        search.config(contents.set(option_chosen)) 
+        """ if option_chosen == "clicked1" :
+            search.config( contents.set(clicked1.get()) ) 
+        elif option_chosen == "clicked2" :
+            search.config( contents.set(clicked2.get()) ) """
+        #if option_chosen == "clicked3" :
+        #    search.config( contents.set(clicked3.get()) ) 
+        #if option_chosen == "clicked4" :
+        #    search.config( contents.set(clicked4.get()) ) 
+        #else :
+        #    search.config( contents.set(clicked5.get()) ) 
 
     clicked2 = StringVar() 
     clicked2.set("Bryophyta") 
 
     options = [ 
-    "",
+    "--Select--",
     "Bryophyta", 
     "Gymnosperms", 
     "Angiosperms",
@@ -276,39 +292,39 @@ def order_page():
                        fg = "black")
     label.place(x = "110", y = 100)
 
-    search_kingdom_menu = OptionMenu( order_frame , clicked2 , *options)# back = "dodgerblue3",) 
-    search_kingdom_menu.place(x = "110", y= "125") 
+    search_plant_menu = OptionMenu( order_frame,clicked2, *options, command= drop_down_index_changed)# back = "dodgerblue3",) 
+    search_plant_menu.place(x = "110", y= "125") 
 
-    def show(): 
-        search.config( contents.set( clicked3.get()) ) 
-
-    clicked3 = StringVar() 
-    clicked3.set("Glomeromycota") 
-
-    options = [ 
-    "",
-    "Glomeromycota", 
-    "Ascomycota", 
-    "Chytridiomycota",
-    "Basidiomycetes"  
-    ] 
-    
-    label = tk.Label(order_frame, text = "Fungi:-",font = ("Bradley Hand ITC" , 12, "italic", "bold"), bg = "darkgrey",
-                       fg = "black")
-    label.place(x = "222", y = 100)
-
-    search_Fungi_menu = OptionMenu( order_frame , clicked3 , *options)# back = "dodgerblue3",) 
-    search_Fungi_menu.place(x = "222", y= "125") 
+    #def show(): 
+    #    search.config( contents.set( clicked3.get()) ) 
+#
+    #clicked3 = StringVar() 
+    #clicked3.set("Glomeromycota") 
+#
+    #options = [ 
+    #"",
+    #"Glomeromycota", 
+    #"Ascomycota", 
+    #"Chytridiomycota",
+    #"Basidiomycetes"  
+    #] 
+    #
+    #label = tk.Label(order_frame, text = "Fungi:-",font = ("Bradley Hand ITC" , 12, "italic", "bold"), bg = "darkgrey",
+    #                   fg = "black")
+    #label.place(x = "222", y = 100)
+#
+    #search_Fungi_menu = OptionMenu( order_frame , clicked3 , *options)# back = "dodgerblue3",) 
+    #search_Fungi_menu.place(x = "222", y= "125") 
 
     search = tk.Entry(order_frame, width = "30", fg = "dodgerblue3")
     search.place(x = "1", y = "153")
     contents = tk.StringVar()
-    contents = tk.StringVar()
-    contents.set(clicked1.get())
+    contents.set(clicked1.get())# or clicked3.get())
     search["textvariable"] = contents
  
     global search_btn
-    search_btn = tk.Button(order_frame, text = "SEARCH", bg = "dodgerblue3", activebackground = "darkgrey",  activeforeground = "dodgerblue3", command = show )
+    search_btn = tk.Button(order_frame, text = "SEARCH", bg = "dodgerblue3", activebackground = "darkgrey",
+                            activeforeground = "dodgerblue3", command = show )
     search_btn.bind("<Enter>", on_enter)
     search_btn.bind("<Leave>", on_leave)
     search_btn.place(x = "191", y = "150")
