@@ -32,7 +32,7 @@ def on_enter(e):
 def on_leave(e):
     search_btn['background'] = 'dodgerblue3'
 
-
+#-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=PAGES=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 def home_page():
     home_frame = tk.Frame(main_frame, highlightbackground= "dodgerblue3",  highlightthickness= "4", bg = "darkgrey")
@@ -101,12 +101,9 @@ def home_page():
                 label = tk.Label(home_frame, text = row, font = ("Arial" , 10, "italic" ), bg = "darkgrey")
                 label.place(x = 1, y = 180)
         elif value == "kingdom":
-            i = 0
-            count = cur.execute("SELECT COUNT(*) FROM animal_details")
-            while i <= count :
-                for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  kingdom = '"+tosearch+"' "):
-                    label = tk.Label(home_frame, text = row, font = ("Arial" , 10, "italic" ), bg = "darkgrey")
-                    label.place(x = "1", y = i*10**count-1)
+            for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  kingdom = '"+tosearch+"' "):
+                label = tk.Label(home_frame, text = row, font = ("Arial" , 10, "italic" ), bg = "darkgrey")
+                label.place(x = "1", y = "175")
         elif value == "phylum":
             for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  phylum = '"+tosearch+"' "):
                 label = tk.Label(home_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
@@ -115,8 +112,22 @@ def home_page():
             for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  class = '"+tosearch+"' "):
                 label = tk.Label(home_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
                 label.place(x = "1", y = "150")
-
-
+        elif value == "naturalorder":
+            for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  naturalorder = '"+tosearch+"' "):
+                label = tk.Label(home_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
+                label.place(x = "1", y = "150")
+        elif value == "family":
+            for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  family = '"+tosearch+"' "):
+                label = tk.Label(home_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
+                label.place(x = "1", y = "150")
+        elif value == "genus":
+            for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  genus = '"+tosearch+"' "):
+                label = tk.Label(home_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
+                label.place(x = "1", y = "150")
+        elif value == "species":
+            for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  species = '"+tosearch+"' "):
+                label = tk.Label(home_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
+                label.place(x = "1", y = "150")
 
     global search_btn
     search_btn = tk.Button(home_frame, text = "SEARCH", bg = "dodgerblue3", activebackground = "darkgrey",
