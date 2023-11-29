@@ -18,28 +18,27 @@ while True :
     """cur.execute(
                         INSERT INTO animal_details VALUES
 
-                        ("Human", "Animalia", "Chordata", "Mamamalia", "Primates", "Hominidae", "Home", "Sapiens"),
-                        
-                        ("Dog", "Animalia", "Chordata", "Mamamalia", "Carnivora", "Canidae", "Canis", "Familaris"),
-                        ("Rat", "Animalia", "Chordata", "Mamamalia", "Rodentia", "Muridea", "Rattus", "Notvegicus"),
-                        ("Rabbit", "Animalia", "Chordata", "Mamamalia", "Lagomorpha", "Lpordae", "Oryctolagus", "Cuniculus"),
-                        ("Leopord", "Animalia", "Chordata", "Mamamalia", "Carnivora", "Felidae", "Panthera", "Paradus"),
-                        ("Red Fox", "Animalia", "Chordata", "Mamamalia", "Carnivora", "Canidae", "Vulpes", "Vulpes"),
-                        ("Gorilla", "Animalia", "Chordata", "Mamamalia", "Primates", "Hominidae", "Gorilla", "Gorlla"),
-                        ("Capybara", "Animalia", "Chordata", "Mamamalia", "Rodentia", "Caviidae", "Hydrochoerus", "Hydrochaeris"),
-                        ("Wolf", "Animalia", "Chordata", "Mamamalia", "Carnivora", "Canidae", "Canis", "Lupus"),
-                        ("Lion", "Animalia", "Chordata", "Mamamalia", "Carnivora", "Felidae", "Panthera", "Leo"),
-                        ("Cockroach", "Animalia", "Arthropoda", "Insecta", "Orthoptera", "Blattidae", "Periplanta", "Americana"),
-                        ("Stag Beetle", "Animalia", "Arthropoda", "Insecta", "Coleoptera", "Lucanide", "Lucanus", "Cervus"),
-                        ("Boa Constrictor", "Animalia", "Chordata", "Reptila", "Squamata", "Boidea", "Boa", "Constrictor") ,
-                        ("Spitting Cobra", "Animalia", "Chordata", "Reptila", "Squamata", "Elapidae", "Naja", "Pallida"),
-                        ("Horned Viper", "Animalia", "Chordata", "Reptila", "Squamata", "Viperidae", "Vipera", "Ammodytes"),
-                        ("Scarlet Snake", "Animalia", "Chordata", "Reptila", "Squamata", "Columbridae", "Cemophora", "Coccinae"),
-                        ("Eastern Diamondback Rattlesnake", "Animalia", "Chordata", "Reptila", "Squamata", "Viperidae", "Crotalus", "Adamanteus"),
-                        ("Timber Rattlesnake", "Animalia", "Chordata", "Reptila", "Squamata", "Viperidae", "Crotalus", "Horridus"),
-                        ("Indian Python ", "Animalia", "Chordata", "Reptila", "Squamata", "Pythonidae", "Python", "Molurus"),
-                        ("Banded Water Snake", "Animalia", "Chordata", "Reptila", "Squamata", "Columbridae", "Helicops", "Angulatus"),
-                        ("Mandalay Spitting Cobra", "Animalia", "Chordata", "Reptila", "Squamata", "Elapidae", "Naja", "Mandalayensis")
+                        ("Human:", "Animalia:", "Chordata:", "Mamamalia:", "Primates:", "Hominidae:", "Home:", "Sapiens"),                        
+                        ("Dog:", "Animalia:", "Chordata:", "Mamamalia:", "Carnivora:", "Canidae:", "Canis:", "Familaris"),
+                        ("Rat:", "Animalia:", "Chordata:", "Mamamalia:", "Rodentia::", "Muridea:", "Rattus:", "Notvegicus"),
+                        ("Rabbit:", "Animalia:", "Chordata:", "Mamamalia:", "Lagomorpha:", "Lpordae:", "Oryctolagus:", "Cuniculus"),
+                        ("Leopord:", "Animalia:", "Chordata:", "Mamamalia:", "Carnivora:", "Felidae:", "Panthera:", "Paradus"),
+                        ("Red Fox:", "Animalia:", "Chordata:", "Mamamalia:", "Carnivora:", "Canidae:", "Vulpes:", "Vulpes"),
+                        ("Gorilla:", "Animalia:", "Chordata:", "Mamamalia:", "Primates:", "Hominidae:", "Gorilla:", "Gorlla"),
+                        ("Capybara:", "Animalia:", "Chordata:", "Mamamalia:", "Rodentia:", "Caviidae:", "Hydrochoerus:", "Hydrochaeris"),
+                        ("Wolf:", "Animalia:", "Chordata:", "Mamamalia:", "Carnivora:", "Canidae:", "Canis:", "Lupus"),
+                        ("Lion:", "Animalia:", "Chordata:", "Mamamalia:", "Carnivora:", "Felidae:", "Panthera:", "Leo"),
+                        ("Cockroach:", "Animalia:", "Arthropoda:", "Insecta:", "Orthoptera:", "Blattidae:", "Periplanta:", "Americana"),
+                        ("Stag Beetle:", "Animalia:", "Arthropoda:", "Insecta:", "Coleoptera:", "Lucanide:", "Lucanus:", "Cervus"),
+                        ("Boa Constrictor:", "Animalia:", "Chordata:", "Reptila:", "Squamata:", "Boidea:", "Boa:", "Constrictor") ,
+                        ("Spitting Cobra:", "Animalia:", "Chordata:", "Reptila:", "Squamata:", "Elapidae:", "Naja:", "Pallida"),
+                        ("Horned Viper:", "Animalia:", "Chordata:", "Reptila:", "Squamata:", "Viperidae:", "Vipera:", "Ammodytes"),
+                        ("Scarlet Snake:", "Animalia:", "Chordata:", "Reptila:", "Squamata:", "Columbridae:", "Cemophora:", "Coccinae"),
+                        ("Eastern Diamondback Rattlesnake:", "Animalia:", "Chordata:", "Reptila:", "Squamata:", "Viperidae:", "Crotalus:", "Adamanteus"),
+                        ("Timber Rattlesnake:", "Animalia:", "Chordata:", "Reptila:", "Squamata:", "Viperidae:", "Crotalus:", "Horridus"),
+                        ("Indian Python:", "Animalia:", "Chordata:", "Reptila:", "Squamata:", "Pythonidae:", "Python:", "Molurus"),
+                        ("Banded Water Snake:", "Animalia:", "Chordata:", "Reptila:", "Squamata:", "Columbridae:", "Helicops:", "Angulatus"),
+                        ("Mandalay Spitting Cobra:", "Animalia:", "Chordata:", "Reptila:", "Squamata:", "Elapidae:", "Naja:", "Mandalayensis")
 
 
                         

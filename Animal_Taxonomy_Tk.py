@@ -2,12 +2,16 @@ from tkinter import *
 from tkinter.ttk import *
 import tkinter as tk
 from tkinter import ttk
+import sqlite3
 
 root = tk.Tk()
 root.geometry("800x500")
 root.title("Animal Taxonomy")
 root.maxsize(width = "800", height = "500")
 root.iconbitmap(r"icon/favicon1.ico")
+
+con = sqlite3.connect("Animal_Taxonomy_DB.db")
+cur = con.cursor()
 
 option_chosen = ""
 
@@ -41,46 +45,80 @@ def home_page():
     label = tk.Label(home_frame, text = "Search by :-",font = ("Brush Script MT" , 15, "italic" ), bg = "darkgrey")
     label.place(x = "1", y = "70")
 
+    def radio_value(value_before):
+        global value
+        value = value_before
+        print(value)
+
     search_name_btn = tk.Radiobutton(home_frame, text = "NAME", bg = "darkgrey", activebackground = "darkgrey",
-                                       activeforeground = "dodgerblue3", value = "NAME")
+                                       activeforeground = "dodgerblue3", value = "NAME", command = lambda:(radio_value("name")))
     search_name_btn.place(x = "4", y = "100")
 
     search_kingdom_btn = tk.Radiobutton(home_frame, text = "KINGDOM", bg = "darkgrey", activebackground = "darkgrey",
-                                          activeforeground = "dodgerblue3", value = "KINGDOM")
+                                          activeforeground = "dodgerblue3", value = "KINGDOM", command = lambda:(radio_value("kingdom")))
     search_kingdom_btn.place(x = "71", y = "100")
 
     search_phylum_btn = tk.Radiobutton(home_frame, text = "Phylum", bg = "darkgrey", activebackground = "darkgrey",
-                                         activeforeground = "dodgerblue3", value = "Phylum")
+                                         activeforeground = "dodgerblue3", value = "Phylum", command = lambda:(radio_value("phylum")))
     search_phylum_btn.place(x = "159", y = "100")
 
     search_class_btn = tk.Radiobutton(home_frame, text = "CLASS", bg = "darkgrey", activebackground = "darkgrey",
-                                        activeforeground = "dodgerblue3", value = "CLASS")
+                                        activeforeground = "dodgerblue3", value = "CLASS", command = lambda:(radio_value("class")))
     search_class_btn.place(x = "233", y = "100")
 
     search_order_btn = tk.Radiobutton(home_frame, text = "ORDER", bg = "darkgrey", activebackground = "darkgrey",
-                                        activeforeground = "dodgerblue3", value = "ORDER")
+                                        activeforeground = "dodgerblue3", value = "ORDER", command = lambda:(radio_value("naturalorder")))
     search_order_btn.place(x = "300", y = "100")
 
     search_family_btn = tk.Radiobutton(home_frame, text = "FAMILY", bg = "darkgrey", activebackground = "darkgrey",
-                                         activeforeground = "dodgerblue3", value = "FAMILY")
+                                         activeforeground = "dodgerblue3", value = "FAMILY", command = lambda:(radio_value("family")))
     search_family_btn.place(x = "370", y = "100")
 
     search_genus_btn = tk.Radiobutton(home_frame, text = "Genus", bg = "darkgrey", activebackground = "darkgrey",
-                                        activeforeground = "dodgerblue3", value = "Genus")
+                                        activeforeground = "dodgerblue3", value = "Genus", command = lambda:(radio_value("genus")))
     search_genus_btn.place(x = "444", y = "100")
 
     search_species_btn = tk.Radiobutton(home_frame, text = "SPECIES", bg = "darkgrey", activebackground = "darkgrey",
-                                          activeforeground = "dodgerblue3", value = "SPECIES")
+                                          activeforeground = "dodgerblue3", value = "SPECIES", command = lambda:(radio_value("species")))
     search_species_btn.place(x = "510", y = "100")
 
     search = tk.Entry(home_frame, width = "30", bg = "aliceblue", fg = "dodgerblue3")
     search.place(x = "1", y = "135")
+    global contents
     contents = tk.StringVar()
     contents.set("Search according to your option.")
     search["textvariable"] = contents
 
+    def on_home_search_btn_click():
+        tosearch = ((contents.get())).title()
+        if tosearch[-1]!= ":":
+            tosearch = ((contents.get())).title() + ":"
+        else:
+            tosearch = tosearch
+
+        if value == "name":
+            for i in cur.execute("SELECT COUNT(*)FROM animal_details" ):
+                for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  name = '"+tosearch+"' "):
+                    label = tk.Label(home_frame, text = row, font = ("Arial" , 10, "italic" ), bg = "darkgrey")
+                    label.place(x = "1", y = i + 175)
+        elif value == "kingdom":
+            for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  kingdom = '"+tosearch+"' "):
+                label = tk.Label(home_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
+                label.place(x = "1", y = "150")
+        elif value == "phylum":
+            for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  phylum = '"+tosearch+"' "):
+                label = tk.Label(home_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
+                label.place(x = "1", y = "150")
+        elif value == "class":
+            for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  class = '"+tosearch+"' "):
+                label = tk.Label(home_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
+                label.place(x = "1", y = "150")
+
+
+
     global search_btn
-    search_btn = tk.Button(home_frame, text = "SEARCH", bg = "dodgerblue3", activebackground = "darkgrey",  activeforeground = "dodgerblue3")
+    search_btn = tk.Button(home_frame, text = "SEARCH", bg = "dodgerblue3", activebackground = "darkgrey",
+                             activeforeground = "dodgerblue3", command = lambda:(on_home_search_btn_click()))
     search_btn.bind("<Enter>", on_enter)
     search_btn.bind("<Leave>", on_leave)
     search_btn.place(x = "191", y = "132")
