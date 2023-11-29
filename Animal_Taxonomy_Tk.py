@@ -48,7 +48,7 @@ def home_page():
     def radio_value(value_before):
         global value
         value = value_before
-        print(value)
+        #print(value)
 
     search_name_btn = tk.Radiobutton(home_frame, text = "NAME", bg = "darkgrey", activebackground = "darkgrey",
                                        activeforeground = "dodgerblue3", value = "NAME", command = lambda:(radio_value("name")))
@@ -97,14 +97,16 @@ def home_page():
             tosearch = tosearch
 
         if value == "name":
-            for i in cur.execute("SELECT COUNT(*)FROM animal_details" ):
-                for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  name = '"+tosearch+"' "):
-                    label = tk.Label(home_frame, text = row, font = ("Arial" , 10, "italic" ), bg = "darkgrey")
-                    label.place(x = "1", y = i + 175)
+            for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  name = '"+tosearch+"' "):
+                label = tk.Label(home_frame, text = row, font = ("Arial" , 10, "italic" ), bg = "darkgrey")
+                label.place(x = 1, y = 180)
         elif value == "kingdom":
-            for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  kingdom = '"+tosearch+"' "):
-                label = tk.Label(home_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
-                label.place(x = "1", y = "150")
+            i = 0
+            count = cur.execute("SELECT COUNT(*) FROM animal_details")
+            while i <= count :
+                for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  kingdom = '"+tosearch+"' "):
+                    label = tk.Label(home_frame, text = row, font = ("Arial" , 10, "italic" ), bg = "darkgrey")
+                    label.place(x = "1", y = i*10**count-1)
         elif value == "phylum":
             for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  phylum = '"+tosearch+"' "):
                 label = tk.Label(home_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
