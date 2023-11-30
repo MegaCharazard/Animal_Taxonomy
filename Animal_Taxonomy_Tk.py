@@ -46,9 +46,16 @@ def home_page():
     label.place(x = "1", y = "70")
 
     def radio_value(value_before):
-        global value
-        value = value_before
-        #print(value)
+        if value_before == "":
+            label = tk.Label(home_frame, text = "! Please Choose An Option !",font = ("Brush Script MT" , 15, "italic" ),
+                              bg = "darkgrey", fg = "red")
+            label.place(x = "1", y = "470")
+        else:
+            global value
+            value = value_before
+            #print(value)
+
+
 
     search_name_btn = tk.Radiobutton(home_frame, text = "NAME", bg = "darkgrey", activebackground = "darkgrey",
                                        activeforeground = "dodgerblue3", value = "NAME", command = lambda:(radio_value("name")))
@@ -128,6 +135,10 @@ def home_page():
             for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  species = '"+tosearch+"' "):
                 label = tk.Label(home_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
                 label.place(x = "1", y = "150")
+
+    label = tk.Label(home_frame, text = "Search Result(s):-",font = ("Brush Script MT" , 15, "italic" ), bg = "darkgrey",
+                     fg = "dodgerblue3")
+    label.place(x = 1, y = 160)
 
     global search_btn
     search_btn = tk.Button(home_frame, text = "SEARCH", bg = "dodgerblue3", activebackground = "darkgrey",
