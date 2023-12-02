@@ -224,8 +224,7 @@ def phylum_page():
     "Arthrpod", 
     "Molusc", 
     "Echinoderm", 
-    "Annalid",
-    "Sponge"
+    "Annalid"
     ] 
     
     label = tk.Label(phylum_frame, text = "Animals:-",font = ("Bradley Hand ITC" , 12, "italic", "bold"),
