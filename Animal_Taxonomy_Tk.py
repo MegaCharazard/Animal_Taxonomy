@@ -140,8 +140,7 @@ def home_page():
                 label = tk.Label(home_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
                 label.place(x = "1", y = "150")
 
-    label = tk.Label(home_frame, text = "Search Result(s):-",font = ("Brush Script MT" , 15, "italic" ), bg = "darkgrey",
-                     fg = "dodgerblue3")
+    label = tk.Label(home_frame, text = "Search Result(s):-",font = ("Brush Script MT" , 15, "italic" ), bg = "darkgrey",)
     label.place(x = 1, y = 160)
 
     global search_btn
@@ -292,10 +291,10 @@ def phylum_page():
     
     label = tk.Label(phylum_frame, text = "Monera:-",font = ("Bradley Hand ITC" , 12, "italic", "bold"), bg = "darkgrey",
                        fg = "black")
-    label.place(x = "400", y = 100)
+    label.place(x = "433", y = 100)
 
     search_phylum_monera_menu = OptionMenu( phylum_frame , clicked3 , *options, command= drop_down_index_changed)
-    search_phylum_monera_menu.place(x = "400", y= "125") 
+    search_phylum_monera_menu.place(x = "433", y= "125") 
     
     def show(): 
         search.config(contents.set(option_chosen)) 
@@ -315,8 +314,8 @@ def phylum_page():
                        fg = "black")
     label.place(x = "323", y = 100)
 
-    search_phylum_protista_menu = OptionMenu( phylum_frame , clicked3 , *options, command= drop_down_index_changed)
-    search_phylum_protista_menu.place(x = "323", y= "125") 
+    search_phylum_protista_menu = OptionMenu( phylum_frame , clicked4 , *options, command= drop_down_index_changed)
+    search_phylum_protista_menu.place(x = "319", y= "125") 
 
     search = tk.Entry(phylum_frame, width = "30", fg = "dodgerblue3")
     search.place(x = "1", y = "153")
@@ -386,10 +385,10 @@ def order_page():
     label.place(x = "7", y = "3")
     label.configure(width = "28")
 
-    label = tk.Label(order_frame, text = "Search by :-",font = ("Brush Script MT" , 15, "italic" ), bg = "darkgrey")
+    label = tk.Label(order_frame, text = "Search by Order:-",font = ("Brush Script MT" , 15, "italic" ), bg = "darkgrey")
     label.place(x = "1", y = "70")
 
-    clicked1 = StringVar() 
+    """clicked1 = StringVar() 
     clicked1.set( "Primates" ) 
     options = [  
     "--Select--",
@@ -448,20 +447,33 @@ def order_page():
     label.place(x = "222", y = 100)
 
     search_Fungi_menu = OptionMenu( order_frame , clicked3 , *options, command= drop_down_index_changed)
-    search_Fungi_menu.place(x = "222", y= "125") 
+    search_Fungi_menu.place(x = "222", y= "125") """
 
     search = tk.Entry(order_frame, width = "30", fg = "dodgerblue3")
-    search.place(x = "1", y = "153")
+    search.place(x = "1", y = "113")
     contents = tk.StringVar()
-    contents.set(clicked1.get())
+    contents.set("<Search Orders>")
     search["textvariable"] = contents
+
+    def on_order_page_search_btn_click():
+        tosearch = ((contents.get())).title()
+        if tosearch[-1]!= ":":
+            tosearch = ((contents.get())).title() + ":"
+        else:
+            for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  naturalorder = '"+tosearch+"' "):
+                label = tk.Label(order_frame, text = row, font = ("Arial" , 10, "italic" ), bg = "darkgrey")
+                label.place(x = 1, y = 170)
+                print(row)
  
     global search_btn
     search_btn = tk.Button(order_frame, text = "SEARCH", bg = "dodgerblue3", activebackground = "darkgrey",
-                            activeforeground = "dodgerblue3", command = show )
+                            activeforeground = "dodgerblue3", command = on_order_page_search_btn_click )#, command = show 
     search_btn.bind("<Enter>", on_enter)
     search_btn.bind("<Leave>", on_leave)
-    search_btn.place(x = "191", y = "150")
+    search_btn.place(x = "191", y = "110")
+
+    label = tk.Label(order_frame, text = "Search Results(s):-",font = ("Brush Script MT" , 15, "italic" ), bg = "darkgrey")
+    label.place(x = "1", y = "140")
 
     order_frame.pack(padx = 20, pady = 20)
     order_frame.configure(width = "650", height = "500")
@@ -480,8 +492,20 @@ def family_page():
     contents.set("Type The Family.")
     search["textvariable"] = contents
 
+    def on_family_page_search_btn_click():
+        tosearch = ((contents.get())).title()
+        if tosearch[-1]!= ":":
+            tosearch = ((contents.get())).title() + ":"
+        else:
+            for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  family = '"+tosearch+"' "):
+                label = tk.Label(family_frame, text = row, font = ("Arial" , 10, "italic" ), bg = "darkgrey")
+                label.place(x = 1, y = 170)
+                print(row)
+ 
+
     global search_btn
-    search_btn = tk.Button(family_frame, text = "SEARCH", bg = "dodgerblue3", activebackground = "darkgrey",  activeforeground = "dodgerblue3")
+    search_btn = tk.Button(family_frame, text = "SEARCH", bg = "dodgerblue3", activebackground = "darkgrey",
+                             activeforeground = "dodgerblue3", command = on_family_page_search_btn_click())
     search_btn.bind("<Enter>", on_enter)
     search_btn.bind("<Leave>", on_leave)
     search_btn.place(x = "191", y = "98")
@@ -603,13 +627,13 @@ kingdom_btn.place(x = 15, y = 75)
 kingdom_indicate = tk.Label(option_frame, text = " ", bg = "darkgray")
 kingdom_indicate.place(x = 10, y = 75, width = 2, height = 60)
 
-phylum_btn = tk.Button(option_frame, text = "Phylum", font = ("Bradley Hand ITC" , 20, "italic", "bold" ), fg = "dodgerblue3",
+phylum_btn = tk.Button(option_frame, text = "Phylum-\n-Division", font = ("Bradley Hand ITC" , 15, "italic", "bold" ), fg = "dodgerblue3",
                      bd = 0, bg = "darkgray",  activebackground = "darkgray",
                     command = lambda: indicate(phylum_indicate, phylum_page))
 phylum_btn.place(x = 15, y = 125)
 
 phylum_indicate = tk.Label(option_frame, text = " ", bg = "darkgray")
-phylum_indicate.place(x = 10, y = 125, width = 2, height = 60)
+phylum_indicate.place(x = 10, y = 125, width = 2, height = 65)
 
 class_btn = tk.Button(option_frame, text = "Class", font = ("Bradley Hand ITC" , 20, "italic", "bold" ), fg = "dodgerblue3", 
                         bd = 0, bg = "darkgray", activebackground = "darkgray",
