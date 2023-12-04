@@ -342,10 +342,10 @@ def class_page():
     label.place(x = "7", y = "3")
     label.configure(width = "28")
 
-    label = tk.Label(class_frame, text = "Search by :-",font = ("Brush Script MT" , 15, "italic" ), bg = "darkgrey")
+    label = tk.Label(class_frame, text = "Search by Order:-",font = ("Brush Script MT" , 15, "italic" ), bg = "darkgrey")
     label.place(x = "1", y = "70")
 
-    search_mammallia_btn = tk.Radiobutton(class_frame, text = "MAMMALIA", bg = "darkgrey",
+    """search_mammallia_btn = tk.Radiobutton(class_frame, text = "MAMMALIA", bg = "darkgrey",
                                             activeforeground = "dodgerblue3", value = "MAMMALLIA")
     search_mammallia_btn.place(x = "4", y = "100")
 
@@ -359,11 +359,10 @@ def class_page():
 
     search_diplopoda_btn = tk.Radiobutton(class_frame, text = "DIPLOPODA", bg = "darkgrey",
                                             activeforeground = "dodgerblue3", value = "DIPLOPODA")
-    search_diplopoda_btn.place(x = "285", y = "100")
-
+    search_diplopoda_btn.place(x = "285", y = "100")"""
 
     search = tk.Entry(class_frame, width = "30", fg = "dodgerblue3")
-    search.place(x = "1", y = "135")
+    search.place(x = "1", y = "105")
     contents = tk.StringVar()
     contents.set("Type The Class.")
     search["textvariable"] = contents
@@ -372,7 +371,10 @@ def class_page():
     search_btn = tk.Button(class_frame, text = "SEARCH", bg = "dodgerblue3", activebackground = "darkgrey",  activeforeground = "dodgerblue3")
     search_btn.bind("<Enter>", on_enter)
     search_btn.bind("<Leave>", on_leave)
-    search_btn.place(x = "191", y = "132")
+    search_btn.place(x = "191", y = "101")
+
+    label = tk.Label(class_frame, text = "Search Results(s):-",font = ("Brush Script MT" , 15, "italic" ), bg = "darkgrey")
+    label.place(x = "1", y = "130")
 
     class_frame.pack(padx = 20, pady = 20)
     class_frame.configure(width = "650", height = "500")
@@ -450,7 +452,7 @@ def order_page():
     search_Fungi_menu.place(x = "222", y= "125") """
 
     search = tk.Entry(order_frame, width = "30", fg = "dodgerblue3")
-    search.place(x = "1", y = "113")
+    search.place(x = "1", y = "105")
     contents = tk.StringVar()
     contents.set("<Search Orders>")
     search["textvariable"] = contents
@@ -470,10 +472,10 @@ def order_page():
                             activeforeground = "dodgerblue3", command = on_order_page_search_btn_click )#, command = show 
     search_btn.bind("<Enter>", on_enter)
     search_btn.bind("<Leave>", on_leave)
-    search_btn.place(x = "191", y = "110")
+    search_btn.place(x = "191", y = "101")
 
     label = tk.Label(order_frame, text = "Search Results(s):-",font = ("Brush Script MT" , 15, "italic" ), bg = "darkgrey")
-    label.place(x = "1", y = "140")
+    label.place(x = "1", y = "130")
 
     order_frame.pack(padx = 20, pady = 20)
     order_frame.configure(width = "650", height = "500")
@@ -486,8 +488,11 @@ def family_page():
     label.place(x = "7", y = "3")
     label.configure(width = "28")
 
+    label = tk.Label(family_frame, text = "Search by Family:-",font = ("Brush Script MT" , 15, "italic" ), bg = "darkgrey")
+    label.place(x = "1", y = "70")
+
     search = tk.Entry(family_frame, width = "30", fg = "dodgerblue3")
-    search.place(x = "1", y = "100")
+    search.place(x = "1", y = "105")
     contents = tk.StringVar()
     contents.set("Type The Family.")
     search["textvariable"] = contents
@@ -501,14 +506,16 @@ def family_page():
                 label = tk.Label(family_frame, text = row, font = ("Arial" , 10, "italic" ), bg = "darkgrey")
                 label.place(x = 1, y = 170)
                 print(row)
- 
+
+    label = tk.Label(family_frame, text = "Search Results(s):-",font = ("Brush Script MT" , 15, "italic" ), bg = "darkgrey")
+    label.place(x = "1", y = "130")
 
     global search_btn
     search_btn = tk.Button(family_frame, text = "SEARCH", bg = "dodgerblue3", activebackground = "darkgrey",
                              activeforeground = "dodgerblue3", command = on_family_page_search_btn_click())
     search_btn.bind("<Enter>", on_enter)
     search_btn.bind("<Leave>", on_leave)
-    search_btn.place(x = "191", y = "98")
+    search_btn.place(x = "191", y = "101")
 
     family_frame.pack(padx = 20, pady = 20)
     family_frame.configure(width = "650", height = "500")
@@ -521,8 +528,11 @@ def genus_page():
     label.place(x = "7", y = "3")
     label.configure(width = "28")
 
+    label = tk.Label(genus_frame, text = "Search by Genus:-",font = ("Brush Script MT" , 15, "italic" ), bg = "darkgrey")
+    label.place(x = "1", y = "70")
+
     search = tk.Entry(genus_frame, width = "30", fg = "dodgerblue3")
-    search.place(x = "1", y = "100")
+    search.place(x = "1", y = "105")
     contents = tk.StringVar()
     contents.set("Type The Genus.")
     search["textvariable"] = contents
@@ -531,7 +541,10 @@ def genus_page():
     search_btn = tk.Button(genus_frame, text = "SEARCH", bg = "dodgerblue3", activebackground = "darkgrey",  activeforeground = "dodgerblue3")
     search_btn.bind("<Enter>", on_enter)
     search_btn.bind("<Leave>", on_leave)
-    search_btn.place(x = "191", y = "98")
+    search_btn.place(x = "191", y = "101")
+
+    label = tk.Label(genus_frame, text = "Search Results(s):-",font = ("Brush Script MT" , 15, "italic" ), bg = "darkgrey")
+    label.place(x = "1", y = "130")
 
     genus_frame.pack(padx = 20, pady = 20)
     genus_frame.configure(width = "650", height = "500")
@@ -544,8 +557,11 @@ def species_page():
     label.place(x = "7", y = "3")
     label.configure(width = "28")
 
+    label = tk.Label(species_frame, text = "Search by Speices:-",font = ("Brush Script MT" , 15, "italic" ), bg = "darkgrey")
+    label.place(x = "1", y = "70")
+
     search = tk.Entry(species_frame, width = "30", fg = "dodgerblue3")
-    search.place(x = "1", y = "100")
+    search.place(x = "1", y = "105")
     contents = tk.StringVar()
     contents.set("Type The Species.")
     search["textvariable"] = contents
@@ -554,7 +570,10 @@ def species_page():
     search_btn = tk.Button(species_frame, text = "SEARCH", bg = "dodgerblue3", activebackground = "darkgrey",  activeforeground = "dodgerblue3")
     search_btn.bind("<Enter>", on_enter)
     search_btn.bind("<Leave>", on_leave)
-    search_btn.place(x = "191", y = "98")
+    search_btn.place(x = "191", y = "101")
+
+    label = tk.Label(species_frame, text = "Search Results(s):-",font = ("Brush Script MT" , 15, "italic" ), bg = "darkgrey")
+    label.place(x = "1", y = "130")
 
     species_frame.pack(padx = 20, pady = 20)
     species_frame.configure(width = "650", height = "500")
