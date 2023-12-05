@@ -164,24 +164,34 @@ def kingdom_page():
     label = tk.Label(kingdom_frame, text = "Search by :-",font = ("Brush Script MT" , 15, "italic" ), bg = "darkgrey")
     label.place(x = "1", y = "70")
 
+    def radio_value(value_before):
+        if value_before == "":
+            label = tk.Label(kingdom_frame, text = "! Please Choose An Option !",font = ("Brush Script MT" , 15, "italic" ),
+                              bg = "darkgrey", fg = "red")
+            label.place(x = "1", y = "470")
+        else:
+            global value
+            value = value_before
+            #print(value)
+
     search_animal_btn = tk.Radiobutton(kingdom_frame, text = "ANIMALS", bg = "darkgrey",
-                                        activeforeground = "dodgerblue3", value = "ANIMALS")
+                                        activeforeground = "dodgerblue3", value = "ANIMALS", command = lambda:(radio_value("animals")))
     search_animal_btn.place(x = "3", y = "98")
 
     search_plant_btn = tk.Radiobutton(kingdom_frame, text = "PLANT", bg = "darkgrey",
-                                        activeforeground = "dodgerblue3", value = "PLANT")
+                                        activeforeground = "dodgerblue3", value = "PLANT", command = lambda:(radio_value("plant")))
     search_plant_btn.place(x = "78", y = "98")
 
     search_fungi_btn = tk.Radiobutton(kingdom_frame, text = "FUNGI", bg = "darkgrey",
-                                        activeforeground = "dodgerblue3", value = "FUNGI")
+                                        activeforeground = "dodgerblue3", value = "FUNGI", command = lambda:(radio_value("fungi")))
     search_fungi_btn.place(x = "138", y = "98")
 
     search_protista_btn = tk.Radiobutton(kingdom_frame, text = "PROTISTA", bg = "darkgrey",
-                                        activeforeground = "dodgerblue3", value = "PROTISTA")
+                                        activeforeground = "dodgerblue3", value = "PROTISTA", command = lambda:(radio_value("protista")))
     search_protista_btn.place(x = "196", y = "98")
 
     search_monera_btn = tk.Radiobutton(kingdom_frame, text = "MONERA", bg = "darkgrey",
-                                        activeforeground = "dodgerblue3", value = "MONERA")
+                                        activeforeground = "dodgerblue3", value = "MONERA", command = lambda:(radio_value("monera")))
     search_monera_btn.place(x = "271", y = "98")
 
     search = tk.Entry(kingdom_frame, width = "30", bg = "aliceblue", fg = "dodgerblue3")
@@ -190,9 +200,39 @@ def kingdom_page():
     contents.set("Type The Kingdom.")
     search["textvariable"] = contents
 
+    def on_kingdom_search_btn_click():#=-=-=-=-=-=-=-=WRONG CONCEPT
+        tosearch = ((contents.get())).title()
+        if tosearch[-1]!= ":":
+            tosearch = ((contents.get())).title() + ":"
+        else:
+            tosearch = tosearch
+
+        if value == "animals":
+            for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  kingdom = '"+tosearch+"' "):
+                label = tk.Label(kingdom_frame, text = row, font = ("Arial" , 10, "italic" ), bg = "darkgrey")
+                label.place(x = 1, y = 180) 
+
+        elif value == "plant":
+            for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  kingdom = '"+tosearch+"' "):
+                label = tk.Label(kingdom_frame, text = row, font = ("Arial" , 10, "italic" ), bg = "darkgrey")
+                label.place(x = "1", y = "175")
+        elif value == "fungi":
+            for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  phylum = '"+tosearch+"' "):
+                label = tk.Label(kingdom_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
+                label.place(x = "1", y = "150")
+        elif value == "protista":
+            for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  class = '"+tosearch+"' "):
+                label = tk.Label(kingdom_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
+                label.place(x = "1", y = "150")
+        elif value == "monera":
+            for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  naturalorder = '"+tosearch+"' "):
+                label = tk.Label(kingdom_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
+                label.place(x = "1", y = "150")
+
 
     global search_btn
-    search_btn = tk.Button(kingdom_frame, text = "SEARCH", bg = "dodgerblue3", activebackground = "darkgrey",  activeforeground = "dodgerblue3")
+    search_btn = tk.Button(kingdom_frame, text = "SEARCH", bg = "dodgerblue3", activebackground = "darkgrey",
+                             activeforeground = "dodgerblue3", command = lambda:(on_kingdom_search_btn_click()))
     search_btn.bind("<Enter>", on_enter)
     search_btn.bind("<Leave>", on_leave)
     search_btn.place(x = "191", y = "132")
