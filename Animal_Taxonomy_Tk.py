@@ -45,16 +45,16 @@ def home_page():
     label = tk.Label(home_frame, text = "Search by :-",font = ("Brush Script MT" , 15, "italic" ), bg = "darkgrey")
     label.place(x = "1", y = "70")
 
+    global radio_value
     def radio_value(value_before):
         if value_before == "":
             label = tk.Label(home_frame, text = "! Please Choose An Option !",font = ("Brush Script MT" , 15, "italic" ),
                               bg = "darkgrey", fg = "red")
             label.place(x = "1", y = "470")
         else:
-            global value
-            value = value_before
+            global home_value
+            home_value = value_before
             #print(value)
-
 
 
     search_name_btn = tk.Radiobutton(home_frame, text = "NAME", bg = "darkgrey", activebackground = "darkgrey",
@@ -103,7 +103,7 @@ def home_page():
         else:
             tosearch = tosearch
 
-        if value == "name":
+        if home_value == "name":
             for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  name = '"+tosearch+"' "):
                 label = tk.Label(home_frame, text = row, font = ("Arial" , 10, "italic" ), bg = "darkgrey")
                 label.place(x = 1, y = 180) 
@@ -111,31 +111,31 @@ def home_page():
             #    label = tk.Label(home_frame, text = "No Records", font = ("Arial" , 10, "italic" ), bg = "darkgrey")
             #    label.place(x = 1, y = 180) 
 
-        elif value == "kingdom":
+        elif home_value == "kingdom":
             for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  kingdom = '"+tosearch+"' "):
                 label = tk.Label(home_frame, text = row, font = ("Arial" , 10, "italic" ), bg = "darkgrey")
                 label.place(x = "1", y = "175")
-        elif value == "phylum":
+        elif home_value == "phylum":
             for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  phylum = '"+tosearch+"' "):
                 label = tk.Label(home_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
                 label.place(x = "1", y = "150")
-        elif value == "class":
+        elif home_value == "class":
             for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  class = '"+tosearch+"' "):
                 label = tk.Label(home_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
                 label.place(x = "1", y = "150")
-        elif value == "naturalorder":
+        elif home_value == "naturalorder":
             for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  naturalorder = '"+tosearch+"' "):
                 label = tk.Label(home_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
                 label.place(x = "1", y = "150")
-        elif value == "family":
+        elif home_value == "family":
             for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  family = '"+tosearch+"' "):
                 label = tk.Label(home_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
                 label.place(x = "1", y = "150")
-        elif value == "genus":
+        elif home_value == "genus":
             for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  genus = '"+tosearch+"' "):
                 label = tk.Label(home_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
                 label.place(x = "1", y = "150")
-        elif value == "species":
+        elif home_value == "species":
             for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  species = '"+tosearch+"' "):
                 label = tk.Label(home_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
                 label.place(x = "1", y = "150")
@@ -292,6 +292,9 @@ def phylum_page():
     label = tk.Label(phylum_frame , text = "Search by :-",font = ("Brush Script MT" , 15, "italic" ), bg = "darkgrey")
     label.place(x = "1", y = "70")
 
+    label = tk.Label(phylum_frame, text = "Animals:-",font = ("Bradley Hand ITC" , 12, "italic", "bold"),
+                     bg = "darkgrey", fg = "black")
+    label.place(x = "1", y = 100)
 
     def radio_value(value_before):
         if value_before == "":
@@ -299,13 +302,9 @@ def phylum_page():
                               bg = "darkgrey", fg = "red")
             label.place(x = "1", y = "470")
         else:
-            global value
-            value = value_before
+            global phylum_value
+            phylum_value = value_before
             #print(value)
-    
-    label = tk.Label(phylum_frame, text = "Animals:-",font = ("Bradley Hand ITC" , 12, "italic", "bold"),
-                     bg = "darkgrey", fg = "black")
-    label.place(x = "1", y = 100)
 
     search_phylum_animal_menu =tk.Radiobutton( phylum_frame ,text = "Animal" , bg = "darkgrey", activebackground = "darkgrey",
                                           activeforeground = "dodgerblue3", value = "Animalia", command = lambda:(radio_value("Animalia")))
@@ -342,7 +341,7 @@ def phylum_page():
     search_phylum_protista_menu =tk.Radiobutton( phylum_frame ,text = "Protista" , bg = "darkgrey", activebackground = "darkgrey",
                                           activeforeground = "dodgerblue3", value = "Protista", command = lambda:(radio_value("Protista")))
     search_phylum_protista_menu.place(x = "319", y= "125") 
-
+    
     """search = tk.Entry(phylum_frame, width = "30", fg = "dodgerblue3")
     search.place(x = "1", y = "153")
     contents = tk.StringVar()
@@ -357,7 +356,7 @@ def phylum_page():
     search_btn.bind("<Leave>", on_leave)
     search_btn.place(x = "191", y = "150")"""
 
-    if value == "Animalia":
+    if phylum_value == "Animalia":
         combo = Combobox(phylum_frame)
         combo["values"] = [ 
         "--Select--",
@@ -371,7 +370,7 @@ def phylum_page():
         combo.current()
         combo.place(x = "1", y = "105")
 
-    elif value == "Plantae":
+    elif phylum_value == "Plantae":
         combo = Combobox(phylum_frame)
         combo["values"] = [  
         "--Select--",
@@ -385,7 +384,7 @@ def phylum_page():
         combo.current()
         combo.place(x = "1", y = "105")
 
-    elif value == "Fungi":
+    elif phylum_value == "Fungi":
         combo = Combobox(phylum_frame)
         combo["values"] = [ 
         "--Select--",
@@ -401,7 +400,7 @@ def phylum_page():
         combo.current()
         combo.place(x = "1", y = "105")
 
-    elif value == "Monera": 
+    elif phylum_value == "Monera": 
         combo = Combobox(phylum_frame)
         combo["values"] = [ 
         "--Select--",
@@ -413,8 +412,8 @@ def phylum_page():
         combo.set("Search")
         combo.current()
         combo.place(x = "1", y = "105")
-        
-    elif value == "Protista":
+
+    elif phylum_value == "Protista":
         combo = Combobox(phylum_frame)
         combo["values"] = [ 
         "--Select--",
