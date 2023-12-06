@@ -292,124 +292,154 @@ def phylum_page():
     label = tk.Label(phylum_frame , text = "Search by :-",font = ("Brush Script MT" , 15, "italic" ), bg = "darkgrey")
     label.place(x = "1", y = "70")
 
-    def show(): 
-        search.config(contents.set(option_chosen)) 
-    clicked = StringVar() 
-    clicked.set( "Chordate" ) 
 
-    options = [ 
-    "--Select--",
-    "Chordate", 
-    "Arthrpod", 
-    "Molusc", 
-    "Echinoderm", 
-    "Annalid"
-    ] 
+    def radio_value(value_before):
+        if value_before == "":
+            label = tk.Label(phylum_frame, text = "! Please Choose An Option !",font = ("Brush Script MT" , 15, "italic" ),
+                              bg = "darkgrey", fg = "red")
+            label.place(x = "1", y = "470")
+        else:
+            global value
+            value = value_before
+            #print(value)
     
     label = tk.Label(phylum_frame, text = "Animals:-",font = ("Bradley Hand ITC" , 12, "italic", "bold"),
                      bg = "darkgrey", fg = "black")
     label.place(x = "1", y = 100)
 
-    search_phylum_animal_menu = OptionMenu( phylum_frame , clicked , *options, command= drop_down_index_changed)
+    search_phylum_animal_menu =tk.Radiobutton( phylum_frame ,text = "Animal" , bg = "darkgrey", activebackground = "darkgrey",
+                                          activeforeground = "dodgerblue3", value = "Animalia", command = lambda:(radio_value("Animalia")))
     search_phylum_animal_menu.place(x = "1", y= "125") 
 
-    clicked1 = StringVar() 
-    clicked1.set( "Primates" ) 
-    options = [  
-    "--Select--",
-    "Bryophyta", 
-    "Cycadophyta", 
-    "Ginkgophyta", 
-    "Chlorophyta", 
-    "Lycophyta"
-    ] 
-    
     label = tk.Label(phylum_frame, text = "Plant:-",font = ("Bradley Hand ITC" , 12, "italic", "bold"), bg = "darkgrey",
                        fg = "black")
     label.place(x = "100", y = 100)
 
-    search_phylum_plant_menu = OptionMenu( phylum_frame , clicked1 , *options, command= drop_down_index_changed)# back = "dodgerblue3",) 
+    search_phylum_plant_menu =tk.Radiobutton( phylum_frame ,text = "Plant" , bg = "darkgrey", activebackground = "darkgrey",
+                                          activeforeground = "dodgerblue3", value = "Plantae", command = lambda:(radio_value("Plantae")))
     search_phylum_plant_menu.place(x = "100", y= "125") 
-    
-    def show(): 
-        search.config(contents.set(option_chosen)) 
-        
-    clicked2 = StringVar() 
-    clicked2.set("Bryophyta") 
-
-    options = [ 
-    "--Select--",
-    "Ascomycota", 
-    "Basidiomycota", 
-    "Zygomycota",
-    "Microsporidia",  
-    "Bigyra",
-    "Aphelida",
-    "Mycetozoa"
-    ] 
     
     label = tk.Label(phylum_frame, text = "Fungi:-",font = ("Bradley Hand ITC" , 12, "italic", "bold"), bg = "darkgrey",
                        fg = "black")
     label.place(x = "205", y = 100)
 
-    search_phylum_fungi_menu = OptionMenu( phylum_frame,clicked2, *options, command= drop_down_index_changed)
+    search_phylum_fungi_menu =tk.Radiobutton( phylum_frame,text = "Fungi" , bg = "darkgrey", activebackground = "darkgrey",
+                                          activeforeground = "dodgerblue3", value = "Fungi", command = lambda:(radio_value("Fungi")))
     search_phylum_fungi_menu.place(x = "205", y= "125") 
-
-    def show(): 
-        search.config(contents.set(option_chosen)) 
-
-    clicked3 = StringVar() 
-    clicked3.set("Glomeromycota") 
-
-    options = [ 
-    "--Select--",
-    "Archaebacteria", 
-    "Schizopyta", 
-    "Cyanophyta",
-    "Prochlorophyta"  
-    ] 
     
     label = tk.Label(phylum_frame, text = "Monera:-",font = ("Bradley Hand ITC" , 12, "italic", "bold"), bg = "darkgrey",
                        fg = "black")
     label.place(x = "433", y = 100)
 
-    search_phylum_monera_menu = OptionMenu( phylum_frame , clicked3 , *options, command= drop_down_index_changed)
+    search_phylum_monera_menu =tk.Radiobutton( phylum_frame ,text = "Monera" , bg = "darkgrey", activebackground = "darkgrey",
+                                          activeforeground = "dodgerblue3", value = "Monera", command = lambda:(radio_value("Monera")))
     search_phylum_monera_menu.place(x = "433", y= "125") 
-    
-    def show(): 
-        search.config(contents.set(option_chosen)) 
-
-    clicked4 = StringVar() 
-    clicked4.set("Glomeromycota") 
-
-    options = [ 
-    "--Select--",
-    "Dinoflagellates", 
-    "Amoebozoa", 
-    "Rhodophyta",
-    "Ciliates"  
-    ] 
     
     label = tk.Label(phylum_frame, text = "Protista:-",font = ("Bradley Hand ITC" , 12, "italic", "bold"), bg = "darkgrey",
                        fg = "black")
     label.place(x = "323", y = 100)
 
-    search_phylum_protista_menu = OptionMenu( phylum_frame , clicked4 , *options, command= drop_down_index_changed)
+    search_phylum_protista_menu =tk.Radiobutton( phylum_frame ,text = "Protista" , bg = "darkgrey", activebackground = "darkgrey",
+                                          activeforeground = "dodgerblue3", value = "Protista", command = lambda:(radio_value("Protista")))
     search_phylum_protista_menu.place(x = "319", y= "125") 
 
-    search = tk.Entry(phylum_frame, width = "30", fg = "dodgerblue3")
+    """search = tk.Entry(phylum_frame, width = "30", fg = "dodgerblue3")
     search.place(x = "1", y = "153")
     contents = tk.StringVar()
     contents.set("Type The Order.")    
     contents = tk.StringVar()
     contents.set(clicked.get() )
     search["textvariable"] = contents
- 
+    
     global search_btn   
     search_btn = tk.Button(phylum_frame, text = "SEARCH", bg = "dodgerblue3", activebackground = "darkgrey",  activeforeground = "dodgerblue3", command = show )
     search_btn.bind("<Enter>", on_enter)
     search_btn.bind("<Leave>", on_leave)
-    search_btn.place(x = "191", y = "150")
+    search_btn.place(x = "191", y = "150")"""
+
+    if value == "Animalia":
+        combo = Combobox(phylum_frame)
+        combo["values"] = [ 
+        "--Select--",
+        "Chordate", 
+        "Arthrpod", 
+        "Molusc", 
+        "Echinoderm", 
+        "Annalid"
+        ] 
+        combo.set("Search")
+        combo.current()
+        combo.place(x = "1", y = "105")
+
+    elif value == "Plantae":
+        combo = Combobox(phylum_frame)
+        combo["values"] = [  
+        "--Select--",
+        "Bryophyta", 
+        "Cycadophyta", 
+        "Ginkgophyta", 
+        "Chlorophyta", 
+        "Lycophyta"
+        ]
+        combo.set("Search")
+        combo.current()
+        combo.place(x = "1", y = "105")
+
+    elif value == "Fungi":
+        combo = Combobox(phylum_frame)
+        combo["values"] = [ 
+        "--Select--",
+        "Ascomycota", 
+        "Basidiomycota", 
+        "Zygomycota",
+        "Microsporidia",  
+        "Bigyra",
+        "Aphelida",
+        "Mycetozoa"
+        ]
+        combo.set("Search")
+        combo.current()
+        combo.place(x = "1", y = "105")
+
+    elif value == "Monera": 
+        combo = Combobox(phylum_frame)
+        combo["values"] = [ 
+        "--Select--",
+        "Archaebacteria", 
+        "Schizopyta", 
+        "Cyanophyta",
+        "Prochlorophyta"  
+        ] 
+        combo.set("Search")
+        combo.current()
+        combo.place(x = "1", y = "105")
+        
+    elif value == "Protista":
+        combo = Combobox(phylum_frame)
+        combo["values"] = [ 
+        "--Select--",
+        "Dinoflagellates", 
+        "Amoebozoa", 
+        "Rhodophyta",
+        "Ciliates"  
+        ] 
+        combo.set("Search")
+        combo.current()
+        combo.place(x = "1", y = "105")
+
+    #combo = Combobox(phylum_frame)
+    #combo["values"] = (1,2,3,"Hari")
+    #combo.set("Search")
+    #combo.current()
+    #combo.place(x = "1", y = "105")
+
+    global search_btn
+    search_btn = tk.Button(phylum_frame, text = "SEARCH", bg = "dodgerblue3", activebackground = "darkgrey",
+                             activeforeground = "dodgerblue3")
+    search_btn.bind("<Enter>", on_enter)
+    search_btn.bind("<Leave>", on_leave)
+    search_btn.place(x = "191", y = "101")
+
 
     phylum_frame.pack(padx = 20, pady = 20)
     phylum_frame.configure(width = "650", height = "500")
