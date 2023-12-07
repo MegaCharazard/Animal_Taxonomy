@@ -24,7 +24,7 @@ def on_enter_global(e):
     e.widget['background'] = 'deepskyblue3'
 
 def on_leave_global(e):
-    e.widget['background'] = 'darkgrey'
+    e.widget['background'] = 'dodgerblue3'
 
 def on_enter(e):
     search_btn['background'] = 'deepskyblue3'
@@ -171,11 +171,11 @@ def kingdom_page():
             label = tk.Label(kingdom_frame, text = row, font = ("Arial" , 10, "italic" ), bg = "darkgrey")
             label.place(x = 1, y = 150) 
 
-    global search_animal_btn
-    search_animal_btn = tk.Button(kingdom_frame, text = "ANIMALS", bg = "darkgrey",
+    #global search_animal_btn
+    search_animal_btn = tk.Button(kingdom_frame, text = "ANIMALS", bg = "dodgerblue3",
                                         activeforeground = "dodgerblue3", command = lambda:(on_search_animal_btn_click()))
-    search_animal_btn.bind("<Enter>", on_enter)
-    search_animal_btn.bind("<Leave>", on_leave)
+    search_animal_btn.bind("<Enter>", on_enter_global)
+    search_animal_btn.bind("<Leave>", on_leave_global)
     search_animal_btn.place(x = "3", y = "98")
 
 
@@ -185,11 +185,11 @@ def kingdom_page():
             label = tk.Label(kingdom_frame, text = row, font = ("Arial" , 10, "italic" ), bg = "darkgrey")
             label.place(x = 1, y = 150) 
 
-    global search_plant_btn
-    search_plant_btn = tk.Button(kingdom_frame, text = "PLANT", bg = "darkgrey",
+    #global search_plant_btn
+    search_plant_btn = tk.Button(kingdom_frame, text = "PLANT", bg = "dodgerblue3",
                                         activeforeground = "dodgerblue3", command = lambda:(on_search_plant_btn_click()))
-    search_plant_btn.bind("<Enter>", on_enter)
-    search_plant_btn.bind("<Leave>", on_leave)
+    search_plant_btn.bind("<Enter>", on_enter_global)
+    search_plant_btn.bind("<Leave>", on_leave_global)
     search_plant_btn.place(x = "78", y = "98")
 
 
@@ -199,11 +199,11 @@ def kingdom_page():
             label = tk.Label(kingdom_frame, text = row, font = ("Arial" , 10, "italic" ), bg = "darkgrey")
             label.place(x = 1, y = 150) 
 
-    global search_fungi_btn
-    search_fungi_btn = tk.Button(kingdom_frame, text = "FUNGI", bg = "darkgrey",
+    #global search_fungi_btn
+    search_fungi_btn = tk.Button(kingdom_frame, text = "FUNGI", bg = "dodgerblue3",
                                         activeforeground = "dodgerblue3", command = lambda:(on_search_fungi_btn_click()))
-    search_fungi_btn.bind("<Enter>", on_enter)
-    search_fungi_btn.bind("<Leave>", on_leave)
+    search_fungi_btn.bind("<Enter>", on_enter_global)
+    search_fungi_btn.bind("<Leave>", on_leave_global)
     search_fungi_btn.place(x = "138", y = "98")
 
 
@@ -213,11 +213,11 @@ def kingdom_page():
             label = tk.Label(kingdom_frame, text = row, font = ("Arial" , 10, "italic" ), bg = "darkgrey")
             label.place(x = 1, y = 150) 
     
-    global search_protista_btn
-    search_protista_btn = tk.Button(kingdom_frame, text = "PROTISTA", bg = "darkgrey",
+    #global search_protista_btn
+    search_protista_btn = tk.Button(kingdom_frame, text = "PROTISTA", bg = "dodgerblue3",
                                         activeforeground = "dodgerblue3", command = lambda:(on_search_protista_btn_click()))
-    search_protista_btn.bind("<Enter>", on_enter)
-    search_protista_btn.bind("<Leave>", on_leave)
+    search_protista_btn.bind("<Enter>", on_enter_global)
+    search_protista_btn.bind("<Leave>", on_leave_global)
     search_protista_btn.place(x = "196", y = "98")
 
 
@@ -227,11 +227,11 @@ def kingdom_page():
             label = tk.Label(kingdom_frame, text = row, font = ("Arial" , 10, "italic" ), bg = "darkgrey")
             label.place(x = 1, y = 150) 
 
-    global search_monera_btn
-    search_monera_btn = tk.Button(kingdom_frame, text = "MONERA", bg = "darkgrey",
+    #global search_monera_btn
+    search_monera_btn = tk.Button(kingdom_frame, text = "MONERA", bg = "dodgerblue3",
                                         activeforeground = "dodgerblue3", command = lambda:(on_search_monera_btn_click()))
-    search_monera_btn.bind("<Enter>", on_enter)
-    search_monera_btn.bind("<Leave>", on_leave)
+    search_monera_btn.bind("<Enter>", on_enter_global)
+    search_monera_btn.bind("<Leave>", on_leave_global)
     search_monera_btn.place(x = "271", y = "98")
 
     #search = tk.Entry(kingdom_frame, width = "30", bg = "aliceblue", fg = "dodgerblue3")
