@@ -35,6 +35,8 @@ def on_leave(e):
 #-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=PAGES=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 def home_page():
+    global search_result_ypos 
+    search_result_ypos = 160
     home_frame = tk.Frame(main_frame, highlightbackground= "dodgerblue3",  highlightthickness= "4", bg = "darkgrey")
 
     label = tk.Label(home_frame, text = "HOME",font = ("Bradley Hand ITC" , 25, "italic", "bold" ), bg = "darkgrey",
@@ -95,7 +97,7 @@ def home_page():
     contents = tk.StringVar()
     contents.set("Search according to your option.")
     search["textvariable"] = contents
-
+    
     def on_home_search_btn_click():
         tosearch = ((contents.get())).title()
         if tosearch[-1]!= ":":
@@ -112,9 +114,12 @@ def home_page():
             #    label.place(x = 1, y = 180) 
 
         elif home_value == "kingdom":
+            ypos = 187 
             for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  kingdom = '"+tosearch+"' "):
                 label = tk.Label(home_frame, text = row, font = ("Arial" , 10, "italic" ), bg = "darkgrey")
-                label.place(x = "1", y = "175")
+                label.place(x = 1, y = ypos)
+                ypos = ypos + 27
+                print(row)
         elif home_value == "phylum":
             for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  phylum = '"+tosearch+"' "):
                 label = tk.Label(home_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
@@ -141,7 +146,7 @@ def home_page():
                 label.place(x = "1", y = "150")
 
     label = tk.Label(home_frame, text = "Search Result(s):-",font = ("Brush Script MT" , 15, "italic" ), bg = "darkgrey",)
-    label.place(x = 1, y = 160)
+    label.place(x = 1, y = search_result_ypos)
 
     global search_btn
     search_btn = tk.Button(home_frame, text = "SEARCH", bg = "dodgerblue3", activebackground = "darkgrey",
@@ -282,6 +287,8 @@ def kingdom_page():
     kingdom_frame.configure(width = "650", height = "500")
 
 def phylum_page():
+    global search_result_ypos 
+    search_result_ypos = 160
     phylum_frame = tk.Frame(main_frame, highlightbackground= "dodgerblue3",  highlightthickness= "4", bg = "darkgrey")
 
     label = tk.Label(phylum_frame, text = "PHYLUM",font = ("Bradley Hand ITC" , 25, "italic", "bold" ), bg = "darkgrey",
@@ -424,6 +431,9 @@ def phylum_page():
     search_btn.bind("<Enter>", on_enter)
     search_btn.bind("<Leave>", on_leave)
     search_btn.place(x = "191", y = "150")"""
+
+    label = tk.Label(phylum_frame, text = "Search Result(s):-",font = ("Brush Script MT" , 15, "italic" ), bg = "darkgrey",)
+    label.place(x = 1, y = search_result_ypos)
     
     combo = Combobox(phylum_frame)
     combo["values"] = ("Choose An Option!")
