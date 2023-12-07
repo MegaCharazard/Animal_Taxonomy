@@ -821,11 +821,3 @@ main_frame.pack_propagate(False)
 main_frame.configure(width = "650", height = "500")
 
 root.mainloop()
-
-
-
-#combo = Combobox(nav_frame)
-#combo["values"] = (1,2,3,"Hari")
-#combo.set("Search")
-#combo.current()
-#combo.pack(side = "left", padx = 3 , pady=3)
