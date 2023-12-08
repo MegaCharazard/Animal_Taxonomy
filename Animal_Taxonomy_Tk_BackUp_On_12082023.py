@@ -507,7 +507,7 @@ def phylum_page():
         for label in result_frame.winfo_children():
             label.destroy()
         ypos = 10 
-        tosearch = .get()
+        tosearch = combo.get()
         tosearch = tosearch.title() + ":"
         print(tosearch)
         for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  phylum = '"+tosearch+"' "):
