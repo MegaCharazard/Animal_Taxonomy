@@ -538,22 +538,6 @@ def class_page():
     label = tk.Label(class_frame, text = "Search by Order:-",font = ("Brush Script MT" , 15, "italic" ), bg = "darkgrey")
     label.place(x = "1", y = "70")
 
-    """search_mammallia_btn = tk.Radiobutton(class_frame, text = "MAMMALIA", bg = "darkgrey",
-                                            activeforeground = "dodgerblue3", value = "MAMMALLIA")
-    search_mammallia_btn.place(x = "4", y = "100")
-
-    search_maxillopoda_btn = tk.Radiobutton(class_frame, text = "MAXILLOPODA", bg = "darkgrey",
-                                            activeforeground = "dodgerblue3", value = "MAXILLOPODA")
-    search_maxillopoda_btn.place(x = "85", y = "100")
-
-    search_souropsida_btn = tk.Radiobutton(class_frame, text = "SOUROPSIDA", bg = "darkgrey",
-                                            activeforeground = "dodgerblue3", value = "SOUROPSIDA")
-    search_souropsida_btn.place(x = "190", y = "100")
-
-    search_diplopoda_btn = tk.Radiobutton(class_frame, text = "DIPLOPODA", bg = "darkgrey",
-                                            activeforeground = "dodgerblue3", value = "DIPLOPODA")
-    search_diplopoda_btn.place(x = "285", y = "100")"""
-
     search = tk.Entry(class_frame, width = "30", fg = "dodgerblue3")
     search.place(x = "1", y = "105")
     contents = tk.StringVar()

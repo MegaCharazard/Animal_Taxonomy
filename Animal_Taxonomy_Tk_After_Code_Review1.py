@@ -33,14 +33,10 @@ def on_leave(e):
     search_btn['background'] = 'dodgerblue3'
 
 #-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=PAGES=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-#global buildFrame()
 def buildFrame(frame, highlightbackground, highlightthickness, bg = "dodgerblue3"):
     return tk.Frame(frame, highlightbackground = highlightbackground,  highlightthickness= highlightthickness, bg = bg)
 
 def home_page():
-    #global search_result_ypos 
-    #search_result_ypos = 160
-    #home_frame = tk.Frame(main_frame, highlightbackground= "dodgerblue3",  highlightthickness= "4", bg = "darkgrey")
     home_frame = buildFrame(main_frame,  "dodgerblue3",  "4", "darkgrey")
 
     label = tk.Label(home_frame, text = "HOME",font = ("Bradley Hand ITC" , 25, "italic", "bold" ), bg = "darkgrey",
@@ -60,8 +56,6 @@ def home_page():
         else:
             global home_value
             home_value = value_before
-            #print(value)
-
 
     search_name_btn = tk.Radiobutton(home_frame, text = "NAME", bg = "darkgrey", activebackground = "darkgrey",
                                        activeforeground = "dodgerblue3", value = "NAME", command = lambda:(radio_value("name")))
@@ -99,7 +93,7 @@ def home_page():
     search.place(x = "1", y = 130)
     global contents
     contents = tk.StringVar()
-    contents.set("Search according to your option.")
+    contents.set("Search As Per Your Option.")
     search["textvariable"] = contents
 
     result_frame = buildFrame(home_frame,  "dodgerblue3",  "4", "darkgrey")
@@ -119,9 +113,6 @@ def home_page():
             for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  name = '"+tosearch+"' "):
                 label = tk.Label(result_frame, text = row, font = ("Arial" , 10, "italic" ), bg = "darkgrey")
                 label.place(x = 1, y = 10) 
-            #if cur.execute("SELECT EXISTS"("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  name = '"+tosearch+"' ")) == False:  
-            #    label = tk.Label(home_frame, text = "No Records", font = ("Arial" , 10, "italic" ), bg = "darkgrey")
-            #    label.place(x = 1, y = 180) 
 
         elif home_value == "kingdom":
             for label in result_frame.winfo_children():
@@ -131,7 +122,7 @@ def home_page():
                 label = tk.Label(result_frame, text = row, font = ("Arial" , 10, "italic" ), bg = "darkgrey")
                 label.place(x = 1, y = ypos)
                 ypos = ypos + 27
-                #print(row)
+
         elif home_value == "phylum":
             for label in result_frame.winfo_children():
                 label.destroy()
@@ -140,6 +131,7 @@ def home_page():
                 label = tk.Label(result_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
                 label.place(x = "1", y = ypos)
                 ypos = ypos + 27
+
         elif home_value == "class":
             for label in result_frame.winfo_children():
                 label.destroy()
@@ -148,6 +140,7 @@ def home_page():
                 label = tk.Label(result_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
                 label.place(x = "1", y = ypos)
                 ypos = ypos + 27
+
         elif home_value == "naturalorder":
             for label in result_frame.winfo_children():
                 label.destroy()
@@ -156,6 +149,7 @@ def home_page():
                 label = tk.Label(result_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
                 label.place(x = "1", y = ypos)
                 ypos = ypos + 27
+
         elif home_value == "family":
             for label in result_frame.winfo_children():
                 label.destroy()
@@ -164,6 +158,7 @@ def home_page():
                 label = tk.Label(result_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
                 label.place(x = "1", y = ypos)
                 ypos = ypos + 27
+
         elif home_value == "genus":
             for label in result_frame.winfo_children():
                 label.destroy()
@@ -172,6 +167,7 @@ def home_page():
                 label = tk.Label(result_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
                 label.place(x = "1", y = ypos)
                 ypos = ypos + 27
+
         elif home_value == "species":
             for label in result_frame.winfo_children():
                 label.destroy()
@@ -219,7 +215,6 @@ def kingdom_page():
             label.place(x = 1, y = ypos)
             ypos = ypos + 27 
 
-    #global search_animal_btn
     search_animal_btn = tk.Button(kingdom_frame, text = "ANIMALS", bg = "dodgerblue3",
                                         activeforeground = "dodgerblue3", command = lambda:(on_search_animal_btn_click()))
     search_animal_btn.bind("<Enter>", on_enter_global)
@@ -237,7 +232,6 @@ def kingdom_page():
             label.place(x = 1, y = ypos) 
             ypos = ypos + 27 
 
-    #global search_plant_btn
     search_plant_btn = tk.Button(kingdom_frame, text = "PLANT", bg = "dodgerblue3",
                                         activeforeground = "dodgerblue3", command = lambda:(on_search_plant_btn_click()))
     search_plant_btn.bind("<Enter>", on_enter_global)
@@ -255,7 +249,6 @@ def kingdom_page():
             label.place(x = 1, y = ypos) 
             ypos = ypos + 27 
 
-    #global search_fungi_btn
     search_fungi_btn = tk.Button(kingdom_frame, text = "FUNGI", bg = "dodgerblue3",
                                         activeforeground = "dodgerblue3", command = lambda:(on_search_fungi_btn_click()))
     search_fungi_btn.bind("<Enter>", on_enter_global)
@@ -273,7 +266,6 @@ def kingdom_page():
             label.place(x = 1, y = ypos) 
             ypos = ypos + 27 
     
-    #global search_protista_btn
     search_protista_btn = tk.Button(kingdom_frame, text = "PROTISTA", bg = "dodgerblue3",
                                         activeforeground = "dodgerblue3", command = lambda:(on_search_protista_btn_click()))
     search_protista_btn.bind("<Enter>", on_enter_global)
@@ -291,7 +283,6 @@ def kingdom_page():
             label.place(x = 1, y = ypos) 
             ypos = ypos + 27 
 
-    #global search_monera_btn
     search_monera_btn = tk.Button(kingdom_frame, text = "MONERA", bg = "dodgerblue3",
                                         activeforeground = "dodgerblue3", command = lambda:(on_search_monera_btn_click()))
     search_monera_btn.bind("<Enter>", on_enter_global)
@@ -300,50 +291,6 @@ def kingdom_page():
 
     label = tk.Label(kingdom_frame, text = "Search Result(s):-",font = ("Brush Script MT" , 15, "italic" ), bg = "darkgrey",)
     label.place(x = 1, y = 130)
-
-    #search = tk.Entry(kingdom_frame, width = "30", bg = "aliceblue", fg = "dodgerblue3")
-    #search.place(x = "1", y = "135")
-    #contents = tk.StringVar()
-    #contents.set("Type The Kingdom.")
-    #search["textvariable"] = contents
-
-    """"    def on_kingdom_search_btn_click():#=-=-=-=-=-=-=-=WRONG CONCEPT
-        tosearch = ((contents.get())).title()
-        if tosearch[-1]!= ":":
-            tosearch = ((contents.get())).title() + ":"
-        else:
-            tosearch = tosearch
-
-        if value == "animals":
-            for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  kingdom = Animalia: "):
-                label = tk.Label(kingdom_frame, text = row, font = ("Arial" , 10, "italic" ), bg = "darkgrey")
-                label.place(x = 1, y = 180) 
-
-        elif value == "plant":
-            for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  kingdom = Plantae: "):
-                label = tk.Label(kingdom_frame, text = row, font = ("Arial" , 10, "italic" ), bg = "darkgrey")
-                label.place(x = "1", y = "175")
-        elif value == "fungi":
-            for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  phylum = '"+tosearch+"' "):
-                label = tk.Label(kingdom_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
-                label.place(x = "1", y = "150")
-        elif value == "protista":
-            for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  class = '"+tosearch+"' "):
-                label = tk.Label(kingdom_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
-                label.place(x = "1", y = "150")
-        elif value == "monera":
-            for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  naturalorder = '"+tosearch+"' "):
-                label = tk.Label(kingdom_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
-                label.place(x = "1", y = "150")
-"""
-
-    #global search_btn
-    #search_btn = tk.Button(kingdom_frame, text = "SEARCH", bg = "dodgerblue3", activebackground = "darkgrey",
-    #                         activeforeground = "dodgerblue3", command = lambda:(on_kingdom_search_btn_click()))
-    #search_btn.bind("<Enter>", on_enter)
-    #search_btn.bind("<Leave>", on_leave)
-    #search_btn.place(x = "191", y = "132")
-
 
     kingdom_frame.pack(padx = 20, pady = 20)
     kingdom_frame.configure(width = "650", height = "500")
@@ -369,7 +316,7 @@ def phylum_page():
         else:
             global phylum_value
             phylum_value = value_before
-            #print(value)
+        
             if phylum_value == "Animalia":
                 combo = Combobox(phylum_frame)
                 combo["values"] = [ 
@@ -435,59 +382,24 @@ def phylum_page():
                 combo.current()
                 combo.place(x = "1", y = "125")
 
-    #label = tk.Label(phylum_frame, text = "Animals:-",font = ("Bradley Hand ITC" , 12, "italic", "bold"),
-    #                 bg = "darkgrey", fg = "black")
-    #label.place(x = "1", y = 100)
-
     search_phylum_animal_menu =tk.Radiobutton( phylum_frame ,text = "Animal" , bg = "darkgrey", activebackground = "darkgrey",
                                           activeforeground = "dodgerblue3", value = "Animalia", command = lambda:(radio_value("Animalia")))
     search_phylum_animal_menu.place(x = "1", y= "100") 
 
-    #label = tk.Label(phylum_frame, text = "Plant:-",font = ("Bradley Hand ITC" , 12, "italic", "bold"), bg = "darkgrey",
-    #                   fg = "black")
-    #label.place(x = "100", y = 100)
-
     search_phylum_plant_menu =tk.Radiobutton( phylum_frame ,text = "Plant" , bg = "darkgrey", activebackground = "darkgrey",
                                           activeforeground = "dodgerblue3", value = "Plantae", command = lambda:(radio_value("Plantae")))
     search_phylum_plant_menu.place(x = "71", y= "100") 
-    
-    #label = tk.Label(phylum_frame, text = "Fungi:-",font = ("Bradley Hand ITC" , 12, "italic", "bold"), bg = "darkgrey",
-    #                   fg = "black")
-    #label.place(x = "205", y = 100)
 
     search_phylum_fungi_menu =tk.Radiobutton( phylum_frame,text = "Fungi" , bg = "darkgrey", activebackground = "darkgrey",
                                           activeforeground = "dodgerblue3", value = "Fungi", command = lambda:(radio_value("Fungi")))
     search_phylum_fungi_menu.place(x = "130", y= "100") 
-    
-    #label = tk.Label(phylum_frame, text = "Protista:-",font = ("Bradley Hand ITC" , 12, "italic", "bold"), bg = "darkgrey",
-    #                   fg = "black")
-    #label.place(x = "323", y = 100)
-
     search_phylum_protista_menu =tk.Radiobutton( phylum_frame ,text = "Protista" , bg = "darkgrey", activebackground = "darkgrey",
                                           activeforeground = "dodgerblue3", value = "Protista", command = lambda:(radio_value("Protista")))
     search_phylum_protista_menu.place(x = "190", y= "100") 
-    
-    #label = tk.Label(phylum_frame, text = "Monera:-",font = ("Bradley Hand ITC" , 12, "italic", "bold"), bg = "darkgrey",
-    #                   fg = "black")
-    #label.place(x = "433", y = 100)
 
     search_phylum_monera_menu =tk.Radiobutton( phylum_frame ,text = "Monera" , bg = "darkgrey", activebackground = "darkgrey",
                                           activeforeground = "dodgerblue3", value = "Monera", command = lambda:(radio_value("Monera")))
     search_phylum_monera_menu.place(x = "253", y= "100") 
-    
-    """search = tk.Entry(phylum_frame, width = "30", fg = "dodgerblue3")
-    search.place(x = "1", y = "153")
-    contents = tk.StringVar()
-    contents.set("Type The Order.")    
-    contents = tk.StringVar()
-    contents.set(clicked.get() )
-    search["textvariable"] = contents
-    
-    global search_btn   
-    search_btn = tk.Button(phylum_frame, text = "SEARCH", bg = "dodgerblue3", activebackground = "darkgrey",  activeforeground = "dodgerblue3", command = show )
-    search_btn.bind("<Enter>", on_enter)
-    search_btn.bind("<Leave>", on_leave)
-    search_btn.place(x = "191", y = "150")"""
 
     result_frame = buildFrame(phylum_frame,  "dodgerblue3",  "4", "darkgrey")
     result_frame.place(x = 10, y = 165)
@@ -543,27 +455,10 @@ def class_page():
     result_frame.place(x = 10, y = 145)
     result_frame.configure(width = "575", height = "290")
 
-
-    """search_mammallia_btn = tk.Radiobutton(class_frame, text = "MAMMALIA", bg = "darkgrey",
-                                            activeforeground = "dodgerblue3", value = "MAMMALLIA")
-    search_mammallia_btn.place(x = "4", y = "100")
-
-    search_maxillopoda_btn = tk.Radiobutton(class_frame, text = "MAXILLOPODA", bg = "darkgrey",
-                                            activeforeground = "dodgerblue3", value = "MAXILLOPODA")
-    search_maxillopoda_btn.place(x = "85", y = "100")
-
-    search_souropsida_btn = tk.Radiobutton(class_frame, text = "SOUROPSIDA", bg = "darkgrey",
-                                            activeforeground = "dodgerblue3", value = "SOUROPSIDA")
-    search_souropsida_btn.place(x = "190", y = "100")
-
-    search_diplopoda_btn = tk.Radiobutton(class_frame, text = "DIPLOPODA", bg = "darkgrey",
-                                            activeforeground = "dodgerblue3", value = "DIPLOPODA")
-    search_diplopoda_btn.place(x = "285", y = "100")"""
-
     search = tk.Entry(class_frame, width = "30", fg = "dodgerblue3")
     search.place(x = "1", y = "105")
     contents = tk.StringVar()
-    contents.set("Type The Class.")
+    contents.set("Search For Classes.")
     search["textvariable"] = contents
 
     global search_btn
@@ -588,69 +483,7 @@ def order_page():
 
     label = tk.Label(order_frame, text = "Search by Order:-",font = ("Brush Script MT" , 15, "italic" ), bg = "darkgrey")
     label.place(x = "1", y = "70")
-
-    """clicked1 = StringVar() 
-    clicked1.set( "Primates" ) 
-    options = [  
-    "--Select--",
-    "Primates", 
-    "Chiroptera", 
-    "Afrosoricida", 
-    "Eriaceomorph", 
-    "Rodentia"
-    ] 
     
-    label = tk.Label(order_frame, text = "Mammals:-",font = ("Bradley Hand ITC" , 12, "italic", "bold"), bg = "darkgrey",
-                       fg = "black")
-    label.place(x = "1", y = 100)
-
-    search_kingdom_menu = OptionMenu( order_frame , clicked1 , *options, command= drop_down_index_changed)# back = "dodgerblue3",) 
-    search_kingdom_menu.place(x = "1", y= "125") 
-    
-    def show(): 
-        search.config(contents.set(option_chosen)) 
-        
-    clicked2 = StringVar() 
-    clicked2.set("Bryophyta") 
-
-    options = [ 
-    "--Select--",
-    "Bryophyta", 
-    "Gymnosperms", 
-    "Angiosperms",
-    "Ferns",  
-    "Algea"
-    ] 
-    
-    label = tk.Label(order_frame, text = "Plants:-",font = ("Bradley Hand ITC" , 12, "italic", "bold"), bg = "darkgrey",
-                       fg = "black")
-    label.place(x = "110", y = 100)
-
-    search_plant_menu = OptionMenu( order_frame,clicked2, *options, command= drop_down_index_changed)
-    search_plant_menu.place(x = "110", y= "125") 
-
-    def show(): 
-        search.config(contents.set(option_chosen)) 
-
-    clicked3 = StringVar() 
-    clicked3.set("Glomeromycota") 
-
-    options = [ 
-    "--Select--",
-    "Glomeromycota", 
-    "Ascomycota", 
-    "Chytridiomycota",
-    "Basidiomycetes"  
-    ] 
-    
-    label = tk.Label(order_frame, text = "Fungi:-",font = ("Bradley Hand ITC" , 12, "italic", "bold"), bg = "darkgrey",
-                       fg = "black")
-    label.place(x = "222", y = 100)
-
-    search_Fungi_menu = OptionMenu( order_frame , clicked3 , *options, command= drop_down_index_changed)
-    search_Fungi_menu.place(x = "222", y= "125") """
-    
-
     result_frame = buildFrame(order_frame,  "dodgerblue3",  "4", "darkgrey")
     result_frame.place(x = 10, y = 144)
     result_frame.configure(width = 575, height = 290)
@@ -658,7 +491,7 @@ def order_page():
     search = tk.Entry(order_frame, width = "30", fg = "dodgerblue3")
     search.place(x = "1", y = "105")
     contents = tk.StringVar()
-    contents.set("<Search Orders>")
+    contents.set("Search For Orders")
     search["textvariable"] = contents
 
     def on_order_page_search_btn_click():
@@ -673,7 +506,7 @@ def order_page():
  
     global search_btn
     search_btn = tk.Button(order_frame, text = "SEARCH", bg = "dodgerblue3", activebackground = "darkgrey",
-                            activeforeground = "dodgerblue3", command = on_order_page_search_btn_click )#, command = show 
+                            activeforeground = "dodgerblue3", command = on_order_page_search_btn_click )
     search_btn.bind("<Enter>", on_enter)
     search_btn.bind("<Leave>", on_leave)
     search_btn.place(x = "191", y = "101")
@@ -698,7 +531,7 @@ def family_page():
     search = tk.Entry(family_frame, width = "30", fg = "dodgerblue3")
     search.place(x = "1", y = "105")
     contents = tk.StringVar()
-    contents.set("Type The Family.")
+    contents.set("Search For Family.")
     search["textvariable"] = contents
 
     def on_family_page_search_btn_click():
@@ -743,7 +576,7 @@ def genus_page():
     search = tk.Entry(genus_frame, width = "30", fg = "dodgerblue3")
     search.place(x = "1", y = "105")
     contents = tk.StringVar()
-    contents.set("Type The Genus.")
+    contents.set("Search For Genus.")
     search["textvariable"] = contents
     
     result_frame = buildFrame(genus_frame,  "dodgerblue3",  "4", "darkgrey")
@@ -776,7 +609,7 @@ def species_page():
     search = tk.Entry(species_frame, width = "30", fg = "dodgerblue3")
     search.place(x = "1", y = "105")
     contents = tk.StringVar()
-    contents.set("Type The Species.")
+    contents.set("Search For Species.")
     search["textvariable"] = contents
     
     result_frame = buildFrame(species_frame,  "dodgerblue3",  "4", "darkgrey")
@@ -815,7 +648,7 @@ Co-Biologist2-->Akshay Ram R.F\n\
 \n\
 Contact us --> +91 948 668 3398\n\
 \n\
-        Thank you for using this program © AnimalTaxonaomy ™HAPAA", 
+        Thank you for using this program © AnimalTaxonaomy HAPAA™", 
                         font = ("Brush Script MT" , 15, "italic" ), bg = "darkgrey")
     label.place(x = "0", y = "100")
 
