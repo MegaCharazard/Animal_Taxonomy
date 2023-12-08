@@ -1,5 +1,6 @@
 # Animal_Taxonomy
-Animal_Taxonomy is a windows aplication designed, developed by V.S. Hari Dhejus(me). It initially started as a project, but I have started a Programming Journey just like a Pokemon Journey but just a little tougher. 
+Animal_Taxonomy is a windows aplication designed, developed by V.S. Hari Dhejus(me). 
+It initially started as a project, but I have started a Programming Journey just like a Pokemon Journey but just a little tougher. 
 Anyhow my team members are ,
 i)   V.S. Hari Dhejus(me)                  - Team lead, Cheif Developer, Idealogy;
 ii)  Anandha Krishnan                      - Vetti Officer;
@@ -8,3 +9,4 @@ iv)  Adharsh S.M.                          - Cheif Biologist_2;
 v)   Pranav Krishna Prathap                - Co Biologist_1;
 vi)  Akshay Ram R.F.                       - Co Biologist_2.
 Contact me (V.S. Hari Dhejus) haridhejus@gmail.com
+We are a group fo students studying at 11th.This is totally for our practice.
