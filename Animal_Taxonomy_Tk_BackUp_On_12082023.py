@@ -33,15 +33,11 @@ def on_leave(e):
     search_btn['background'] = 'dodgerblue3'
 
 #-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=PAGES=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-#global buildFrame()
-def buildFrame(frame, highlightbackground, highlightthickness, bg = "dodgerblue3"):
-    return tk.Frame(frame, highlightbackground = highlightbackground,  highlightthickness= highlightthickness, bg = bg)
 
 def home_page():
     #global search_result_ypos 
     #search_result_ypos = 160
-    #home_frame = tk.Frame(main_frame, highlightbackground= "dodgerblue3",  highlightthickness= "4", bg = "darkgrey")
-    home_frame = buildFrame(main_frame,  "dodgerblue3",  "4", "darkgrey")
+    home_frame = tk.Frame(main_frame, highlightbackground= "dodgerblue3",  highlightthickness= "4", bg = "darkgrey")
 
     label = tk.Label(home_frame, text = "HOME",font = ("Bradley Hand ITC" , 25, "italic", "bold" ), bg = "darkgrey",
                       highlightbackground= "deepskyblue3",  highlightthickness= "3", fg = "dodgerblue3")
@@ -102,7 +98,7 @@ def home_page():
     contents.set("Search according to your option.")
     search["textvariable"] = contents
 
-    result_frame = buildFrame(home_frame,  "dodgerblue3",  "4", "darkgrey")
+    result_frame = tk.Frame(home_frame, highlightbackground= "dodgerblue3",  highlightthickness= "4", bg = "darkgrey")
     result_frame.place(x = 10, y = 165)
     result_frame.configure(width = 570, height = 265)
 
@@ -195,7 +191,7 @@ def home_page():
     home_frame.configure(width = "650", height = "500")
 
 def kingdom_page():
-    kingdom_frame = buildFrame(main_frame,  "dodgerblue3",  "4", "darkgrey")
+    kingdom_frame = tk.Frame(main_frame, highlightbackground= "dodgerblue3",  highlightthickness= "4", bg = "darkgrey")
 
     label = tk.Label(kingdom_frame, text = "KINGDOM",font = ("Bradley Hand ITC" , 25, "italic", "bold" ), bg = "darkgrey",
                       highlightbackground= "deepskyblue3",  highlightthickness= "3", fg = "dodgerblue3")
@@ -205,7 +201,7 @@ def kingdom_page():
     label = tk.Label(kingdom_frame, text = "Search by :-",font = ("Brush Script MT" , 15, "italic" ), bg = "darkgrey")
     label.place(x = "1", y = "70")
 
-    result_frame = buildFrame(kingdom_frame,  "dodgerblue3",  "4", "darkgrey")
+    result_frame = tk.Frame(kingdom_frame, highlightbackground= "dodgerblue3",  highlightthickness= "4", bg = "darkgrey")
     result_frame.place(x = 10, y = 150)
     result_frame.configure(width = "570", height = "280")
 
@@ -494,7 +490,7 @@ def phylum_page():
     search_btn.bind("<Leave>", on_leave)
     search_btn.place(x = "191", y = "150")"""
 
-    result_frame = buildFrame(phylum_frame,  "dodgerblue3",  "4", "darkgrey")
+    result_frame = tk.Frame(phylum_frame, highlightbackground= "dodgerblue3",  highlightthickness= "4", bg = "darkgrey")
     result_frame.place(x = 10, y = 165)
     result_frame.configure(width = 570, height = 265)
 
@@ -505,26 +501,24 @@ def phylum_page():
     combo["values"] = ("Choose An Option!")
     combo.set("Please Choose An Option!")
     combo.current()
-    #global contents
-    #contents = tk.StringVar()
     combo.place(x = "1", y = "125")
     
-    #def on_pylum_search_btn_click():
-    #    for label in result_frame.winfo_children():
-    #        label.destroy()
-    #    ypos = 10 
-    #    #tosearch = .get()
-    #    tosearch = tosearch.title() + ":"
-    #    print(tosearch)
-    #    for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  phylum = '"+tosearch+"' "):
-    #        label = tk.Label(result_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
-    #        label.place(x = "1", y = ypos)
-    #        ypos = ypos + 27
+    def on_pylum_search_btn_click():
+        for label in result_frame.winfo_children():
+            label.destroy()
+        ypos = 10 
+        tosearch = .get()
+        tosearch = tosearch.title() + ":"
+        print(tosearch)
+        for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  phylum = '"+tosearch+"' "):
+            label = tk.Label(result_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
+            label.place(x = "1", y = ypos)
+            ypos = ypos + 27
 
 
     global search_btn
     search_btn = tk.Button(phylum_frame, text = "SEARCH", bg = "dodgerblue3", activebackground = "darkgrey",
-                             activeforeground = "dodgerblue3", )#command = on_pylum_search_btn_click()
+                             activeforeground = "dodgerblue3", command = on_pylum_search_btn_click())
     search_btn.bind("<Enter>", on_enter)
     search_btn.bind("<Leave>", on_leave)
     search_btn.place(x = "149", y = "123")
@@ -534,7 +528,7 @@ def phylum_page():
     phylum_frame.configure(width = "650", height = "500")
 
 def class_page():
-    class_frame = buildFrame(main_frame,  "dodgerblue3",  "4", "darkgrey")
+    class_frame = tk.Frame(main_frame, highlightbackground= "dodgerblue3",  highlightthickness= "4", bg = "darkgrey")
 
     label = tk.Label(class_frame, text = "CLASS",font = ("Bradley Hand ITC" , 25, "italic", "bold" ), bg = "darkgrey",
                       highlightbackground= "deepskyblue3",  highlightthickness= "3", fg = "dodgerblue3")
@@ -579,7 +573,7 @@ def class_page():
     class_frame.configure(width = "650", height = "500")
 
 def order_page():
-    order_frame = buildFrame(main_frame,  "dodgerblue3",  "4", "darkgrey")
+    order_frame = tk.Frame(main_frame, highlightbackground= "dodgerblue3",  highlightthickness= "4", bg = "darkgrey")
 
     label = tk.Label(order_frame, text = "ORDER",font = ("Bradley Hand ITC" , 25, "italic", "bold" ), bg = "darkgrey",
                       highlightbackground= "deepskyblue3",  highlightthickness= "3", fg = "dodgerblue3")
@@ -680,7 +674,7 @@ def order_page():
     order_frame.configure(width = "650", height = "500")
 
 def family_page():
-    family_frame = buildFrame(main_frame,  "dodgerblue3",  "4", "darkgrey")
+    family_frame = tk.Frame(main_frame, highlightbackground= "dodgerblue3",  highlightthickness= "4", bg = "darkgrey")
 
     label = tk.Label(family_frame, text = "FAMILY",font = ("Bradley Hand ITC" , 25, "italic", "bold" ), bg = "darkgrey",
                       highlightbackground= "deepskyblue3",  highlightthickness= "3", fg = "dodgerblue3")
@@ -720,7 +714,7 @@ def family_page():
     family_frame.configure(width = "650", height = "500")
 
 def genus_page():
-    genus_frame = buildFrame(main_frame,  "dodgerblue3",  "4", "darkgrey")
+    genus_frame = tk.Frame(main_frame, highlightbackground= "dodgerblue3",  highlightthickness= "4", bg = "darkgrey")
 
     label = tk.Label(genus_frame, text = "GENUS",font = ("Bradley Hand ITC" , 25, "italic", "bold" ), bg = "darkgrey",
                       highlightbackground= "deepskyblue3",  highlightthickness= "3", fg = "dodgerblue3")
@@ -749,7 +743,7 @@ def genus_page():
     genus_frame.configure(width = "650", height = "500")
 
 def species_page():
-    species_frame = buildFrame(main_frame,  "dodgerblue3",  "4", "darkgrey")
+    species_frame = tk.Frame(main_frame, highlightbackground= "dodgerblue3",  highlightthickness= "4", bg = "darkgrey")
 
     label = tk.Label(species_frame, text = "SPEICES",font = ("Bradley Hand ITC" , 25, "italic", "bold" ), bg = "darkgrey",
                       highlightbackground= "deepskyblue3",  highlightthickness= "3", fg = "dodgerblue3")
@@ -778,7 +772,7 @@ def species_page():
     species_frame.configure(width = "650", height = "500")
 
 def about_page():
-    about_frame = buildFrame(main_frame,  "dodgerblue3",  "4", "darkgrey")
+    about_frame = tk.Frame(main_frame, highlightbackground= "dodgerblue3",  highlightthickness= "4", bg = "darkgrey")
 
     label = tk.Label(about_frame, text = "ABOUT",font = ("Bradley Hand ITC" , 25, "italic", "bold" ), bg = "darkgrey",
                       highlightbackground= "deepskyblue3",  highlightthickness= "3", fg = "dodgerblue3")
@@ -906,7 +900,7 @@ option_frame.pack(side = "left")
 option_frame.pack_propagate(False)
 option_frame.configure(width = "150", height = "500")
 
-main_frame = buildFrame(root,  "dodgerblue3",  "4", "darkgrey")
+main_frame = tk.Frame(root, highlightbackground= "dodgerblue3",  highlightthickness= "5", bg = "darkgrey")
 main_frame.pack(side = "left")
 main_frame.pack_propagate(False)
 main_frame.configure(width = "650", height = "500")
