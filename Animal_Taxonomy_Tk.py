@@ -35,8 +35,8 @@ def on_leave(e):
 #-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=PAGES=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 def home_page():
-    global search_result_ypos 
-    search_result_ypos = 160
+    #global search_result_ypos 
+    #search_result_ypos = 160
     home_frame = tk.Frame(main_frame, highlightbackground= "dodgerblue3",  highlightthickness= "4", bg = "darkgrey")
 
     label = tk.Label(home_frame, text = "HOME",font = ("Bradley Hand ITC" , 25, "italic", "bold" ), bg = "darkgrey",
@@ -92,12 +92,16 @@ def home_page():
     search_species_btn.place(x = "510", y = "100")
 
     search = tk.Entry(home_frame, width = "30", bg = "aliceblue", fg = "dodgerblue3")
-    search.place(x = "1", y = "135")
+    search.place(x = "1", y = 130)
     global contents
     contents = tk.StringVar()
     contents.set("Search according to your option.")
     search["textvariable"] = contents
-    
+
+    result_frame = tk.Frame(home_frame, highlightbackground= "dodgerblue3",  highlightthickness= "4", bg = "darkgrey")
+    result_frame.place(x = 10, y = 165)
+    result_frame.configure(width = 570, height = 265)
+
     def on_home_search_btn_click():
         tosearch = ((contents.get())).title()
         if tosearch[-1]!= ":":
@@ -106,54 +110,82 @@ def home_page():
             tosearch = tosearch
 
         if home_value == "name":
+            for label in result_frame.winfo_children():
+                label.destroy()
             for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  name = '"+tosearch+"' "):
-                label = tk.Label(home_frame, text = row, font = ("Arial" , 10, "italic" ), bg = "darkgrey")
-                label.place(x = 1, y = 180) 
+                label = tk.Label(result_frame, text = row, font = ("Arial" , 10, "italic" ), bg = "darkgrey")
+                label.place(x = 1, y = 10) 
             #if cur.execute("SELECT EXISTS"("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  name = '"+tosearch+"' ")) == False:  
             #    label = tk.Label(home_frame, text = "No Records", font = ("Arial" , 10, "italic" ), bg = "darkgrey")
             #    label.place(x = 1, y = 180) 
 
         elif home_value == "kingdom":
-            ypos = 187 
+            for label in result_frame.winfo_children():
+                label.destroy()
+            ypos = 10 
             for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  kingdom = '"+tosearch+"' "):
-                label = tk.Label(home_frame, text = row, font = ("Arial" , 10, "italic" ), bg = "darkgrey")
+                label = tk.Label(result_frame, text = row, font = ("Arial" , 10, "italic" ), bg = "darkgrey")
                 label.place(x = 1, y = ypos)
                 ypos = ypos + 27
-                print(row)
+                #print(row)
         elif home_value == "phylum":
+            for label in result_frame.winfo_children():
+                label.destroy()
+            ypos = 10 
             for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  phylum = '"+tosearch+"' "):
-                label = tk.Label(home_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
-                label.place(x = "1", y = "150")
+                label = tk.Label(result_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
+                label.place(x = "1", y = ypos)
+                ypos = ypos + 27
         elif home_value == "class":
+            for label in result_frame.winfo_children():
+                label.destroy()
+            ypos = 10 
             for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  class = '"+tosearch+"' "):
-                label = tk.Label(home_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
-                label.place(x = "1", y = "150")
+                label = tk.Label(result_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
+                label.place(x = "1", y = ypos)
+                ypos = ypos + 27
         elif home_value == "naturalorder":
+            for label in result_frame.winfo_children():
+                label.destroy()
+            ypos = 10 
             for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  naturalorder = '"+tosearch+"' "):
-                label = tk.Label(home_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
-                label.place(x = "1", y = "150")
+                label = tk.Label(result_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
+                label.place(x = "1", y = ypos)
+                ypos = ypos + 27
         elif home_value == "family":
+            for label in result_frame.winfo_children():
+                label.destroy()
+            ypos = 10 
             for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  family = '"+tosearch+"' "):
-                label = tk.Label(home_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
-                label.place(x = "1", y = "150")
+                label = tk.Label(result_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
+                label.place(x = "1", y = ypos)
+                ypos = ypos + 27
         elif home_value == "genus":
+            for label in result_frame.winfo_children():
+                label.destroy()
+            ypos = 10 
             for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  genus = '"+tosearch+"' "):
-                label = tk.Label(home_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
-                label.place(x = "1", y = "150")
+                label = tk.Label(result_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
+                label.place(x = "1", y = ypos)
+                ypos = ypos + 27
         elif home_value == "species":
+            for label in result_frame.winfo_children():
+                label.destroy()
+            ypos = 10 
             for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  species = '"+tosearch+"' "):
-                label = tk.Label(home_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
-                label.place(x = "1", y = "150")
+                label = tk.Label(result_frame, text = row,font = ("Arial" , 10, "italic" ), bg = "darkgrey")
+                label.place(x = "1", y = ypos)
+                ypos = ypos + 27
 
     label = tk.Label(home_frame, text = "Search Result(s):-",font = ("Brush Script MT" , 15, "italic" ), bg = "darkgrey",)
-    label.place(x = 1, y = search_result_ypos)
+    label.place(x = 1, y = 150)
 
     global search_btn
     search_btn = tk.Button(home_frame, text = "SEARCH", bg = "dodgerblue3", activebackground = "darkgrey",
                              activeforeground = "dodgerblue3", command = lambda:(on_home_search_btn_click()))
     search_btn.bind("<Enter>", on_enter)
     search_btn.bind("<Leave>", on_leave)
-    search_btn.place(x = "191", y = "132")
+    search_btn.place(x = "191", y = 127)
 
     home_frame.pack(padx = 20, pady = 20)
     home_frame.configure(width = "650", height = "500")
@@ -169,12 +201,19 @@ def kingdom_page():
     label = tk.Label(kingdom_frame, text = "Search by :-",font = ("Brush Script MT" , 15, "italic" ), bg = "darkgrey")
     label.place(x = "1", y = "70")
 
+    result_frame = tk.Frame(kingdom_frame, highlightbackground= "dodgerblue3",  highlightthickness= "4", bg = "darkgrey")
+    result_frame.place(x = 10, y = 150)
+    result_frame.configure(width = "570", height = "280")
 
     def on_search_animal_btn_click():
+        for label in result_frame.winfo_children():
+            label.destroy()
         tosearch = "Animalia:"
+        ypos = 10 
         for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  kingdom = '"+tosearch+"' "):
-            label = tk.Label(kingdom_frame, text = row, font = ("Arial" , 10, "italic" ), bg = "darkgrey")
-            label.place(x = 1, y = 150) 
+            label = tk.Label(result_frame, text = row, font = ("Arial" , 10, "italic" ), bg = "darkgrey")
+            label.place(x = 1, y = ypos)
+            ypos = ypos + 27 
 
     #global search_animal_btn
     search_animal_btn = tk.Button(kingdom_frame, text = "ANIMALS", bg = "dodgerblue3",
@@ -185,10 +224,14 @@ def kingdom_page():
 
 
     def on_search_plant_btn_click():
+        for label in result_frame.winfo_children():
+            label.destroy()
         tosearch = "Plantae:"
+        ypos = 11 
         for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  kingdom = '"+tosearch+"' "):
-            label = tk.Label(kingdom_frame, text = row, font = ("Arial" , 10, "italic" ), bg = "darkgrey")
-            label.place(x = 1, y = 150) 
+            label = tk.Label(result_frame, text = row, font = ("Arial" , 10, "italic" ), bg = "darkgrey")
+            label.place(x = 1, y = ypos) 
+            ypos = ypos + 27 
 
     #global search_plant_btn
     search_plant_btn = tk.Button(kingdom_frame, text = "PLANT", bg = "dodgerblue3",
@@ -199,10 +242,14 @@ def kingdom_page():
 
 
     def on_search_fungi_btn_click():
+        for label in result_frame.winfo_children():
+            label.destroy()
         tosearch = "Fungi:"
+        ypos = 10 
         for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  kingdom = '"+tosearch+"' "):
-            label = tk.Label(kingdom_frame, text = row, font = ("Arial" , 10, "italic" ), bg = "darkgrey")
-            label.place(x = 1, y = 150) 
+            label = tk.Label(result_frame, text = row, font = ("Arial" , 10, "italic" ), bg = "darkgrey")
+            label.place(x = 1, y = ypos) 
+            ypos = ypos + 27 
 
     #global search_fungi_btn
     search_fungi_btn = tk.Button(kingdom_frame, text = "FUNGI", bg = "dodgerblue3",
@@ -213,10 +260,14 @@ def kingdom_page():
 
 
     def on_search_protista_btn_click():
+        for label in result_frame.winfo_children():
+            label.destroy()
         tosearch = "Protista:"
+        ypos = 10 
         for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  kingdom = '"+tosearch+"' "):
-            label = tk.Label(kingdom_frame, text = row, font = ("Arial" , 10, "italic" ), bg = "darkgrey")
-            label.place(x = 1, y = 150) 
+            label = tk.Label(result_frame, text = row, font = ("Arial" , 10, "italic" ), bg = "darkgrey")
+            label.place(x = 1, y = ypos) 
+            ypos = ypos + 27 
     
     #global search_protista_btn
     search_protista_btn = tk.Button(kingdom_frame, text = "PROTISTA", bg = "dodgerblue3",
@@ -227,10 +278,14 @@ def kingdom_page():
 
 
     def on_search_monera_btn_click():
+        for label in result_frame.winfo_children():
+            label.destroy()
         tosearch = "Monera:"
+        ypos = 10 
         for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  kingdom = '"+tosearch+"' "):
-            label = tk.Label(kingdom_frame, text = row, font = ("Arial" , 10, "italic" ), bg = "darkgrey")
-            label.place(x = 1, y = 150) 
+            label = tk.Label(result_frame, text = row, font = ("Arial" , 10, "italic" ), bg = "darkgrey")
+            label.place(x = 1, y = ypos) 
+            ypos = ypos + 27 
 
     #global search_monera_btn
     search_monera_btn = tk.Button(kingdom_frame, text = "MONERA", bg = "dodgerblue3",
@@ -238,6 +293,9 @@ def kingdom_page():
     search_monera_btn.bind("<Enter>", on_enter_global)
     search_monera_btn.bind("<Leave>", on_leave_global)
     search_monera_btn.place(x = "271", y = "98")
+
+    label = tk.Label(kingdom_frame, text = "Search Result(s):-",font = ("Brush Script MT" , 15, "italic" ), bg = "darkgrey",)
+    label.place(x = 1, y = 130)
 
     #search = tk.Entry(kingdom_frame, width = "30", bg = "aliceblue", fg = "dodgerblue3")
     #search.place(x = "1", y = "135")
