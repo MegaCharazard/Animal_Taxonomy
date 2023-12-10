@@ -17,8 +17,8 @@ cur = con.cursor()
 def buildFrame(frame, border_color, border_width, fg_color = "dodgerblue3"):
     return CTkFrame(frame, border_color = border_color,  border_width= border_width, fg_color = fg_color)
 
-def createRadioButton (_frame ,_text, _fg_color , _value , _command, _argu,  _xpos, _ypos ):
-    tmpRdBtn = CTkRadioButton(_frame, text = _text , fg_color = _fg_color, value = _value, command = lambda:(_command(_argu)))
+def createRadioButton (_frame ,_text, _fg_color , _value , _command, _argument,  _xpos, _ypos ):
+    tmpRdBtn = CTkRadioButton(_frame, text = _text , fg_color = _fg_color, value = _value, command = lambda:(_command(_argument)))
     tmpRdBtn.place(x =_xpos, y = _ypos)
     return tmpRdBtn
 
@@ -162,7 +162,7 @@ def kingdom_page():
     label = CTkLabel(kingdom_frame, text = "KINGDOM",font = ("Bradley Hand ITC" , 50, "italic", "bold" ), fg_color = "transparent", text_color = "#c850c0")
     label.place(x = 300, y = 5)
 
-    label = CTkLabel(kingdom_frame, text = "Search by :-",font = ("Brush Script MT" , 20, "italic" ), fg_color = "transparent", text_color = "#c850c0")
+    label = CTkLabel(kingdom_frame, text = "Search By Kingdom :-",font = ("Brush Script MT" , 20, "italic" ), fg_color = "transparent", text_color = "#c850c0")
     label.place(x = 10, y = 70)
 
     result_frame = buildFrame(kingdom_frame,  "#c850c0",  4, "transparent")
@@ -258,7 +258,7 @@ def phylum_page():
     label.place(x = 300, y = 5)
     label.configure(width = 28)
 
-    label = CTkLabel(phylum_frame, text = "Search by :-",font = ("Brush Script MT" , 20, "italic" ), fg_color = "transparent", text_color = "#c850c0")
+    label = CTkLabel(phylum_frame, text = "Search By Phylum :-",font = ("Brush Script MT" , 20, "italic" ), fg_color = "transparent", text_color = "#c850c0")
     label.place(x = 10, y = 70)
 
 
@@ -387,7 +387,7 @@ def class_page():
     label = CTkLabel(class_frame, text = "CLASS",font = ("Bradley Hand ITC" , 50, "italic", "bold" ), fg_color = "transparent", text_color = "#c850c0")
     label.place(x = 300, y = 5)
 
-    label = CTkLabel(class_frame, text = "Search by :-",font = ("Brush Script MT" , 20, "italic" ), fg_color = "transparent", text_color = "#c850c0")
+    label = CTkLabel(class_frame, text = "Search By Class :-",font = ("Brush Script MT" , 20, "italic" ), fg_color = "transparent", text_color = "#c850c0")
     label.place(x = 10, y = 70)
 
     result_frame = buildFrame(class_frame,  "#c850c0",  4, "transparent")
@@ -434,10 +434,10 @@ def class_page():
 def order_page():
     order_frame = buildFrame(main_frame,  "dodgerblue3",  4, "transparent")
 
-    label = CTkLabel(order_frame, text = "CLASS",font = ("Bradley Hand ITC" , 50, "italic", "bold" ), fg_color = "transparent", text_color = "#c850c0")
+    label = CTkLabel(order_frame, text = "ORDER",font = ("Bradley Hand ITC" , 50, "italic", "bold" ), fg_color = "transparent", text_color = "#c850c0")
     label.place(x = 300, y = 5)
 
-    label = CTkLabel(order_frame, text = "Search by :-",font = ("Brush Script MT" , 20, "italic" ), fg_color = "transparent", text_color = "#c850c0")
+    label = CTkLabel(order_frame, text = "Search By Order :-",font = ("Brush Script MT" , 20, "italic" ), fg_color = "transparent", text_color = "#c850c0")
     label.place(x = 10, y = 70)
 
     result_frame = buildFrame(order_frame,  "#c850c0",  4, "transparent")
