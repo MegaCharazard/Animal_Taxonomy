@@ -6,7 +6,7 @@ root = CTk()
 root.geometry("1000x550")
 root.title("Animal Taxonomy")
 root.maxsize(width = 1000, height = 550)
-root.iconbitmap(r"icon/favicon1.ico")
+root.iconbitmap(r"icon/favicon6.ico")
 
 set_appearance_mode("Dark")
 
@@ -66,22 +66,27 @@ def home_page():
     # #CTkRadioButton(home_frame, text = "PHYLUM", fg_color = "darkgrey", value = "NAME", command = lambda:(radio_value("phylum")))
     # search_phylum_btn.place(x = 177, y = 100)
 
-    # search_class_btn = createRadioButton (_frame ,_text, _fg_color , _value , _command )#CTkRadioButton(home_frame, text = "CLASS", fg_color = "darkgrey", value = "NAME", command = lambda:(radio_value("class")))
+    search_class_btn = createRadioButton (home_frame ,"CLASS", "darkgrey" , "NAME" , radio_value, "class", 262, 100)
+    # #CTkRadioButton(home_frame, text = "CLASS", fg_color = "darkgrey", value = "NAME", command = lambda:(radio_value("class")))
     # search_class_btn.place(x = 262, y = 100)
 
-    # search_order_btn = createRadioButton (_frame ,_text, _fg_color , _value , _command )#CTkRadioButton(home_frame, text = "ORDER", fg_color = "darkgrey", value = "NAME", command = lambda:(radio_value("naturalorder")))
+    search_order_btn = createRadioButton(home_frame ,"ORDER", "darkgrey" , "NAME" , radio_value, "naturalorder", 335, 100)
+    #CTkRadioButton(home_frame, text = "ORDER", fg_color = "darkgrey", value = "NAME", command = lambda:(radio_value("naturalorder")))
     # search_order_btn.place(x = 335, y = 100)
 
-    # search_family_btn = createRadioButton (_frame ,_text, _fg_color , _value , _command )#CTkRadioButton(home_frame, text = "FAMILY", fg_color = "darkgrey", value = "NAME", command = lambda:(radio_value("family")))
+    search_family_btn = createRadioButton (home_frame ,"FAMILY", "darkgrey" , "NAME" , radio_value, "family", 415, 100)
+    #CTkRadioButton(home_frame, text = "FAMILY", fg_color = "darkgrey", value = "NAME", command = lambda:(radio_value("family")))
     # search_family_btn.place(x = 415, y = 100)
 
-    # search_genus_btn = createRadioButton (_frame ,_text, _fg_color , _value , _command )#CTkRadioButton(home_frame, text = "GENUS", fg_color = "darkgrey", value = "NAME", command = lambda:(radio_value("genus")))
+    search_genus_btn = createRadioButton (home_frame ,"GENUS", "darkgrey" , "NAME" , radio_value, "genus", 495, 100)
+    #CTkRadioButton(home_frame, text = "GENUS", fg_color = "darkgrey", value = "NAME", command = lambda:(radio_value("genus")))
     # search_genus_btn.place(x = 495, y = 100)
 
-    # search_species_btn = createRadioButton (_frame ,_text, _fg_color , _value , _command )#CTkRadioButton(home_frame, text = "SPECIES", fg_color = "darkgrey", value = "NAME", command = lambda:(radio_value("species")))
+    search_species_btn = createRadioButton (home_frame ,"SPECIES", "darkgrey" , "NAME" , radio_value, "species", 570, 100)
+    #CTkRadioButton(home_frame, text = "SPECIES", fg_color = "darkgrey", value = "NAME", command = lambda:(radio_value("species")))
     # search_species_btn.place(x = 570, y = 100)
 
-    search = CTkEntry(home_frame, fg_color = "aliceblue", width = 200, text_color = "#c850c0")
+    search = CTkEntry(home_frame, width = 200, text_color = "#c850c0")
     search.place(x = 10, y = 130)
     global contents
     contents = StringVar()
@@ -200,8 +205,8 @@ def kingdom_page():
         tosearch = "Animalia:"
         ypos = 10 
         for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  kingdom = '"+tosearch+"' "):
-            label = CTkLabel(result_frame, text = row, font = ("Arial" , 10, "italic" ), fg_color = "darkgrey")
-            label.place(x = 1, y = ypos)
+            label = CTkLabel(result_frame, text = row, font = ("Arial" , 15, "italic" ), fg_color = "transparent", text_color = "#FFCC70")
+            label.place(x = 10, y = ypos)
             ypos = ypos + 27 
 
     search_animal_btn = CTkButton(kingdom_frame, text = "ANIMALS", fg_color = "dodgerblue3",hover_color = "#c850c0", corner_radius = 40,
@@ -215,8 +220,8 @@ def kingdom_page():
         tosearch = "Plantae:"
         ypos = 11 
         for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  kingdom = '"+tosearch+"' "):
-            label = CTkLabel(result_frame, text = row, font = ("Arial" , 10, "italic" ), fg_color = "darkgrey")
-            label.place(x = 1, y = ypos) 
+            label = CTkLabel(result_frame, text = row, font = ("Arial" , 15, "italic" ), fg_color = "transparent", text_color = "#FFCC70")
+            label.place(x = 10, y = ypos) 
             ypos = ypos + 27 
 
     search_plant_btn = CTkButton(kingdom_frame, text = "PLANT", fg_color = "dodgerblue3",hover_color = "#c850c0",  corner_radius = 40,
@@ -230,8 +235,8 @@ def kingdom_page():
         tosearch = "Fungi:"
         ypos = 10 
         for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  kingdom = '"+tosearch+"' "):
-            label = CTkLabel(result_frame, text = row, font = ("Arial" , 10, "italic" ), fg_color = "darkgrey")
-            label.place(x = 1, y = ypos) 
+            label = CTkLabel(result_frame, text = row, font = ("Arial" , 15, "italic" ), fg_color = "transparent", text_color = "#FFCC70")
+            label.place(x = 10, y = ypos) 
             ypos = ypos + 27 
 
     search_fungi_btn = CTkButton(kingdom_frame, text = "FUNGI", fg_color = "dodgerblue3",hover_color = "#c850c0", corner_radius = 40,
@@ -245,8 +250,8 @@ def kingdom_page():
         tosearch = "Protista:"
         ypos = 10 
         for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  kingdom = '"+tosearch+"' "):
-            label = CTkLabel(result_frame, text = row, font = ("Arial" , 10, "italic" ), fg_color = "darkgrey")
-            label.place(x = 1, y = ypos) 
+            label = CTkLabel(result_frame, text = row, font = ("Arial" , 15, "italic" ), fg_color = "transparent", text_color = "#FFCC70")
+            label.place(x = 10, y = ypos) 
             ypos = ypos + 27 
     
     search_protista_btn = CTkButton(kingdom_frame, text = "PROTISTA", fg_color = "dodgerblue3",hover_color = "#c850c0", corner_radius = 40,
@@ -260,8 +265,8 @@ def kingdom_page():
         tosearch = "Monera:"
         ypos = 10 
         for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  kingdom = '"+tosearch+"' "):
-            label = CTkLabel(result_frame, text = row, font = ("Arial" , 10, "italic" ), fg_color = "darkgrey")
-            label.place(x = 1, y = ypos) 
+            label = CTkLabel(result_frame, text = row, font = ("Arial" , 15, "italic" ), fg_color = "transparent", text_color = "#FFCC70")
+            label.place(x = 10, y = ypos) 
             ypos = ypos + 27 
 
     search_monera_btn = CTkButton(kingdom_frame, text = "MONERA", fg_color = "dodgerblue3",hover_color = "#c850c0",  corner_radius = 40,
@@ -278,28 +283,26 @@ def phylum_page():
     global search_result_ypos 
     search_result_ypos = 160
     phylum_frame = buildFrame(main_frame,  "dodgerblue3",  4, "transparent")
-    
-    label = CTkLabel(phylum_frame, text = "HOME",font = ("Bradley Hand ITC" , 50, "italic", "bold" ), fg_color = "transparent", 
-                     text_color = "#c850c0")
-    label.place(x = 300, y = 5)
 
-    label.place(x = 7, y = 3)
+    label = CTkLabel(phylum_frame, text = "PHYLUM",font = ("Bradley Hand ITC" , 50, "italic", "bold" ), fg_color = "transparent", text_color = "#c850c0")
+    label.place(x = 300, y = 5)
     label.configure(width = 28)
 
-    label = CTkLabel(phylum_frame , text = "Search by :-",font = ("Brush Script MT" , 15, "italic" ), fg_color = "darkgrey")
-    label.place(x = 1, y = 70)
+    label = CTkLabel(phylum_frame, text = "Search by :-",font = ("Brush Script MT" , 20, "italic" ), fg_color = "transparent", text_color = "#c850c0")
+    label.place(x = 10, y = 70)
+
 
     def radio_value(value_before):
         if value_before == "":
             label = CTkLabel(phylum_frame, text = "! Please Choose An Option !",font = ("Brush Script MT" , 15, "italic" ),
                               fg_color = "darkgrey", fg = "red")
-            label.place(x = 1, y = 470)
+            label.place(x = 10, y = 470)
         else:
             global phylum_value
             phylum_value = value_before
         
             if phylum_value == "Animalia":
-                combo = CTkComboBox(phylum_frame)
+                combo = CTkComboBox(phylum_frame, width = 200)
                 combo["values"] = [ 
                 "Chordate", 
                 "Arthrpod", 
@@ -308,11 +311,11 @@ def phylum_page():
                 "Annalid"
                 ] 
                 combo.set("Animalia")
-                combo.current()
-                combo.place(x = 1, y = 125)
+                #combo.current()
+                combo.place(x = 10, y = 130)
 
             elif phylum_value == "Plantae":
-                combo = CTkComboBox(phylum_frame)
+                combo = CTkComboBox(phylum_frame, width = 200)
                 combo["values"] = [  
                 "Bryophyta", 
                 "Cycadophyta", 
@@ -321,11 +324,11 @@ def phylum_page():
                 "Lycophyta"
                 ]
                 combo.set("Plantae")
-                combo.current()
-                combo.place(x = 1, y = 125)
+                #combo.current()
+                combo.place(x = 10, y = 130)
 
             elif phylum_value == "Fungi":
-                combo = CTkComboBox(phylum_frame)
+                combo = CTkComboBox(phylum_frame, width = 200)
                 combo["values"] = [ 
                 "Ascomycota", 
                 "Basidiomycota", 
@@ -336,11 +339,11 @@ def phylum_page():
                 "Mycetozoa"
                 ]
                 combo.set("Fungi")
-                combo.current()
-                combo.place(x = 1, y = 125)
+                #combo.current()
+                combo.place(x = 10, y = 130)
 
             elif phylum_value == "Protista":
-                combo = CTkComboBox(phylum_frame)
+                combo = CTkComboBox(phylum_frame, width = 200)
                 combo["values"] = [ 
                 "Dinoflagellates", 
                 "Amoebozoa", 
@@ -348,11 +351,11 @@ def phylum_page():
                 "Ciliates"  
                 ] 
                 combo.set("Protista")
-                combo.current()
-                combo.place(x = 1, y = 125)
+                #combo.current()
+                combo.place(x = 10, y = 130)
 
             elif phylum_value == "Monera": 
-                combo = CTkComboBox(phylum_frame)
+                combo = CTkComboBox(phylum_frame, width = 200)
                 combo["values"] = [ 
                 "Archaebacteria", 
                 "Schizopyta", 
@@ -360,42 +363,33 @@ def phylum_page():
                 "Prochlorophyta"  
                 ] 
                 combo.set("Monera")
-                combo.current()
-                combo.place(x = 1, y = 125)
+                #combo.current()
+                combo.place(x = 10, y = 130)
 
-    # search_phylum_animal_menu =createRadioButton (_frame ,_text, _fg_color , _value , _command )#CTkRadioButton( phylum_frame ,text = "Animal" , fg_color = "darkgrey", activebackground = "darkgrey",
-    #                                     #value = "Animalia", command = lambda:(radio_value("Animalia")))
-    # search_phylum_animal_menu.place(x = 1, y= 100) 
+    search_phylum_animal_menu =createRadioButton (phylum_frame ,"Animal", "darkgrey" , "NAME" , radio_value, "Animalia", 10, 100)
 
-    # search_phylum_plant_menu =createRadioButton (_frame ,_text, _fg_color , _value , _command )#CTkRadioButton( phylum_frame ,text = "Plant" , fg_color = "darkgrey", activebackground = "darkgrey",
-    #                                     value = "Plantae", command = lambda:(radio_value("Plantae")))
-    # search_phylum_plant_menu.place(x = 71, y= 100) 
+    search_phylum_plant_menu =createRadioButton (phylum_frame ,"Plant", "darkgrey" , "NAME" , radio_value, "Plantae", 85, 100)
 
-    # search_phylum_fungi_menu =createRadioButton (_frame ,_text, _fg_color , _value , _command )#CTkRadioButton( phylum_frame,text = "Fungi" , fg_color = "darkgrey", activebackground = "darkgrey",
-    #                                     value = "Fungi", command = lambda:(radio_value("Fungi")))
-    # search_phylum_fungi_menu.place(x = 130, y= 100) 
-    # search_phylum_protista_menu =createRadioButton (_frame ,_text, _fg_color , _value , _command )#CTkRadioButton( phylum_frame ,text = "Protista" , fg_color = "darkgrey", activebackground = "darkgrey",
-    #                                     value = "Protista", command = lambda:(radio_value("Protista")))
-    # search_phylum_protista_menu.place(x = 190, y= 100) 
+    search_phylum_fungi_menu =createRadioButton (phylum_frame ,"Fungi", "darkgrey" , "NAME" , radio_value, "Fungi", 150, 100)
 
-    # search_phylum_monera_menu =createRadioButton (_frame ,_text, _fg_color , _value , _command )#CTkRadioButton( phylum_frame ,text = "Monera" , fg_color = "darkgrey", activebackground = "darkgrey",
-    #                                     value = "Monera", command = lambda:(radio_value("Monera")))
-    # search_phylum_monera_menu.place(x = 253, y= 100) 
+    search_phylum_protista_menu =createRadioButton (phylum_frame ,"Protista", "darkgrey" , "NAME" , radio_value, "Protista", 215, 100)
 
-    result_frame = buildFrame(phylum_frame,  "dodgerblue3",  4, "darkgrey")
-    result_frame.place(x = 10, y = 165)
-    result_frame.configure(width = 575, height = 270)
+    search_phylum_monera_menu =createRadioButton (phylum_frame ,"Monera", "darkgrey" , "Monera" , radio_value, "Animalia", 295, 100)
 
-    label = CTkLabel(phylum_frame, text = "Search Result(s):-",font = ("Brush Script MT" , 15, "italic" ), fg_color = "darkgrey",)
-    label.place(x = 1, y = 150)
+    result_frame = buildFrame(phylum_frame,  "#c850c0",  4, "transparent")
+    result_frame.place(x = 20, y = 173)
+    result_frame.configure(width = 770, height = 305)
+
+    label = CTkLabel(phylum_frame, text = "Search Result(s):-",font = ("Brush Script MT" , 20, "italic" ), fg_color = "transparent", text_color = "dodgerblue3")
+    label.place(x = 10, y = 160)
     
-    combo = CTkComboBox(phylum_frame)
-    combo["values"] = ("Choose An Option!")
+    combo = CTkComboBox(phylum_frame, width = 200)
+    combo["values"] = ("Choose", "An", "Option!")
     combo.set("Please Choose An Option!")
-    combo.current()
-    contents = CTk.StringVar()
+    #combo.current()
+    contents = StringVar()
     combo["textvariable"] = contents
-    combo.place(x = 1, y = 125)
+    combo.place(x = 10, y = 130)
     
     def on_pylum_search_btn_click():
         for label in result_frame.winfo_children():
@@ -411,32 +405,30 @@ def phylum_page():
 
 
     global search_btn
-    search_btn = CTkButton(phylum_frame, text = "SEARCH", fg_color = "dodgerblue3", activebackground = "darkgrey",hover_color = "#c850c0",
-                             activeforeground = "dodgerblue3", command = on_pylum_search_btn_click())
-    search_btn.place(x = 149, y = 123)
+    search_btn = CTkButton(phylum_frame, text = "SEARCH", fg_color = "dodgerblue3", hover_color = "#c850c0", corner_radius = 40, 
+                           command = on_pylum_search_btn_click())
+    search_btn.place(x = 230, y = 130)
 
-
-    phylum_frame.pack(padx = 20, pady = 20)
-    phylum_frame.configure(width = 650, height = 500)
+    phylum_frame.pack(padx = 20, pady = 25)
+    phylum_frame.configure(width = 850, height = 500)
 
 def class_page():
-    class_frame = buildFrame(main_frame,  "dodgerblue3",  4, "darkgrey")
+    class_frame = buildFrame(main_frame,  "dodgerblue3",  4, "transparent")
 
-    label = CTkLabel(class_frame, text = "CLASS",font = ("Bradley Hand ITC" , 25, "italic", "bold" ), fg_color = "darkgrey",
-                      border_color= "deepskyblue3",  border_width= 3)
-    label.place(x = 7, y = 3)
-    label.configure(width = 28)
+    label = CTkLabel(class_frame, text = "CLASS",font = ("Bradley Hand ITC" , 50, "italic", "bold" ), fg_color = "transparent", text_color = "#c850c0")
+    label.place(x = 300, y = 5)
 
-    label = CTkLabel(class_frame, text = "Search by Order:-",font = ("Brush Script MT" , 15, "italic" ), fg_color = "darkgrey")
-    label.place(x = 1, y = 70)
+    label = CTkLabel(class_frame, text = "Search by :-",font = ("Brush Script MT" , 20, "italic" ), fg_color = "transparent", text_color = "#c850c0")
+    label.place(x = 10, y = 70)
 
-    result_frame = buildFrame(class_frame,  "dodgerblue3",  4, "darkgrey")
-    result_frame.place(x = 10, y = 145)
-    result_frame.configure(width = 575, height = 290)
+    result_frame = buildFrame(class_frame,  "#c850c0",  4, "transparent")
+    result_frame.place(x = 20, y = 153)
+    result_frame.configure(width = 770, height = 325)
 
-    search = CTkEntry(class_frame, width = 30)
-    search.place(x = 1, y = 105)
-    contents = CTk.StringVar()
+    search = CTkEntry(class_frame, width = 200, text_color = "#c850c0")
+    search.place(x = 10, y = 105)
+    global contents
+    contents = StringVar()
     contents.set("Search For Classes.")
     search["textvariable"] = contents
 
@@ -462,15 +454,16 @@ def class_page():
                 ypos = ypos + 27
  
     global search_btn
-    search_btn = CTkButton(class_frame, text = "SEARCH", fg_color = "dodgerblue3", activebackground = "darkgrey",hover_color = "#c850c0",
-                             activeforeground = "dodgerblue3", command = on_class_search_click())
-    search_btn.place(x = 191, y = 101)
+    search_btn = CTkButton(class_frame, text = "SEARCH", fg_color = "dodgerblue3", hover_color = "#c850c0", corner_radius = 40,
+                           command = on_class_search_click())
+    search_btn.place(x = 221, y = 105)
 
-    label = CTkLabel(class_frame, text = "Search Result(s):-",font = ("Brush Script MT" , 15, "italic" ), fg_color = "darkgrey")
-    label.place(x = 1, y = 130)
+    label = CTkLabel(class_frame, text = "Search Result(s):-",font = ("Brush Script MT" , 20, "italic" ), fg_color = "transparent", text_color = "dodgerblue3")
+    label.place(x = 10, y = 140)
 
-    class_frame.pack(padx = 20, pady = 20)
-    class_frame.configure(width = 650, height = 500)
+    class_frame.pack(padx = 20, pady = 25)
+    class_frame.configure(width = 850, height = 500)
+
 
 def order_page():
     order_frame = buildFrame(main_frame,  "dodgerblue3",  4, "darkgrey")
