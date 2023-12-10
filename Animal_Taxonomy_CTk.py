@@ -474,7 +474,6 @@ def order_page():
                            command = on_order_page_search_btn_click())
     search_btn.place(x = 221, y = 105)
 
-
     label = CTkLabel(order_frame, text = "Search Result(s):-",font = ("Brush Script MT" , 20, "italic" ), text_color = "dodgerblue3")
     label.place(x = 10, y = 140)
 
@@ -482,19 +481,17 @@ def order_page():
     order_frame.configure(width = 850, height = 500)
 
 def family_page():
-    family_frame = buildFrame(main_frame,  "dodgerblue3",  4, "darkgrey")
+    family_frame = buildFrame(main_frame,  "dodgerblue3",  4, "transparent")
 
-    label = CTkLabel(family_frame, text = "FAMILY",font = ("Bradley Hand ITC" , 25, "italic", "bold" ), fg_color = "darkgrey",
-                      border_color= "deepskyblue3",  border_width= 3)
-    label.place(x = 7, y = 3)
-    label.configure(width = 28)
+    label = CTkLabel(family_frame, text = "FAMILY",font = ("Bradley Hand ITC" , 50, "italic", "bold" ), fg_color = "transparent", text_color = "#c850c0")
+    label.place(x = 300, y = 5)
 
-    label = CTkLabel(family_frame, text = "Search by Family:-",font = ("Brush Script MT" , 15, "italic" ), fg_color = "darkgrey")
-    label.place(x = 1, y = 70)
+    label = CTkLabel(family_frame, text = "Search By Family :-",font = ("Brush Script MT" , 20, "italic" ), fg_color = "transparent", text_color = "#c850c0")
+    label.place(x = 10, y = 70)
 
-    search = CTkEntry(family_frame, width = 30)
-    search.place(x = 1, y = 105)
-    contents = CTk.StringVar()
+    search = CTkEntry(family_frame, width = 200, text_color = "#c850c0")
+    search.place(x = 10, y = 105)
+    contents = StringVar()
     contents.set("Search For Family.")
     search["textvariable"] = contents
 
@@ -503,27 +500,28 @@ def family_page():
         if tosearch[-1]!= ":":
             tosearch = ((contents.get())).title() + ":"
         else:
+            ypos = 170
             for label in result_frame.winfo_children():
                 label.destroy()
             for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  family = '"+tosearch+"' "):
                 label = CTkLabel(family_frame, text = row, font = ("Arial" , 10, "italic" ), fg_color = "darkgrey")
-                label.place(x = 1, y = 170)
-    
-    result_frame = buildFrame(family_frame,  "dodgerblue3", 4, "darkgrey")
-    result_frame.place(x = 10, y = 144)
-    result_frame.configure(width = 575, height = 290)
+                label.place(x = 1, y = ypos)
+                ypos = ypos + 27
 
+    result_frame = buildFrame(family_frame,  "#c850c0",  4, "transparent")
+    result_frame.place(x = 20, y = 153)
+    result_frame.configure(width = 770, height = 325)
 
-    label = CTkLabel(family_frame, text = "Search Results(s):-",font = ("Brush Script MT" , 15, "italic" ), fg_color = "darkgrey")
-    label.place(x = 1, y = 130)
+    search_btn = CTkButton(family_frame, text = "SEARCH", fg_color = "dodgerblue3", hover_color = "#c850c0", corner_radius = 40,
+                           command = on_family_page_search_btn_click())
+    search_btn.place(x = 521, y = 105)
 
-    global search_btn
-    search_btn = CTkButton(family_frame, text = "SEARCH", fg_color = "dodgerblue3", activebackground = "darkgrey",hover_color = "#c850c0",
-                             activeforeground = "dodgerblue3", command = on_family_page_search_btn_click())
+    label = CTkLabel(family_frame, text = "Search Result(s):-", font = ("Brush Script MT" , 20, "italic" ), text_color = "dodgerblue3")
+    label.place(x = 10, y = 140)
     search_btn.place(x = 191, y = 101)
 
-    family_frame.pack(padx = 20, pady = 20)
-    family_frame.configure(width = 650, height = 500)
+    family_frame.pack(padx = 20, pady = 25)
+    family_frame.configure(width = 850, height = 500)
 
 def genus_page():
     genus_frame = buildFrame(main_frame,  "dodgerblue3",  4, "darkgrey")
