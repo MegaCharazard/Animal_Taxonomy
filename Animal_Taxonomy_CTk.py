@@ -13,18 +13,6 @@ set_appearance_mode("Dark")
 con = sqlite3.connect("Animal_Taxonomy_DB.db")
 cur = con.cursor()
 
-# def on_enter_global(e):
-#     e.widget['background'] = 'deepskyblue3'
-
-# def on_leave_global(e):
-#     e.widget['background'] = 'dodgerblue3'
-
-# def on_enter(e):
-#     search_btn['background'] = 'deepskyblue3'
-
-# def on_leave(e):
-#     search_btn['background'] = 'dodgerblue3'
-
 #-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=PAGES=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 def buildFrame(frame, border_color, border_width, fg_color = "dodgerblue3"):
     return CTkFrame(frame, border_color = border_color,  border_width= border_width, fg_color = fg_color)
@@ -52,39 +40,22 @@ def home_page():
         else:
             global home_value
             home_value = value_before
-            print(home_value)
 
     search_name_btn = createRadioButton (home_frame , "NAME", "darkgrey" , "NAME" , radio_value, "name", 10, 100 )
-    #CTkRadioButton(home_frame, text = "NAME", value = "NAME", command = lambda:(radio_value("name")))
-    #search_name_btn.place(x = 10, y = 100)
 
     search_kingdom_btn = createRadioButton (home_frame ,"KINGDOM", "darkgrey" , "NAME" , radio_value, "kingdom", 81, 100)
-    # #CTkRadioButton(home_frame, text = "KINGDOM", fg_color = "darkgrey", value = "NAME", command = lambda:(radio_value("kingdom")))
-    # search_kingdom_btn.place(x = 81, y = 100)
 
     search_phylum_btn = createRadioButton (home_frame ,"PHYLUM", "darkgrey" , "NAME" , radio_value, "phylum", 177, 100)
-    # #CTkRadioButton(home_frame, text = "PHYLUM", fg_color = "darkgrey", value = "NAME", command = lambda:(radio_value("phylum")))
-    # search_phylum_btn.place(x = 177, y = 100)
 
     search_class_btn = createRadioButton (home_frame ,"CLASS", "darkgrey" , "NAME" , radio_value, "class", 262, 100)
-    # #CTkRadioButton(home_frame, text = "CLASS", fg_color = "darkgrey", value = "NAME", command = lambda:(radio_value("class")))
-    # search_class_btn.place(x = 262, y = 100)
 
     search_order_btn = createRadioButton(home_frame ,"ORDER", "darkgrey" , "NAME" , radio_value, "naturalorder", 335, 100)
-    #CTkRadioButton(home_frame, text = "ORDER", fg_color = "darkgrey", value = "NAME", command = lambda:(radio_value("naturalorder")))
-    # search_order_btn.place(x = 335, y = 100)
 
     search_family_btn = createRadioButton (home_frame ,"FAMILY", "darkgrey" , "NAME" , radio_value, "family", 415, 100)
-    #CTkRadioButton(home_frame, text = "FAMILY", fg_color = "darkgrey", value = "NAME", command = lambda:(radio_value("family")))
-    # search_family_btn.place(x = 415, y = 100)
 
     search_genus_btn = createRadioButton (home_frame ,"GENUS", "darkgrey" , "NAME" , radio_value, "genus", 495, 100)
-    #CTkRadioButton(home_frame, text = "GENUS", fg_color = "darkgrey", value = "NAME", command = lambda:(radio_value("genus")))
-    # search_genus_btn.place(x = 495, y = 100)
 
     search_species_btn = createRadioButton (home_frame ,"SPECIES", "darkgrey" , "NAME" , radio_value, "species", 570, 100)
-    #CTkRadioButton(home_frame, text = "SPECIES", fg_color = "darkgrey", value = "NAME", command = lambda:(radio_value("species")))
-    # search_species_btn.place(x = 570, y = 100)
 
     search = CTkEntry(home_frame, width = 200, text_color = "#c850c0")
     search.place(x = 10, y = 130)
@@ -103,7 +74,6 @@ def home_page():
             tosearch = ((contents.get())).title() + ":"
         else:
             tosearch = tosearch
-            print(tosearch)
 
         if home_value == "name":
             for label in result_frame.winfo_children():
@@ -397,7 +367,6 @@ def phylum_page():
         ypos = 10 
         tosearch = combo.get()
         tosearch = tosearch.title() + ":"
-        print(tosearch)
         for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  phylum = '"+tosearch+"' "):
             label = CTkLabel(result_frame, text = row,font = ("Arial" , 10, "italic" ), fg_color = "darkgrey")
             label.place(x = 1, y = ypos)
@@ -436,7 +405,6 @@ def class_page():
         tosearch = ((contents.get())).title()
         if tosearch[-1]!= ":":
             tosearch = ((contents.get())).title() + ":"
-            print(tosearch)
             for label in result_frame.winfo_children():
                 label.destroy()
             ypos = 10
@@ -453,7 +421,6 @@ def class_page():
                 label.place(x = 1, y = ypos)
                 ypos = ypos + 27
  
-    global search_btn
     search_btn = CTkButton(class_frame, text = "SEARCH", fg_color = "dodgerblue3", hover_color = "#c850c0", corner_radius = 40,
                            command = on_class_search_click())
     search_btn.place(x = 221, y = 105)
@@ -464,25 +431,22 @@ def class_page():
     class_frame.pack(padx = 20, pady = 25)
     class_frame.configure(width = 850, height = 500)
 
-
 def order_page():
-    order_frame = buildFrame(main_frame,  "dodgerblue3",  4, "darkgrey")
+    order_frame = buildFrame(main_frame,  "dodgerblue3",  4, "transparent")
 
-    label = CTkLabel(order_frame, text = "ORDER",font = ("Bradley Hand ITC" , 25, "italic", "bold" ), fg_color = "darkgrey",
-                      border_color= "deepskyblue3",  border_width= 3)
-    label.place(x = 7, y = 3)
-    label.configure(width = 28)
+    label = CTkLabel(order_frame, text = "CLASS",font = ("Bradley Hand ITC" , 50, "italic", "bold" ), fg_color = "transparent", text_color = "#c850c0")
+    label.place(x = 300, y = 5)
 
-    label = CTkLabel(order_frame, text = "Search by Order:-",font = ("Brush Script MT" , 15, "italic" ), fg_color = "darkgrey")
-    label.place(x = 1, y = 70)
-    
-    result_frame = buildFrame(order_frame,  "dodgerblue3",  4, "darkgrey")
-    result_frame.place(x = 10, y = 144)
-    result_frame.configure(width = 575, height = 290)
+    label = CTkLabel(order_frame, text = "Search by :-",font = ("Brush Script MT" , 20, "italic" ), fg_color = "transparent", text_color = "#c850c0")
+    label.place(x = 10, y = 70)
 
-    search = CTkEntry(order_frame, width = 30)
-    search.place(x = 1, y = 105)
-    contents = CTk.StringVar()
+    result_frame = buildFrame(order_frame,  "#c850c0",  4, "transparent")
+    result_frame.place(x = 20, y = 153)
+    result_frame.configure(width = 770, height = 325)
+
+    search = CTkEntry(order_frame, width = 200, text_color = "#c850c0")
+    search.place(x = 10, y = 105)
+    contents = StringVar()
     contents.set("Search For Orders")
     search["textvariable"] = contents
 
@@ -490,7 +454,6 @@ def order_page():
         tosearch = ((contents.get())).title()
         if tosearch[-1]!= ":":
             tosearch = ((contents.get())).title() + ":"
-            print(tosearch)
             for label in result_frame.winfo_children():
                 label.destroy()
             ypos = 10
@@ -507,16 +470,16 @@ def order_page():
                 label.place(x = 1, y = ypos)
                 ypos = ypos + 27
  
-    global search_btn
-    search_btn = CTkButton(order_frame, text = "SEARCH", fg_color = "dodgerblue3", activebackground = "darkgrey",hover_color = "#c850c0",
-                            activeforeground = "dodgerblue3", command = lambda : (on_order_page_search_btn_click() ))
-    search_btn.place(x = 191, y = 101)
+    search_btn = CTkButton(order_frame, text = "SEARCH", fg_color = "dodgerblue3", hover_color = "#c850c0", corner_radius = 40,
+                           command = on_order_page_search_btn_click())
+    search_btn.place(x = 221, y = 105)
 
-    label = CTkLabel(order_frame, text = "Search Results(s):-",font = ("Brush Script MT" , 15, "italic" ), fg_color = "darkgrey")
-    label.place(x = 1, y = 130)
 
-    order_frame.pack(padx = 20, pady = 20)
-    order_frame.configure(width = 650, height = 500)
+    label = CTkLabel(order_frame, text = "Search Result(s):-",font = ("Brush Script MT" , 20, "italic" ), text_color = "dodgerblue3")
+    label.place(x = 10, y = 140)
+
+    order_frame.pack(padx = 20, pady = 25)
+    order_frame.configure(width = 850, height = 500)
 
 def family_page():
     family_frame = buildFrame(main_frame,  "dodgerblue3",  4, "darkgrey")
@@ -545,7 +508,6 @@ def family_page():
             for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  family = '"+tosearch+"' "):
                 label = CTkLabel(family_frame, text = row, font = ("Arial" , 10, "italic" ), fg_color = "darkgrey")
                 label.place(x = 1, y = 170)
-                print(row)
     
     result_frame = buildFrame(family_frame,  "dodgerblue3", 4, "darkgrey")
     result_frame.place(x = 10, y = 144)
