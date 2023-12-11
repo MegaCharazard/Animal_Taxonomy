@@ -43,7 +43,12 @@ def redirect_to_user(_isadmin = False):
                                #command = lambda: (validating()))
         submit_btn.place(x = 45, y = 150)
 
-        cancel_btn = CTkButton(login_frame, height = 15, text = "Back", fg_color = "dodgerblue3",hover_color = "#c850c0",corner_radius = 35)
+        def back_to_main_console():
+            login.destroy()
+            call(["python", r"Animal_Taxonomy_CTk\Animal_Taxonamy_Ctk_Main.py"])
+
+        cancel_btn = CTkButton(login_frame, height = 15, text = "Back", fg_color = "dodgerblue3",hover_color = "#c850c0",corner_radius = 35,
+                               command = lambda: (back_to_main_console()))
         cancel_btn.place(x = 210, y = 150)
 
         root.destroy()
