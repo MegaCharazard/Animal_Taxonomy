@@ -12,23 +12,123 @@ set_appearance_mode("Dark")
 con = sqlite3.connect("Animal_Taxonomy_DB.db")
 cur = con.cursor()
 
+global glb_top_position, \
+    glb_crud_frame_width, glb_crud_frame_height, \
+    glb_img_btn_height, glb_img_btn_width, \
+    glb_menu_btn_ypos_space, glb_menu_btn_height, glb_menu_btn_width, glb_menu_btn_current_ypos, glb_menu_btn_font,\
+    glb_home_btn_xpos, glb_img_btn_heights_space, \
+    glb_fg_color_transparent,\
+    border_line_size_2, glb_common_xpos
+
+glb_top_position = 2
+glb_crud_frame_height = 85
+glb_crud_frame_width = 150
+glb_img_btn_height, glb_img_btn_width = 10, 10
+glb_menu_btn_ypos_space = 15
+glb_menu_btn_xpos_space = 15
+glb_menu_btn_height = 28
+glb_menu_btn_width = 140
+glb_menu_btn_current_ypos = 0
+glb_menu_btn_font = ("Bradley Hand ITC" , 20, "italic", "bold" )
+glb_fg_color_transparent = "transparent"
+border_line_size_2 = 2
+glb_common_xpos = 15
+
 #-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=PAGES=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-def buildFrame(frame, border_color, border_width, fg_color = "dodgerblue3"):
-    return CTkFrame(frame, border_color = border_color,  border_width= border_width, fg_color = fg_color)
+def createFrame(_frame, _border_color, _border_width, _fg_color, _xpos = 0, _ypos = 0 , _width = 100, _height = 100, _is_content_frame = False):
+    global glb_top_position
+    if _is_content_frame :
+        tmp_frame = CTkFrame(_frame, border_color = _border_color,  border_width= _border_width, fg_color = _fg_color, width = 820, height = 520)#
+        tmp_frame.place(x = 15, y = 15)
+        glb_top_position = glb_top_position + _height + 5
+    else:
+        tmp_frame = CTkFrame(_frame, border_color = _border_color,  border_width= _border_width, fg_color = _fg_color, width = _width, height = _height)#
+        tmp_frame.place(x = _xpos, y = _ypos)
+        glb_top_position = glb_top_position + _height + 5
+    return tmp_frame
 
 def createRadioButton (_frame ,_text, _fg_color , _value , _command, _argument,  _xpos, _ypos ):
     tmpRdBtn = CTkRadioButton(_frame, text = _text , fg_color = _fg_color, value = _value, command = lambda:(_command(_argument)))
     tmpRdBtn.place(x =_xpos, y = _ypos)
     return tmpRdBtn
 
+def createMenuButton (_frame, _text,  _command, _argument, _previous_control, _add_xpos = 0, _add_ypos = 0):
+    global glb_menu_btn_font    
+    tmp_btn = CTkButton(_frame,text = _text ,hover_color= "#c850c0", font = glb_menu_btn_font,
+                         width=  glb_menu_btn_width, height= glb_menu_btn_height, command = lambda: (_command(_argument)))
+    global glb_menu_btn_current_ypos 
+    glb_menu_btn_current_ypos = glb_menu_btn_current_ypos + _previous_control._current_height + glb_menu_btn_ypos_space + _add_ypos
+    tmp_btn.place(x = glb_menu_btn_xpos_space, y = glb_menu_btn_current_ypos)
+    return tmp_btn
+
+def createButton(_frame, _text, _image, _corner_radius, _width, _call_back_function, _xpos, _ypos):
+    img = Image.open(r"Images/" + _image)
+    tmp_btn = CTkButton(_frame,text = _text, image = CTkImage(dark_image=img, light_image=img),corner_radius = _corner_radius,
+                         width=  glb_img_btn_width, height= glb_img_btn_height, command = lambda: (_call_back_function()))
+    tmp_btn.place(x = _xpos, y = _ypos)
+    return tmp_btn
+
+def createImageButton(_frame, _text, _image, _corner_radius, _call_back_function, _xpos, _ypos):
+    img = Image.open(r"Images/" + _image)
+    tmp_btn = CTkButton(_frame,text = _text, image = CTkImage(dark_image=img, light_image=img),corner_radius = _corner_radius,
+                         width=  glb_img_btn_width, height= glb_img_btn_height, command = lambda: (_call_back_function()))
+    tmp_btn.place(x = _xpos, y = _ypos)
+    return tmp_btn
+
+def createSearchByLabel(_frame):
+    tmp_label = CTkLabel(_frame, text = "Search by :-",font = ("Brush Script MT" , 20, "italic" ), fg_color = "transparent", text_color = "#c850c0")
+    tmp_label.place(x = glb_common_xpos, y = 70)
+    return tmp_label
+
+def createSearchResultLabel(_frame, _iskingdompage = False, _isafterclasspage = False):
+
+    if _iskingdompage :
+        tmp_label = CTkLabel(_frame, text = "Search Result(s):-",font = ("Brush Script MT" , 20, "italic" ), fg_color = "transparent", text_color = "dodgerblue3")
+        tmp_label.place(x = 15, y = 130)
+        return tmp_label
+    elif _isafterclasspage:
+        tmp_label = CTkLabel(_frame, text = "Search Result(s):-",font = ("Brush Script MT" , 20, "italic" ), fg_color = "transparent", text_color = "dodgerblue3")
+        tmp_label.place(x = 15, y = 140)
+        return tmp_label
+    else :
+        tmp_label = CTkLabel(_frame, text = "Search Result(s):-",font = ("Brush Script MT" , 20, "italic" ), fg_color = "transparent", text_color = "dodgerblue3")
+        tmp_label.place(x = 15, y = 160)
+        return tmp_label
+
+def createMainHeading(_frame, _text):
+    tmp_heading = CTkLabel(_frame, text = _text,font = ("Bradley Hand ITC" , 50, "italic", "bold" ), fg_color = "transparent", text_color = "#c850c0")
+    tmp_heading.place(x = 300, y = 5)
+    return tmp_heading
+
+def createSearchButton(_frame, _command, _ishomepage = False):
+    if _ishomepage :
+        tmp_Search_Btn = CTkButton(_frame, text = "SEARCH", fg_color = "dodgerblue3",hover_color = "#c850c0",corner_radius = 35,
+                                command = lambda :(_command()))
+        tmp_Search_Btn.place(x = 660, y = 130)
+        return tmp_Search_Btn
+    else:
+        tmp_Search_Btn = CTkButton(_frame, text = "SEARCH", fg_color = "dodgerblue3",hover_color = "#c850c0",corner_radius = 35,
+                                command = lambda :(_command()))
+        tmp_Search_Btn.place(x = 660, y = 105)
+        return tmp_Search_Btn
+
+def createSearchEntry(_frame, _ishomepage = False):
+    if _ishomepage :
+        tmp_Entry = CTkEntry(_frame, width = 640, text_color = "#c850c0")
+        tmp_Entry.place(x = 15, y = 130)
+        return tmp_Entry
+    else:
+        tmp_Entry = CTkEntry(_frame, width = 640, text_color = "#c850c0")
+        tmp_Entry.place(x = 15, y = 105)
+        return tmp_Entry
+
+
 def home_page():
-    home_frame = buildFrame(main_frame,  "dodgerblue3",  4, "transparent")
+    home_frame = createFrame(main_frame,  "dodgerblue3",  2, "transparent", _is_content_frame = True)
 
-    label = CTkLabel(home_frame, text = "HOME",font = ("Bradley Hand ITC" , 50, "italic", "bold" ), fg_color = "transparent", text_color = "#c850c0")
-    label.place(x = 300, y = 5)
+    label = createMainHeading(home_frame, "HOME")
 
-    label = CTkLabel(home_frame, text = "Search by :-",font = ("Brush Script MT" , 20, "italic" ), fg_color = "transparent", text_color = "#c850c0")
-    label.place(x = 10, y = 70)
+    label = createSearchByLabel(home_frame)
 
     global radio_value
     def radio_value(value_before):
@@ -55,17 +155,6 @@ def home_page():
     search_genus_btn = createRadioButton (home_frame ,"GENUS", "darkgrey" , "NAME" , radio_value, "genus", 495, 100)
 
     search_species_btn = createRadioButton (home_frame ,"SPECIES", "darkgrey" , "NAME" , radio_value, "species", 570, 100)
-
-    search = CTkEntry(home_frame, width = 200, text_color = "#c850c0")
-    search.place(x = 10, y = 130)
-    global contents
-    contents = StringVar()
-    contents.set("Search As Per Your Option.")
-    search["textvariable"] = contents
-
-    result_frame = buildFrame(home_frame,  "#c850c0",  4, "transparent")
-    result_frame.place(x = 20, y = 173)
-    result_frame.configure(width = 770, height = 305)
 
     def on_home_search_btn_click():
         tosearch = ((contents.get())).title()
@@ -144,29 +233,27 @@ def home_page():
                 label.place(x = 1, y = ypos)
                 ypos = ypos + 27
 
-    label = CTkLabel(home_frame, text = "Search Result(s):-",font = ("Brush Script MT" , 20, "italic" ), fg_color = "transparent", text_color = "dodgerblue3")
-    label.place(x = 10, y = 160)
+    result_frame = createFrame(home_frame,  "#c850c0",  2, "transparent", 15, 173, 790, 333)
 
-    
-    search_btn = CTkButton(home_frame, text = "SEARCH", fg_color = "dodgerblue3",hover_color = "#c850c0",corner_radius = 35,
-                            command = lambda :(on_home_search_btn_click()))
-    search_btn.place(x = 215, y = 130)
+    label = createSearchResultLabel(home_frame)
 
-    home_frame.pack(padx = 20, pady = 25)
-    home_frame.configure(width = 850, height = 500)
+    search = createSearchEntry(home_frame, _ishomepage = True)
+    global contents
+    contents = StringVar()
+    contents.set("Search As Per Your Option.")
+    search["textvariable"] = contents
+
+    search_btn = createSearchButton(home_frame, on_home_search_btn_click, _ishomepage = True)
 
 def kingdom_page():
-    kingdom_frame = buildFrame(main_frame,  "dodgerblue3",  4, "transparent")
 
-    label = CTkLabel(kingdom_frame, text = "KINGDOM",font = ("Bradley Hand ITC" , 50, "italic", "bold" ), fg_color = "transparent", text_color = "#c850c0")
-    label.place(x = 300, y = 5)
+    kingdom_frame = createFrame(main_frame,  "dodgerblue3",  2, "transparent", _is_content_frame = True)
 
-    label = CTkLabel(kingdom_frame, text = "Search By Kingdom :-",font = ("Brush Script MT" , 20, "italic" ), fg_color = "transparent", text_color = "#c850c0")
-    label.place(x = 10, y = 70)
+    label = createMainHeading(kingdom_frame, "KINGDOM")
 
-    result_frame = buildFrame(kingdom_frame,  "#c850c0",  4, "transparent")
-    result_frame.place(x = 20, y = 142)
-    result_frame.configure(width = 770, height = 340)
+    label = createSearchByLabel(kingdom_frame)
+
+    result_frame = createFrame(kingdom_frame,  "#c850c0",  2, "transparent", 15, 143, 790, 363)
 
     def on_search_animal_btn_click():
         for label in result_frame.winfo_children():
@@ -242,23 +329,17 @@ def kingdom_page():
                                      command = lambda:(on_search_monera_btn_click()))
     search_monera_btn.place(x = 600, y = 98)
 
-    label = CTkLabel(kingdom_frame, text = "Search Result(s):-",font = ("Brush Script MT" , 20, "italic" ), fg_color = "transparent",text_color = "dodgerblue3")
-    label.place(x = 10, y = 130)
-
-    kingdom_frame.pack(padx = 20, pady = 25)
-    kingdom_frame.configure(width = 850, height = 500)
+    label =createSearchResultLabel(kingdom_frame, _iskingdompage = True)
 
 def phylum_page():
     global search_result_ypos 
     search_result_ypos = 160
-    phylum_frame = buildFrame(main_frame,  "dodgerblue3",  4, "transparent")
 
-    label = CTkLabel(phylum_frame, text = "PHYLUM",font = ("Bradley Hand ITC" , 50, "italic", "bold" ), fg_color = "transparent", text_color = "#c850c0")
-    label.place(x = 300, y = 5)
-    label.configure(width = 28)
+    phylum_frame = createFrame(main_frame,  "dodgerblue3",  2, "transparent", _is_content_frame = True)
 
-    label = CTkLabel(phylum_frame, text = "Search By Phylum :-",font = ("Brush Script MT" , 20, "italic" ), fg_color = "transparent", text_color = "#c850c0")
-    label.place(x = 10, y = 70)
+    label = createMainHeading(phylum_frame, "PHYLUM")
+
+    label = createSearchByLabel(phylum_frame)
 
 
     def radio_value(value_before):
@@ -345,12 +426,9 @@ def phylum_page():
 
     search_phylum_monera_menu =createRadioButton (phylum_frame ,"Monera", "darkgrey" , "Monera" , radio_value, "Animalia", 295, 100)
 
-    result_frame = buildFrame(phylum_frame,  "#c850c0",  4, "transparent")
-    result_frame.place(x = 20, y = 173)
-    result_frame.configure(width = 770, height = 305)
+    result_frame = createFrame(phylum_frame,  "#c850c0",  2, "transparent", 15, 173, 790, 333)
 
-    label = CTkLabel(phylum_frame, text = "Search Result(s):-",font = ("Brush Script MT" , 20, "italic" ), fg_color = "transparent", text_color = "dodgerblue3")
-    label.place(x = 10, y = 160)
+    label = createSearchResultLabel(phylum_frame)
     
     combo = CTkComboBox(phylum_frame, width = 200)
     combo["values"] = ("Choose", "An", "Option!")
@@ -377,24 +455,16 @@ def phylum_page():
                            command = on_pylum_search_btn_click())
     search_btn.place(x = 230, y = 130)
 
-    phylum_frame.pack(padx = 20, pady = 25)
-    phylum_frame.configure(width = 850, height = 500)
-
 def class_page():
-    class_frame = buildFrame(main_frame,  "dodgerblue3",  4, "transparent")
 
-    label = CTkLabel(class_frame, text = "CLASS",font = ("Bradley Hand ITC" , 50, "italic", "bold" ), fg_color = "transparent", text_color = "#c850c0")
-    label.place(x = 300, y = 5)
+    class_frame = createFrame(main_frame,  "dodgerblue3",  2, "transparent", _is_content_frame = True)
 
-    label = CTkLabel(class_frame, text = "Search By Class :-",font = ("Brush Script MT" , 20, "italic" ), fg_color = "transparent", text_color = "#c850c0")
-    label.place(x = 10, y = 70)
+    label = createMainHeading(class_frame, "CLASS")
+    label = createSearchByLabel(class_frame)
 
-    result_frame = buildFrame(class_frame,  "#c850c0",  4, "transparent")
-    result_frame.place(x = 20, y = 153)
-    result_frame.configure(width = 770, height = 325)
+    result_frame = createFrame(class_frame,  "#c850c0",  2, "transparent", 15, 153, 790, 353)
 
-    search = CTkEntry(class_frame, width = 200, text_color = "#c850c0")
-    search.place(x = 10, y = 105)
+    search = createSearchEntry(class_frame)
     global contents
     contents = StringVar()
     contents.set("Search For Classes.")
@@ -420,31 +490,21 @@ def class_page():
                 label.place(x = 1, y = ypos)
                 ypos = ypos + 27
  
-    search_btn = CTkButton(class_frame, text = "SEARCH", fg_color = "dodgerblue3", hover_color = "#c850c0", corner_radius = 40,
-                           command = on_class_search_click())
-    search_btn.place(x = 221, y = 105)
+    search_btn = createSearchButton(class_frame, on_class_search_click)
 
-    label = CTkLabel(class_frame, text = "Search Result(s):-",font = ("Brush Script MT" , 20, "italic" ), fg_color = "transparent", text_color = "dodgerblue3")
-    label.place(x = 10, y = 140)
-
-    class_frame.pack(padx = 20, pady = 25)
-    class_frame.configure(width = 850, height = 500)
+    label = createSearchResultLabel(class_frame, _isafterclasspage = True)
 
 def order_page():
-    order_frame = buildFrame(main_frame,  "dodgerblue3",  4, "transparent")
 
-    label = CTkLabel(order_frame, text = "ORDER",font = ("Bradley Hand ITC" , 50, "italic", "bold" ), fg_color = "transparent", text_color = "#c850c0")
-    label.place(x = 300, y = 5)
+    order_frame = createFrame(main_frame,  "dodgerblue3",  2, "transparent", _is_content_frame = True)
 
-    label = CTkLabel(order_frame, text = "Search By Order :-",font = ("Brush Script MT" , 20, "italic" ), fg_color = "transparent", text_color = "#c850c0")
-    label.place(x = 10, y = 70)
+    label = createMainHeading(order_frame, "ORDER")
 
-    result_frame = buildFrame(order_frame,  "#c850c0",  4, "transparent")
-    result_frame.place(x = 20, y = 153)
-    result_frame.configure(width = 770, height = 325)
+    label = createSearchByLabel(order_frame)
 
-    search = CTkEntry(order_frame, width = 200, text_color = "#c850c0")
-    search.place(x = 10, y = 105)
+    result_frame = createFrame(order_frame,  "#c850c0",  2, "transparent", 15, 153, 790, 353)
+
+    search = createSearchEntry(order_frame)
     contents = StringVar()
     contents.set("Search For Orders")
     search["textvariable"] = contents
@@ -469,27 +529,19 @@ def order_page():
                 label.place(x = 1, y = ypos)
                 ypos = ypos + 27
  
-    search_btn = CTkButton(order_frame, text = "SEARCH", fg_color = "dodgerblue3", hover_color = "#c850c0", corner_radius = 40,
-                           command = on_order_page_search_btn_click())
-    search_btn.place(x = 221, y = 105)
+    search_btn = createSearchButton(order_frame, on_order_page_search_btn_click)
 
-    label = CTkLabel(order_frame, text = "Search Result(s):-",font = ("Brush Script MT" , 20, "italic" ), text_color = "dodgerblue3")
-    label.place(x = 10, y = 140)
-
-    order_frame.pack(padx = 20, pady = 25)
-    order_frame.configure(width = 850, height = 500)
+    label = createSearchResultLabel(order_frame, _isafterclasspage = True)
 
 def family_page():
-    family_frame = buildFrame(main_frame,  "dodgerblue3",  4, "transparent")
 
-    label = CTkLabel(family_frame, text = "FAMILY",font = ("Bradley Hand ITC" , 50, "italic", "bold" ), fg_color = "transparent", text_color = "#c850c0")
-    label.place(x = 300, y = 5)
+    family_frame = createFrame(main_frame,  "dodgerblue3",  2, "transparent", _is_content_frame = True)
 
-    label = CTkLabel(family_frame, text = "Search By Family :-",font = ("Brush Script MT" , 20, "italic" ), fg_color = "transparent", text_color = "#c850c0")
-    label.place(x = 10, y = 70)
+    label = createMainHeading(family_frame, "FAMILY")
 
-    search = CTkEntry(family_frame, width = 200, text_color = "#c850c0")
-    search.place(x = 10, y = 105)
+    label = createSearchByLabel(family_frame)
+
+    search = createSearchEntry(family_frame)
     contents = StringVar()
     contents.set("Search For Family.")
     search["textvariable"] = contents
@@ -508,95 +560,84 @@ def family_page():
                 label.place(x = 1, y = ypos)
                 ypos = ypos + 27
 
-    result_frame = buildFrame(family_frame,  "#c850c0",  4, "transparent")
-    result_frame.place(x = 20, y = 153)
-    result_frame.configure(width = 770, height = 325)
+    result_frame = createFrame(family_frame,  "#c850c0",  2, "transparent", 15, 153, 790, 353)
     
-    search_btn = CTkButton(family_frame, text = "SEARCH", fg_color = "dodgerblue3", hover_color = "#c850c0", corner_radius = 40,
-                           command = on_family_page_search_btn_click())
-    search_btn.place(x = 221, y = 205)
-
-    label = CTkLabel(family_frame, text = "Search Result(s):-", font = ("Brush Script MT" , 20, "italic" ), text_color = "dodgerblue3")
-    label.place(x = 10, y = 140)
-    search_btn.place(x = 191, y = 101)
-
-    family_frame.pack(padx = 20, pady = 25)
-    family_frame.configure(width = 850, height = 500)
+    search_btn =createSearchButton(family_frame, on_family_page_search_btn_click)
+    label = createSearchResultLabel(family_frame, _isafterclasspage = True)
 
 def genus_page():
-    genus_frame = buildFrame(main_frame,  "dodgerblue3",  4, "darkgrey")
 
-    label = CTkLabel(genus_frame, text = "GENUS",font = ("Bradley Hand ITC" , 25, "italic", "bold" ), fg_color = "darkgrey",
-                      border_color= "deepskyblue3",  border_width= 3)
-    label.place(x = 7, y = 3)
-    label.configure(width = 28)
+    genus_frame = createFrame(main_frame,  "dodgerblue3",  2, "transparent", _is_content_frame = True)
 
-    label = CTkLabel(genus_frame, text = "Search by Genus:-",font = ("Brush Script MT" , 15, "italic" ), fg_color = "darkgrey")
-    label.place(x = 1, y = 70)
+    label = createMainHeading(genus_frame, "GENUS")
 
-    search = CTkEntry(genus_frame, width = 30)
-    search.place(x = 1, y = 105)
-    contents = CTk.StringVar()
+    label = createSearchByLabel(genus_frame)
+
+    def on_genus_search_click():
+        tosearch = ((contents.get())).title()
+        if tosearch[-1]!= ":":
+            tosearch = ((contents.get())).title() + ":"
+        else:
+            ypos = 170
+            for label in result_frame.winfo_children():
+                #label.destroy()
+                pass
+            for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  genus = '"+tosearch+"' "):
+                label = CTkLabel(genus_frame, text = row, font = ("Arial" , 10, "italic" ), fg_color = "darkgrey")
+                label.place(x = 1, y = ypos)
+                ypos = ypos + 27
+
+    search = createSearchEntry(genus_frame)
+    contents = StringVar()
     contents.set("Search For Genus.")
     search["textvariable"] = contents
     
-    result_frame = buildFrame(genus_frame,  "dodgerblue3",  4, "darkgrey")
-    result_frame.place(x = 10, y = 144)
-    result_frame.configure(width = 575, height = 290)
+    result_frame = createFrame(genus_frame,  "#c850c0",  2, "transparent", 15, 153, 790, 353)
 
-    global search_btn
-    search_btn = CTkButton(genus_frame, text = "SEARCH", fg_color = "dodgerblue3", activebackground = "darkgrey",hover_color = "#c850c0", 
-                           activeforeground = "dodgerblue3")
-    search_btn.place(x = 191, y = 101)
+    search_btn = createSearchButton(genus_frame, on_genus_search_click)
 
-    label = CTkLabel(genus_frame, text = "Search Results(s):-",font = ("Brush Script MT" , 15, "italic" ), fg_color = "darkgrey")
-    label.place(x = 1, y = 130)
-
-    genus_frame.pack(padx = 20, pady = 20)
-    genus_frame.configure(width = 650, height = 500)
+    label = createSearchResultLabel(genus_frame, _isafterclasspage = True)
 
 def species_page():
-    species_frame = buildFrame(main_frame,  "dodgerblue3",  4, "darkgrey")
+    species_frame = createFrame(main_frame,  "dodgerblue3",  2, "transparent", _is_content_frame = True)
 
-    label = CTkLabel(species_frame, text = "SPEICES",font = ("Bradley Hand ITC" , 25, "italic", "bold" ), fg_color = "darkgrey",
-                      border_color= "deepskyblue3",  border_width= 3)
-    label.place(x = 7, y = 3)
-    label.configure(width = 28)
+    label = createMainHeading(species_frame, "SPEICES")
 
-    label = CTkLabel(species_frame, text = "Search by Speices:-",font = ("Brush Script MT" , 15, "italic" ), fg_color = "darkgrey")
-    label.place(x = 1, y = 70)
+    label = createSearchByLabel(species_frame)
 
-    search = CTkEntry(species_frame, width = 30)
-    search.place(x = 1, y = 105)
-    contents = CTk.StringVar()
+    def on_species_search_click():
+        tosearch = ((contents.get())).title()
+        if tosearch[-1]!= ":":
+            tosearch = ((contents.get())).title() + ":"
+        else:
+            ypos = 170
+            for label in result_frame.winfo_children():
+                #label.destroy()
+                pass
+            for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  species = '"+tosearch+"' "):
+                label = CTkLabel(species_frame, text = row, font = ("Arial" , 10, "italic" ), fg_color = "darkgrey")
+                label.place(x = 1, y = ypos)
+                ypos = ypos + 27
+
+    search = createSearchEntry(species_frame)
+    contents = StringVar()
     contents.set("Search For Species.")
     search["textvariable"] = contents
     
-    result_frame = buildFrame(species_frame,  "dodgerblue3",  4, "darkgrey")
-    result_frame.place(x = 10, y = 144)
-    result_frame.configure(width = 575, height = 290)
+    result_frame = createFrame(species_frame,  "#c850c0",  2, "transparent", 15, 153, 790, 353)
 
-    global search_btn
-    search_btn = CTkButton(species_frame, text = "SEARCH", fg_color = "dodgerblue3", activebackground = "darkgrey",hover_color = "#c850c0", 
-                           activeforeground = "dodgerblue3")
-    search_btn.place(x = 191, y = 101)
-
-    label = CTkLabel(species_frame, text = "Search Results(s):-",font = ("Brush Script MT" , 15, "italic" ), fg_color = "darkgrey")
-    label.place(x = 1, y = 130)
-
-    species_frame.pack(padx = 20, pady = 20)
-    species_frame.configure(width = 650, height = 500)
+    search_btn =createSearchButton(species_frame, on_species_search_click)
+    label = createSearchResultLabel(species_frame, _isafterclasspage = True)
 
 def about_page():
-    about_frame = buildFrame(main_frame,  "dodgerblue3",  4, "darkgrey")
+    about_frame = createFrame(main_frame,  "dodgerblue3",  2, "transparent", _is_content_frame = True)
 
-    label = CTkLabel(about_frame, text = "ABOUT",font = ("Bradley Hand ITC" , 25, "italic", "bold" ), fg_color = "darkgrey",
-                      border_color= "deepskyblue3",  border_width= 3)
-    label.place(x = 7, y = 3)
-    label.configure(width = 28)
+    label = createMainHeading(about_frame, "ABOUT")
 
-    
-    label = CTkLabel(about_frame, text = "We are a group of students studying in XI std,\n\
+    frame = createFrame(about_frame,  "#c850c0",  2, "transparent", 15, 70, 790, 436)
+
+    label = CTkLabel(frame, text = "\
+We are a group of students studying in XI std,\n\
 <--CREDITS-->\n\
 Ideaology --> Hari Dhejus V.S.\n\
 Cheif Devoloper --> Hari Dhejus V.S.\n\
@@ -608,17 +649,13 @@ Co-Biologist2-->Akshay Ram R.F\n\
 Contact us --> +91 948 668 3398\n\
 \n\
         Thank you for using this program © AnimalTaxonaomy HAPAA™", 
-                        font = ("Brush Script MT" , 15, "italic" ), fg_color = "darkgrey")
-    label.place(x = "0", y = 100)
+                        font = ("Brush Script MT" , 20, "italic" ), fg_color = "transparent", text_color = "#FFCC70")
+    label.place(x = 120, y = 80)
 
-    about_frame.pack(padx = 20, pady = 20)
-    about_frame.configure(width = 650, height = 500)
 
 #=-=-=-=-=-=-=-EXTRA-=-=-=-=-=-=-=#
 
-def indicate(lb, page):
-    #hide_indicator()
-    #lb.configure(fg_color = "dodgerblue3")
+def indicate(page):
     delete_pages()
     page()
 
@@ -626,92 +663,47 @@ def delete_pages():
     for frame in main_frame.winfo_children():
         frame.destroy()
 
-def authentication():
+def authenticate():
     login = CTkToplevel(root)
     login.geometry("400x200")
-    login.title("Authentication")
+    login.title("Admin Login")
     login.maxsize(width = 400, height = 200)
 
+menu_frame = CTkFrame(root, fg_color = "transparent")
+
+crud_frame = createFrame(menu_frame, "dodgerblue3",  border_line_size_2, glb_fg_color_transparent , 5, 5, 150, glb_crud_frame_height)
 
 
-option_frame = CTkFrame(root, fg_color = "transparent")
+add_btn = createImageButton(crud_frame, "", "add.png", 100, authenticate, 5, 5)
 
-img = Image.open(r"Images/add.png")
-add_btn = CTkButton(option_frame,text = "", image = CTkImage(dark_image=img, light_image=img),corner_radius = 100, width= 10,
-                     command = lambda: (authentication()))
-add_btn.place(x = 15, y = 15)
+edit_btn = createImageButton(crud_frame, "", "edit_blue.png", 100, authenticate, 70, 5)
 
-home_btn = CTkButton(option_frame, text = "Home", font = ("Bradley Hand ITC" , 20, "italic", "bold" ),hover_color = "#c850c0", 
-                     command = lambda: indicate(home_indicate, home_page))
-home_btn.place(x = 15, y = 95)
+delete_btn = createImageButton(crud_frame, "", "delete.png", 100, authenticate, 5, 45)
 
-home_indicate = CTkLabel(option_frame, text = " ", fg_color = "transparent", width = 2, height = 60)
-home_indicate.place(x = 10, y = 25)
+home_btn = createMenuButton(menu_frame, "Home", indicate, home_page, crud_frame)
 
-kingdom_btn = CTkButton(option_frame, text = "Kingdom", font = ("Bradley Hand ITC" , 20, "italic", "bold" ),hover_color = "#c850c0", 
-                        command = lambda: indicate(kingdom_indicate, kingdom_page))
-kingdom_btn.place(x = 15, y = 140)
+kingdom_btn = createMenuButton(menu_frame, "Kingdom", indicate, kingdom_page, home_btn)
 
-kingdom_indicate = CTkLabel(option_frame, text = " ", fg_color = "transparent", width = 2, height = 60)
-kingdom_indicate.place(x = 10, y = 75)
+phylum_btn =  createMenuButton(menu_frame, "Phylum-\n-Division", indicate, phylum_page, kingdom_btn)
 
-phylum_btn = CTkButton(option_frame, text = "Phylum-\n-Division", font = ("Bradley Hand ITC" , 15, "italic", "bold" ),hover_color = "#c850c0", 
-                       command = lambda: indicate(phylum_indicate, phylum_page))                  
-phylum_btn.place(x = 15, y = 185)
+class_btn =  createMenuButton(menu_frame, "Class", indicate, class_page, phylum_btn, _add_ypos = 25)
 
-phylum_indicate = CTkLabel(option_frame, text = " ", fg_color = "transparent", width = 2, height = 65)
-phylum_indicate.place(x = 10, y = 125)
+order_btn =  createMenuButton(menu_frame, "Order", indicate, order_page, class_btn)
 
-class_btn = CTkButton(option_frame, text = "Class", font = ("Bradley Hand ITC" , 20, "italic", "bold" ),hover_color = "#c850c0", 
-                      command = lambda: indicate(class_indicate, class_page))
-class_btn.place(x = 15, y = 245)
+family_btn = createMenuButton(menu_frame, "Family", indicate, family_page, order_btn)
 
-class_indicate = CTkLabel(option_frame, text = " ", fg_color = "transparent", width = 2, height = 60)
-class_indicate.place(x = 10, y = 175)
+genus_btn = createMenuButton(menu_frame, "Genus", indicate, genus_page, family_btn)
 
-order_btn = CTkButton(option_frame, text = "Order", font = ("Bradley Hand ITC" , 20, "italic", "bold" ),hover_color = "#c850c0", 
-                      command = lambda: indicate(order_indicate, order_page))
-order_btn.place(x = 15, y = 290)
+species_btn = createMenuButton(menu_frame, "Species", indicate, species_page, genus_btn)
 
-order_indicate = CTkLabel(option_frame, text = " ", fg_color = "transparent", width = 2, height = 60)
-order_indicate.place(x = 10, y = 225)
+about_btn = createMenuButton(menu_frame, "About", indicate, about_page, species_btn)
 
-family_btn = CTkButton(option_frame, text = "Family", font = ("Bradley Hand ITC" , 20, "italic", "bold" ),hover_color = "#c850c0", 
-                       command = lambda: indicate(family_indicate, family_page))
-family_btn.place(x = 15, y = 335)
+menu_frame.pack(side = "left")
+menu_frame.pack_propagate(False)
+menu_frame.configure(width = 150, height = 550)
 
-family_indicate = CTkLabel(option_frame, text = " ", fg_color = "transparent", width = 2, height = 60)
-family_indicate.place(x = 10, y = 275)
-
-genus_btn = CTkButton(option_frame, text = "Genus", font = ("Bradley Hand ITC" , 20, "italic", "bold" ),hover_color = "#c850c0", 
-                      command = lambda: indicate(genus_indicate, genus_page))
-genus_btn.place(x = 15, y = 380)
-
-genus_indicate = CTkLabel(option_frame, text = " ", fg_color = "transparent", width = 2, height = 60)
-genus_indicate.place(x = 10, y = 325)
-
-species_btn = CTkButton(option_frame, text = "Species", font = ("Bradley Hand ITC" , 20, "italic", "bold" ),hover_color = "#c850c0", 
-                        command = lambda: indicate(species_indicate, species_page))
-species_btn.place(x = 15, y = 425)
-
-species_indicate = CTkLabel(option_frame, text = " ", fg_color = "transparent", width = 2, height = 60)
-species_indicate.place(x = 10, y = 375)
-
-
-about_btn = CTkButton(option_frame, text = "About", font = ("Bradley Hand ITC" , 20, "italic", "bold" ),hover_color = "#c850c0", 
-                      command = lambda: indicate(about_indicate, about_page))
-about_btn.place(x = 15, y = 470)
-
-about_indicate = CTkLabel(option_frame, text = " ", fg_color = "transparent", width = 2, height = 60)
-about_indicate.place(x = 10, y = 425)
-
-option_frame.pack(side = "left")
-option_frame.pack_propagate(False)
-option_frame.configure(width = 150, height = 500)
-
-main_frame = buildFrame(root,  "#FFCC70",  4, "transparent")
+main_frame = createFrame(root,  "#FFCC70",  3, "transparent", 0 , 0, 950, 550)
 main_frame.pack(side = "left")
 main_frame.pack_propagate(False)
-main_frame.configure(width = 950, height = 550)
 
 root.mainloop()
