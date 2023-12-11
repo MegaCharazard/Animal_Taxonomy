@@ -502,7 +502,8 @@ def family_page():
         else:
             ypos = 170
             for label in result_frame.winfo_children():
-                label.destroy()
+                #label.destroy()
+                pass
             for row in cur.execute("SELECT name, kingdom, phylum, class, naturalorder, family, genus, species FROM animal_details WHERE  family = '"+tosearch+"' "):
                 label = CTkLabel(family_frame, text = row, font = ("Arial" , 10, "italic" ), fg_color = "darkgrey")
                 label.place(x = 1, y = ypos)
@@ -511,10 +512,10 @@ def family_page():
     result_frame = buildFrame(family_frame,  "#c850c0",  4, "transparent")
     result_frame.place(x = 20, y = 153)
     result_frame.configure(width = 770, height = 325)
-
+    
     search_btn = CTkButton(family_frame, text = "SEARCH", fg_color = "dodgerblue3", hover_color = "#c850c0", corner_radius = 40,
                            command = on_family_page_search_btn_click())
-    search_btn.place(x = 521, y = 105)
+    search_btn.place(x = 221, y = 205)
 
     label = CTkLabel(family_frame, text = "Search Result(s):-", font = ("Brush Script MT" , 20, "italic" ), text_color = "dodgerblue3")
     label.place(x = 10, y = 140)
@@ -616,19 +617,8 @@ Contact us --> +91 948 668 3398\n\
 
 #=-=-=-=-=-=-=-EXTRA-=-=-=-=-=-=-=#
 
-def hide_indicator():
-    home_indicate.configure(fg_color = "transparent")
-    kingdom_indicate.configure(fg_color = "transparent")
-    phylum_indicate.configure(fg_color = "transparent")
-    class_indicate.configure(fg_color = "transparent")
-    order_indicate.configure(fg_color = "transparent")
-    family_indicate.configure(fg_color = "transparent")
-    genus_indicate.configure(fg_color = "transparent")
-    species_indicate.configure(fg_color = "transparent")
-    about_indicate.configure(fg_color = "transparent")
-
 def indicate(lb, page):
-    hide_indicator()
+    #hide_indicator()
     #lb.configure(fg_color = "dodgerblue3")
     delete_pages()
     page()
