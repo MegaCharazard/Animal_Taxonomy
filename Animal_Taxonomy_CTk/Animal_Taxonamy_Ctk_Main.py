@@ -1,4 +1,5 @@
 from customtkinter import *
+from subprocess import call
 from PIL import Image
 import sqlite3
 
@@ -15,7 +16,7 @@ welcome_text = "WELCOME"
 def redirect_to_user(_isadmin = False):
     if _isadmin:
         login_text = "LOGIN "
-        login = CTkToplevel(root)
+        login = CTk()
         login.iconbitmap(r"icon/favicon6.ico")
         login.geometry("400x200")
         login.title("Admin Login")
@@ -38,19 +39,22 @@ def redirect_to_user(_isadmin = False):
 
         password_entry = CTkEntry(login_frame, show = "*", text_color = "#c850c0")
         password_entry.place(x = 170, y = 110)
-
         submit_btn = CTkButton(login_frame, height = 15, text = "Submit", fg_color = "dodgerblue3",hover_color = "#c850c0",corner_radius = 35)
+                               #command = lambda: (validating()))
         submit_btn.place(x = 45, y = 150)
 
         cancel_btn = CTkButton(login_frame, height = 15, text = "Back", fg_color = "dodgerblue3",hover_color = "#c850c0",corner_radius = 35)
         cancel_btn.place(x = 210, y = 150)
 
-        #root.destroy()
+        root.destroy()
+        login.mainloop()
+        
 
     else:
-        open("Animal_Taxonomy_CTk_Admin_Content.py")
-        #windows.#CTkInputDialog()
-        #root.destroy()
+        def guest_console():
+            root.destroy()
+            call(["python", r"Animal_Taxonomy_CTk\Animal_Taxonomy_CTk_Guest_Console.py"])
+        guest_console()
 
 
 content_frame = CTkFrame(root, border_color = "#FFCC70", border_width = 2, width = 600, height = 600)
