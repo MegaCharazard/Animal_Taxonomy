@@ -689,7 +689,7 @@ def operate():
     kingdom_entry = CTkEntry(login_frame, text_color = "#c850c0")
     kingdom_entry.place(x = 170, y = 35)
 
-    phylum_label = CTkLabel(login_frame, text = "Kingdom:-", font = ("Bradley Hand ITC" , 20, "italic", "bold"), text_color = "dodgerblue3")
+    phylum_label = CTkLabel(login_frame, text = "Phylum:-", font = ("Bradley Hand ITC" , 20, "italic", "bold"), text_color = "dodgerblue3")
     phylum_label.place(x = 5, y = 35)
 
     phylum_entry = CTkEntry(login_frame, text_color = "#c850c0")

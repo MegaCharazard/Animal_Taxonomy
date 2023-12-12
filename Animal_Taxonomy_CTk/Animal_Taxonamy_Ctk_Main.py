@@ -38,10 +38,7 @@ def validation():
         else:
             #messagebox.showinfo("info", "login fail")
             error_label = CTkLabel(login_frame, text = "Username or password is wrong", font = ("Bradley Hand ITC" , 15, "italic", "bold"), text_color = "red")
-            error_label.place(x = 50, y = 170)
-
-
-            
+            error_label.place(x = 75, y = 170)
 
 welcome_text = "WELCOME"
 
@@ -91,13 +88,11 @@ def redirect_to_user(_isadmin = False):
         root.destroy()
         login.mainloop()
         
-
     else:
         def guest_console():
             root.destroy()
             call(["python", glb_current_working_directory + "/Animal_Taxonomy_CTk_Guest_Console.py"])
         guest_console()
-
 
 content_frame = CTkFrame(root, border_color = "#FFCC70", border_width = 2, width = 600, height = 600)
 
