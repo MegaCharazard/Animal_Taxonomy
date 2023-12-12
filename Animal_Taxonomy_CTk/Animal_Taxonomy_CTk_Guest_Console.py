@@ -1,12 +1,14 @@
 from customtkinter import *
 from PIL import Image
+from subprocess import call
+
 import sqlite3
 
 root = CTk()
 root.geometry("1000x550")
 root.title("Animal Taxonomy")
 root.maxsize(width = 1000, height = 550)
-root.iconbitmap(r"icon/favicon6.ico")
+root.iconbitmap(r"E:\Dhejus/PythonPractice/Project/Animal_Taxonomy/icon/favicon6.ico")
 set_appearance_mode("Dark")
 
 con = sqlite3.connect("Animal_Taxonomy_DB.db")
@@ -18,8 +20,10 @@ global glb_top_position, \
     glb_menu_btn_ypos_space, glb_menu_btn_height, glb_menu_btn_width, glb_menu_btn_current_ypos, glb_menu_btn_font,\
     glb_home_btn_xpos, glb_img_btn_heights_space, \
     glb_fg_color_transparent,\
-    border_line_size_2, glb_common_xpos
+    border_line_size_2, glb_common_xpos, glb_current_working_directory
 
+# get the current working directory
+glb_current_working_directory = os.path.dirname(os.path.realpath(__file__))
 glb_top_position = 2
 glb_crud_frame_height = 85
 glb_crud_frame_width = 150
@@ -673,12 +677,11 @@ menu_frame = CTkFrame(root, fg_color = "transparent")
 
 crud_frame = createFrame(menu_frame, "",  border_line_size_2, glb_fg_color_transparent , 5, 5, 150, glb_crud_frame_height)
 
+def back_to_main_console():
+    root.destroy()
+    call(["python", glb_current_working_directory + "/Animal_Taxonamy_Ctk_Main.py"])
 
-# add_btn = createImageButton(crud_frame, "", "add.png", 100, authenticate, 5, 5)
-
-# edit_btn = createImageButton(crud_frame, "", "edit_blue.png", 100, authenticate, 70, 5)
-
-# delete_btn = createImageButton(crud_frame, "", "delete.png", 100, authenticate, 5, 45)
+back_btn = createImageButton(crud_frame, "", "previous.png", 100, back_to_main_console, 5, 5)
 
 home_btn = createMenuButton(menu_frame, "Home", indicate, home_page, crud_frame)
 
