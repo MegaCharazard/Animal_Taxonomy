@@ -3,16 +3,17 @@ from subprocess import call
 from PIL import Image
 import os
 import sqlite3
+from tkinter import messagebox
 
 root = CTk()
 root.geometry("600x600")
 root.title("Animal Taxonomy")
 root.maxsize(width = 600, height = 600)
 
-root.iconbitmap(r"icon/favicon6.ico")
+root.iconbitmap(r"Animal_Taxonomy_CTk/icon/favicon6.ico")
 set_appearance_mode("Dark")
 
-con = sqlite3.connect("Authentication_Db.db")
+con = sqlite3.connect(r"Animal_Taxonomy_CTk/Authentication_Db.db")
 cur = con.cursor()
 
 global  glb_current_working_directory
@@ -24,9 +25,23 @@ def validation():
     if username == "" or password == "":
         username_entry.configure(border_color = "red")
         password_entry.configure(border_color = "red")
-
     else :
-        pass
+        tmp_qry = "SELECT Username, Password FROM User_details WHERE Username = '"+username+"' AND Password = '"+password+"'"
+        cur.execute(tmp_qry) 
+        row  = cur.fetchone()
+        if row :
+            def admin_console():
+                login.destroy()
+                call(["python", glb_current_working_directory + "/Animal_Taxonomy_CTk_Admin_Console.py"])
+            admin_console()
+            #messagebox.showinfo("info", "login sucsess")
+        else:
+            #messagebox.showinfo("info", "login fail")
+            error_label = CTkLabel(login_frame, text = "Username or password is wrong", font = ("Bradley Hand ITC" , 15, "italic", "bold"), text_color = "red")
+            error_label.place(x = 50, y = 170)
+
+
+            
 
 welcome_text = "WELCOME"
 
@@ -35,11 +50,12 @@ def redirect_to_user(_isadmin = False):
         login_text = "LOGIN"
         global login
         login = CTk()
-        login.iconbitmap(r"icon/favicon6.ico")
+        login.iconbitmap(r"Animal_Taxonomy_CTk/icon/favicon6.ico")
         login.geometry("400x200")
         login.title("Admin Login")
         login.maxsize(width = 400, height = 200)
 
+        global login_frame
         login_frame = CTkFrame(login, border_color = "#FFCC70", border_width = 2, width = 400, height = 200)
         login_frame.pack()
 
@@ -71,7 +87,7 @@ def redirect_to_user(_isadmin = False):
         cancel_btn = CTkButton(login_frame, height = 15, text = "Back", fg_color = "dodgerblue3",hover_color = "#c850c0",corner_radius = 35,
                                command = lambda: (back_to_main_console()))
         cancel_btn.place(x = 210, y = 150)
-
+        
         root.destroy()
         login.mainloop()
         

@@ -8,10 +8,10 @@ root = CTk()
 root.geometry("1000x550")
 root.title("Animal Taxonomy")
 root.maxsize(width = 1000, height = 550)
-root.iconbitmap(r"E:\Dhejus/PythonPractice/Project/Animal_Taxonomy/icon/favicon6.ico")
+root.iconbitmap(r"Animal_Taxonomy_CTk/icon/favicon6.ico")
 set_appearance_mode("Dark")
 
-con = sqlite3.connect("Animal_Taxonomy_DB.db")
+con = sqlite3.connect("Animal_Taxonomy_CTk\Animal_Taxonomy_Db.db")
 cur = con.cursor()
 
 global glb_top_position, \
@@ -66,14 +66,14 @@ def createMenuButton (_frame, _text,  _command, _argument, _previous_control, _a
     return tmp_btn
 
 def createButton(_frame, _text, _image, _corner_radius, _width, _call_back_function, _xpos, _ypos):
-    img = Image.open(r"Images/" + _image)
-    tmp_btn = CTkButton(_frame,text = _text, image = CTkImage(dark_image=img, light_image=img),corner_radius = _corner_radius,
+    #img = Image.open(r"Animal_Taxonomy_CTk/Images/" + _image)
+    tmp_btn = CTkButton(_frame,text = _text,corner_radius = _corner_radius,
                          width=  glb_img_btn_width, height= glb_img_btn_height, command = lambda: (_call_back_function()))
     tmp_btn.place(x = _xpos, y = _ypos)
     return tmp_btn
 
 def createImageButton(_frame, _text, _image, _corner_radius, _call_back_function, _xpos, _ypos):
-    img = Image.open(r"Images/" + _image)
+    img = Image.open(r"Animal_Taxonomy_CTk/Images/" + _image)
     tmp_btn = CTkButton(_frame,text = _text, image = CTkImage(dark_image=img, light_image=img),corner_radius = _corner_radius,
                          width=  glb_img_btn_width, height= glb_img_btn_height, command = lambda: (_call_back_function()))
     tmp_btn.place(x = _xpos, y = _ypos)
@@ -258,7 +258,7 @@ def kingdom_page():
     label = createSearchByLabel(kingdom_frame)
 
     result_frame = createFrame(kingdom_frame,  "#c850c0",  2, "transparent", 15, 143, 790, 363)
-
+    
     def on_search_animal_btn_click():
         for label in result_frame.winfo_children():
             label.destroy()
