@@ -11,7 +11,7 @@ root.maxsize(width = 1000, height = 550)
 root.iconbitmap(r"Animal_Taxonomy_CTk/icon/favicon6.ico")
 set_appearance_mode("Dark")
 
-con = sqlite3.connect("Animal_Taxonomy_DB.db")
+con = sqlite3.connect("Animal_Taxonomy_CTk\Animal_Taxonomy_Db.db")
 cur = con.cursor()
 
 global glb_top_position, \
@@ -65,9 +65,9 @@ def createMenuButton (_frame, _text,  _command, _argument, _previous_control, _a
     tmp_btn.place(x = glb_menu_btn_xpos_space, y = glb_menu_btn_current_ypos)
     return tmp_btn
 
-def createButton(_frame, _text, _image, _corner_radius, _width, _call_back_function, _xpos, _ypos):
-    tmp_btn = CTkButton(_frame,text = _text,corner_radius = _corner_radius,
-                         width=  glb_img_btn_width, height= glb_img_btn_height, command = lambda: (_call_back_function()))
+def createButton(_frame, _text, _corner_radius, _call_back_function, _xpos, _ypos):
+    tmp_btn = CTkButton(_frame,text = _text,corner_radius = _corner_radius,hover_color = "#c850c0",
+                         height= glb_img_btn_height, command = lambda: (_call_back_function()))
     tmp_btn.place(x = _xpos, y = _ypos)
     return tmp_btn
 
@@ -666,16 +666,15 @@ def delete_pages():
     for frame in main_frame.winfo_children():
         frame.destroy()
 
-def operate():
-    login = CTk()
-    login.iconbitmap(r"Animal_Taxonomy_CTk/icon/favicon6.ico")
-    login.geometry("400x200")
-    login.title("Operate")
-    login.maxsize(width = 400, height = 200)
+def insert():
+    insert_root = CTk()
+    insert_root.iconbitmap(r"Animal_Taxonomy_CTk/icon/favicon6.ico")
+    insert_root.geometry("400x300")
+    insert_root.title("Operate")
+    insert_root.maxsize(width = 400, height = 300)
 
-    login_frame = CTkFrame(login, border_color = "#FFCC70", border_width = 2, width = 400, height = 200)
+    login_frame = CTkFrame(insert_root, border_color = "#FFCC70", border_width = 2, width = 400, height = 300)
     login_frame.pack()
-
 
     name_label = CTkLabel(login_frame, text = "Name :-", font = ("Bradley Hand ITC" , 20, "italic", "bold"), text_color = "dodgerblue3")
     name_label.place(x = 5, y = 5)
@@ -690,14 +689,71 @@ def operate():
     kingdom_entry.place(x = 170, y = 35)
 
     phylum_label = CTkLabel(login_frame, text = "Phylum:-", font = ("Bradley Hand ITC" , 20, "italic", "bold"), text_color = "dodgerblue3")
-    phylum_label.place(x = 5, y = 35)
+    phylum_label.place(x = 5, y = 65)
 
     phylum_entry = CTkEntry(login_frame, text_color = "#c850c0")
-    phylum_entry.place(x = 170, y = 35)
+    phylum_entry.place(x = 170, y = 65)
 
+    class_label = CTkLabel(login_frame, text = "Class:-", font = ("Bradley Hand ITC" , 20, "italic", "bold"), text_color = "dodgerblue3")
+    class_label.place(x = 5, y = 95)
+
+    class_entry = CTkEntry(login_frame, text_color = "#c850c0")
+    class_entry.place(x = 170, y = 95)
+
+    order_label = CTkLabel(login_frame, text = "Order:-", font = ("Bradley Hand ITC" , 20, "italic", "bold"), text_color = "dodgerblue3")
+    order_label.place(x = 5, y = 125)
+
+    order_entry = CTkEntry(login_frame, text_color = "#c850c0")
+    order_entry.place(x = 170, y = 125)
+
+    family_label = CTkLabel(login_frame, text = "Family:-", font = ("Bradley Hand ITC" , 20, "italic", "bold"), text_color = "dodgerblue3")
+    family_label.place(x = 5, y = 155)
+
+    family_entry = CTkEntry(login_frame, text_color = "#c850c0")
+    family_entry.place(x = 170, y = 155)
+
+    genus_label = CTkLabel(login_frame, text = "Genus:-", font = ("Bradley Hand ITC" , 20, "italic", "bold"), text_color = "dodgerblue3")
+    genus_label.place(x = 5, y = 185)
+
+    genus_entry = CTkEntry(login_frame, text_color = "#c850c0")
+    genus_entry.place(x = 170, y = 185)
+
+    species_label = CTkLabel(login_frame, text = "Species:-", font = ("Bradley Hand ITC" , 20, "italic", "bold"), text_color = "dodgerblue3")
+    species_label.place(x = 5, y = 215)
+
+    species_entry = CTkEntry(login_frame, text_color = "#c850c0")
+    species_entry.place(x = 170, y = 215)
+    
+    def insert():
+        _name = name_entry.get()
+        _kingdom = kingdom_entry.get()
+        _phylum = phylum_entry.get()
+        _class = class_entry.get()
+        _order = order_entry.get()
+        _family = family_entry.get()
+        _genus = genus_entry.get()
+        _species = species_entry.get()
+
+        cur.execute("INSERT INTO animal_details (name, kingdom, phylum, class, naturalorder, family, genus, species) VALUES (?,?,?,?,?,?,?,?)",
+                    (_name, _kingdom, _phylum, _class, _order, _family, _genus, _species))
+        con.commit()
+
+    insert_btn = createButton(login_frame, "Insert", 40, insert, 40, 255)
+
+    def back_to_admin_console():
+        insert_root.destroy()
+
+    back_btn = createButton(login_frame, "Back", 40, back_to_admin_console, 210, 255)
+
+    insert_root.mainloop()
+
+def update():
+    pass
+
+def delete():
+    pass
 
     root.destroy()
-    login.mainloop()
 
 def back_to_main_console():
     root.destroy()
@@ -709,13 +765,13 @@ menu_frame = CTkFrame(root, fg_color = "transparent")
 crud_frame = createFrame(menu_frame, "dodgerblue3",  border_line_size_2, glb_fg_color_transparent , 5, 5, 150, glb_crud_frame_height)
 
 
-add_btn = createImageButton(crud_frame, "", "add.png", 100, operate, 5, 5)
+insert_btn = createImageButton(crud_frame, "", "add.png", 100, insert, 25, 8)
 
-edit_btn = createImageButton(crud_frame, "", "edit_blue.png", 100, operate, 70, 5)
+edit_btn = createImageButton(crud_frame, "", "edit_blue.png", 100, update, 85, 8)
 
-delete_btn = createImageButton(crud_frame, "", "delete.png", 100, operate, 5, 45)
+delete_btn = createImageButton(crud_frame, "", "delete.png", 100, delete, 25, 48)
 
-back_btn = createImageButton(crud_frame, "", "previous.png", 100, back_to_main_console, 70, 45)
+back_btn = createImageButton(crud_frame, "", "previous.png", 100, back_to_main_console, 85, 48)
 
 home_btn = createMenuButton(menu_frame, "Home", indicate, home_page, crud_frame)
 
